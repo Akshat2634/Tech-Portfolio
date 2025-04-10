@@ -2,6 +2,7 @@ import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
+import Footer from "@/components/footer"
 import { Inter } from "next/font/google"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
@@ -27,6 +28,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}
+          <Footer />
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
