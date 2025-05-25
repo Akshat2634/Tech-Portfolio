@@ -19,6 +19,16 @@ export default function Hero() {
     }),
   }
 
+  const scrollToAbout = () => {
+    const aboutSection = document.querySelector('#about')
+    if (aboutSection) {
+      aboutSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+  }
+
   return (
     <section className="relative h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -151,16 +161,18 @@ export default function Hero() {
           repeatType: "reverse",
           repeatDelay: 0.2,
         }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
       >
-        <Link href="#about">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
-          >
-            <ArrowDown className="h-6 w-6" />
-          </Button>
-        </Link>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={scrollToAbout}
+          className="rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors cursor-pointer"
+          aria-label="Scroll to About section"
+        >
+          <ArrowDown className="h-6 w-6" />
+        </Button>
       </motion.div>
     </section>
   )
