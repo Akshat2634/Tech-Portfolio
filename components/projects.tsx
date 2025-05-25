@@ -12,20 +12,34 @@ import Link from "next/link"
 export default function Projects() {
   const projects = [
     {
-      title: "Surround Shield AI",
-      period: "Feb 2025 — March 2025",
+      title: "PitchPilot AI",
+      period: "March 2025 — May 2025",
       description:
-        "AI-powered personal health guardian that tracks vital metrics, monitors location data, and delivers real-time, personalized health insights using advanced analytics.",
+        "AI-powered investor pitch analyzer and coach that evaluates pitch decks and provides strategic feedback using multi-agent workflows.",
       features: [
-        "Developed SurroundShield, an AI-powered personal health guardian that tracks vital metrics (e.g., BMI, weight, height), monitors location data, and delivers real-time, personalized health insights using advanced analytics.",
-        "Integrated Databricks Playground for LLM processing using the LLAMA 3.1 70B model, enabling context-aware health recommendations, risk assessments, and proactive alerts, thereby boosting overall user engagement and system efficacy.",
-        "Architected a full-stack solution using React.js for dynamic UI development, Node.js/Express.js for scalable user management, and Python Flask for deploying AI/ML services, ensuring seamless cross-layer integration.",
-        "Secured data storage with MongoDB Atlas and implemented Argon2id for password hashing to ensure robust protection, compliance, and data integrity.",
+        "Developed PitchPilot, an AI-driven platform for investor pitch analysis using FastAPI, LangGraph, and OpenAI APIs, orchestrating multi-agent workflows with persistent state management to evaluate pitch decks on clarity, differentiation, and scalability.",
+        "Architected a type-safe backend with PostgreSQL and Prisma ORM, incorporated Supabase Storage, and deployed an OCR-enabled document pipeline for extracting content from PDF, PPTX, and DOCX formats.",
+        "Engineered an AI coaching system using LangGraph's multi-step reasoning to simulate investor Q&A, generate strategic feedback, and surface recommendations based on Y Combinator pitch heuristics.",
       ],
-      technologies: ["React.js", "Node.js", "Express.js", "Python Flask", "MongoDB Atlas", "LLAMA 3.1", "Databricks"],
-      github: "https://github.com/Akshat2634/SurroundShield",
+      technologies: ["FastAPI", "LangGraph", "OpenAI APIs", "PostgreSQL", "Prisma ORM", "Supabase Storage", "OCR"],
+      github: "https://github.com/Akshat2634/PitchPilot-AI-Powered-Investor-Deck-Analyzer-Coach",
       demo: null,
     },
+    // {
+    //   title: "Surround Shield AI",
+    //   period: "Feb 2025 — March 2025",
+    //   description:
+    //     "AI-powered personal health guardian that tracks vital metrics, monitors location data, and delivers real-time, personalized health insights using advanced analytics.",
+    //   features: [
+    //     "Developed SurroundShield, an AI-powered personal health guardian that tracks vital metrics (e.g., BMI, weight, height), monitors location data, and delivers real-time, personalized health insights using advanced analytics.",
+    //     "Integrated Databricks Playground for LLM processing using the LLAMA 3.1 70B model, enabling context-aware health recommendations, risk assessments, and proactive alerts, thereby boosting overall user engagement and system efficacy.",
+    //     "Architected a full-stack solution using React.js for dynamic UI development, Node.js/Express.js for scalable user management, and Python Flask for deploying AI/ML services, ensuring seamless cross-layer integration.",
+    //     "Secured data storage with MongoDB Atlas and implemented Argon2id for password hashing to ensure robust protection, compliance, and data integrity.",
+    //   ],
+    //   technologies: ["React.js", "Node.js", "Express.js", "Python Flask", "MongoDB Atlas", "LLAMA 3.1", "Databricks"],
+    //   github: "https://github.com/Akshat2634/SurroundShield",
+    //   demo: null,
+    // },
     {
       title: "PawPal",
       period: "March 2024 — May 2024",

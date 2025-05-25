@@ -12,7 +12,7 @@ export default function Education() {
       degree: "Master of Science (MS), Computer Science",
       location: "Hoboken, New Jersey",
       period: "September 2023 — May 2025",
-      gpa: "3.89/4",
+      gpa: "3.9/4",
       details: ["Web & Media Graduate Assistant at Hanlon Financial Systems Center"],
     },
     {

@@ -92,3 +92,17 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom Cursor Styles */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+  
+  /* Show default cursor on mobile devices */
+  @media (max-width: 768px) {
+    * {
+      cursor: auto !important;
+    }
+  }
+}
