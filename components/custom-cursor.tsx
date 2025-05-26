@@ -7,16 +7,20 @@ export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
-  const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([])
+  const [trail, setTrail] = useState<{ x: number; y: number; id: string }[]>([])
 
   useEffect(() => {
+    let idCounter = 0
+
     const updateMousePosition = (e: MouseEvent) => {
       const newPosition = { x: e.clientX, y: e.clientY }
       setMousePosition(newPosition)
       
-      // Add to trail
+      // Add to trail with unique ID
       setTrail(prev => {
-        const newTrail = [...prev, { ...newPosition, id: Date.now() }]
+        idCounter += 1
+        const uniqueId = `${Date.now()}-${idCounter}-${Math.random().toString(36).substr(2, 9)}`
+        const newTrail = [...prev, { ...newPosition, id: uniqueId }]
         // Keep only last 8 trail points
         return newTrail.slice(-8)
       })
@@ -58,7 +62,10 @@ export default function CustomCursor() {
   // Clean up old trail points
   useEffect(() => {
     const interval = setInterval(() => {
-      setTrail(prev => prev.filter(point => Date.now() - point.id < 500))
+      setTrail(prev => prev.filter(point => {
+        const timestamp = parseInt(point.id.split('-')[0])
+        return Date.now() - timestamp < 500
+      }))
     }, 50)
     
     return () => clearInterval(interval)
@@ -70,7 +77,7 @@ export default function CustomCursor() {
       {trail.map((point, index) => (
         <motion.div
           key={point.id}
-          className="fixed top-0 left-0 w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full pointer-events-none z-[9997]"
+          className="fixed top-0 left-0 w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-[9997]"
           style={{
             x: point.x - 4,
             y: point.y - 4,
@@ -94,14 +101,14 @@ export default function CustomCursor() {
           x: mousePosition.x - 10,
           y: mousePosition.y - 10,
           background: isHovering 
-            ? "linear-gradient(45deg, #ff6b6b, #feca57)" 
-            : "linear-gradient(45deg, #00d2ff, #3a47d5)",
+            ? "linear-gradient(45deg, #8b5cf6, #ec4899)" 
+            : "linear-gradient(45deg, #3b82f6, #8b5cf6)",
           boxShadow: isHovering 
-            ? "0 0 20px rgba(255, 107, 107, 0.6), 0 0 40px rgba(254, 202, 87, 0.4)"
-            : "0 0 20px rgba(0, 210, 255, 0.6), 0 0 40px rgba(58, 71, 213, 0.4)",
+            ? "0 0 20px rgba(139, 92, 246, 0.6), 0 0 40px rgba(236, 72, 153, 0.4)"
+            : "0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(139, 92, 246, 0.4)",
         }}
         animate={{
-          scale: isClicking ? 0.7 : isHovering ? 1.8 : 1,
+          scale: isClicking ? 0.7 : isHovering ? 1.3 : 1,
         }}
         transition={{
           type: "spring",
@@ -117,14 +124,14 @@ export default function CustomCursor() {
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,
           borderColor: isHovering 
-            ? "rgba(255, 107, 107, 0.8)" 
-            : "rgba(0, 210, 255, 0.8)",
+            ? "rgba(139, 92, 246, 0.8)" 
+            : "rgba(59, 130, 246, 0.8)",
           boxShadow: isHovering 
-            ? "0 0 15px rgba(255, 107, 107, 0.3)"
-            : "0 0 15px rgba(0, 210, 255, 0.3)",
+            ? "0 0 15px rgba(139, 92, 246, 0.3)"
+            : "0 0 15px rgba(59, 130, 246, 0.3)",
         }}
         animate={{
-          scale: isClicking ? 0.7 : isHovering ? 2.2 : 1,
+          scale: isClicking ? 0.7 : isHovering ? 1.6 : 1,
           opacity: isHovering ? 1 : 0.7,
         }}
         transition={{
