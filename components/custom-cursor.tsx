@@ -8,9 +8,29 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [trail, setTrail] = useState<{ x: number; y: number; id: string }[]>([])
 
+  // Check if device is mobile/touch device
   useEffect(() => {
+    const checkMobile = () => {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      const isSmallScreen = window.innerWidth <= 768
+      const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      
+      setIsMobile(isTouchDevice || isSmallScreen || isMobileUserAgent)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    // Don't add event listeners on mobile devices
+    if (isMobile) return
+
     let idCounter = 0
 
     const updateMousePosition = (e: MouseEvent) => {
@@ -63,10 +83,12 @@ export default function CustomCursor() {
         element.removeEventListener("mouseleave", handleMouseLeave)
       })
     }
-  }, [isVisible])
+  }, [isVisible, isMobile])
 
   // Clean up old trail points
   useEffect(() => {
+    if (isMobile) return
+
     const interval = setInterval(() => {
       setTrail(prev => prev.filter(point => {
         const timestamp = parseInt(point.id.split('-')[0])
@@ -75,10 +97,10 @@ export default function CustomCursor() {
     }, 50)
     
     return () => clearInterval(interval)
-  }, [])
+  }, [isMobile])
 
-  // Don't render cursor until mouse has moved
-  if (!isVisible) {
+  // Don't render cursor on mobile devices or until mouse has moved
+  if (isMobile || !isVisible) {
     return null
   }
 
