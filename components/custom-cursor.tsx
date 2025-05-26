@@ -7,6 +7,7 @@ export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const [trail, setTrail] = useState<{ x: number; y: number; id: string }[]>([])
 
   useEffect(() => {
@@ -15,6 +16,11 @@ export default function CustomCursor() {
     const updateMousePosition = (e: MouseEvent) => {
       const newPosition = { x: e.clientX, y: e.clientY }
       setMousePosition(newPosition)
+      
+      // Make cursor visible on first mouse movement
+      if (!isVisible) {
+        setIsVisible(true)
+      }
       
       // Add to trail with unique ID
       setTrail(prev => {
@@ -57,7 +63,7 @@ export default function CustomCursor() {
         element.removeEventListener("mouseleave", handleMouseLeave)
       })
     }
-  }, [])
+  }, [isVisible])
 
   // Clean up old trail points
   useEffect(() => {
@@ -70,6 +76,11 @@ export default function CustomCursor() {
     
     return () => clearInterval(interval)
   }, [])
+
+  // Don't render cursor until mouse has moved
+  if (!isVisible) {
+    return null
+  }
 
   return (
     <>
