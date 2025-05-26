@@ -42,11 +42,7 @@ export default function About() {
             </h3>
 
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              I'm a passionate AI Engineer and Full Stack Developer with expertise in building intelligent systems and
-              web applications. Currently pursuing my Master's in Computer Science at Stevens Institute of Technology, I
-              specialize in AI technologies including RAG, NLP, and working with various LLMs like OpenAI GPT, Claude,
-              and Gemini. I also work as a Web & Media Graduate Assistant at the Hanlon Financial Systems Center, where
-              I assist with web development and media projects.
+              I'm an AI Engineer and Full Stack Developer with a Master's in Computer Science and a focus on building scalable, production-ready AI systems. I specialize in Retrieval-Augmented Generation (RAG), LLM integration (OpenAI, Claude, Gemini), and backend infrastructure using Python, FastAPI, LangChain, and vector databases like LanceDB and Qdrant. I've deployed real-time agents and RAG pipelines for enterprise use cases, including Fortune 500 clients.
             </p>
 
             <div className="space-y-4">
