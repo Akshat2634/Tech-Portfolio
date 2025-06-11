@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CustomCursor from "@/components/custom-cursor"
 import ScrollProgress from "@/components/scroll-progress"
+import UpcomingProjects from "@/components/upcoming-projects"
 import { Inter } from "next/font/google"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
@@ -38,6 +39,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <ScrollProgress />
+          <UpcomingProjects />
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

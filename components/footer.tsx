@@ -45,11 +45,11 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-gray-800 dark:text-white">Get In Touch</h4>
             <div className="space-y-3">
               <a 
-                href="mailto:akshatsahu1@gmail.com" 
+                href="mailto:akshatsahu2634@gmail.com" 
                 className="flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
               >
                 <Mail className="h-4 w-4" />
-                <span>akshatsahu1@gmail.com</span>
+                <span>akshatsahu2634@gmail.com</span>
               </a>
               <a 
                 href="tel:+12012757594" 

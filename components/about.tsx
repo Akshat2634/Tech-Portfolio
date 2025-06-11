@@ -56,7 +56,7 @@ export default function About() {
               <Card>
                 <CardContent className="p-4 flex items-center gap-3">
                   <Mail className="h-5 w-5 text-blue-600" />
-                  <span className="text-gray-700 dark:text-gray-300">asahu3@stevens.edu</span>
+                  <span className="text-gray-700 dark:text-gray-300">akshatsahu2634@gmail.com</span>
                 </CardContent>
               </Card>
 
