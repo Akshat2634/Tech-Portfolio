@@ -25,36 +25,36 @@ export default function Projects() {
       github: "https://github.com/Akshat2634/PitchPilot-AI-Powered-Investor-Deck-Analyzer-Coach",
       demo: null,
     },
+    {
+      title: "DocuChat AI",
+      period: "January 2025 — February 2025",
+      description:
+        "Enterprise-grade AI-powered document chat platform that enables natural language interaction with documents using RAG technology.",
+      features: [
+        "Developed DocuChat AI, an enterprise-grade AI-powered document chat platform using FastAPI, LanceDB, and OpenAI APIs, enabling natural language interaction with documents through advanced RAG (Retrieval-Augmented Generation) technology.",
+        "Architected a robust vector search system with LanceDB for efficient document retrieval, supporting multi-format document processing including PDF, DOCX, and TXT files with real-time chat capabilities.",
+        "Built a responsive React.js and Next.js frontend with seamless user experience for document upload, processing, and interactive chat sessions, ensuring enterprise-level security and data integrity.",
+        "Implemented advanced document chunking and embedding strategies to optimize retrieval accuracy and response quality, delivering contextually relevant answers from large document collections.",
+      ],
+      technologies: ["FastAPI", "LanceDB", "OpenAI APIs", "React.js", "Next.js", "Python", "RAG Technology"],
+      github: "https://github.com/Akshat2634/DocuChat-AI",
+      demo: "https://docu-chat-ai-self.vercel.app",
+    },
     // {
-    //   title: "Surround Shield AI",
-    //   period: "Feb 2025 — March 2025",
+    //   title: "PawPal",
+    //   period: "March 2024 — May 2024",
     //   description:
-    //     "AI-powered personal health guardian that tracks vital metrics, monitors location data, and delivers real-time, personalized health insights using advanced analytics.",
+    //     "A full-stack web app connecting pet owners with pet care service providers for pet management and adoption.",
     //   features: [
-    //     "Developed SurroundShield, an AI-powered personal health guardian that tracks vital metrics (e.g., BMI, weight, height), monitors location data, and delivers real-time, personalized health insights using advanced analytics.",
-    //     "Integrated Databricks Playground for LLM processing using the LLAMA 3.1 70B model, enabling context-aware health recommendations, risk assessments, and proactive alerts, thereby boosting overall user engagement and system efficacy.",
-    //     "Architected a full-stack solution using React.js for dynamic UI development, Node.js/Express.js for scalable user management, and Python Flask for deploying AI/ML services, ensuring seamless cross-layer integration.",
-    //     "Secured data storage with MongoDB Atlas and implemented Argon2id for password hashing to ensure robust protection, compliance, and data integrity.",
+    //     "Developed PawPal, a full-stack web app using Node.js, Express.js, and MongoDB connecting pet owners with pet care service providers for pet management and adoption.",
+    //     "Implemented secure authentication and session management with bcrypt for password hashing and express-session for user sessions, protecting user and service provider data.",
+    //     "Integrated ElasticEmail API for sending appointment confirmation emails with dynamic details and checklists, as well as enabling secure password recovery with one-time passwords (OTPs).",
+    //     "Enhanced PawPal community engagement through appointment scheduling, post creation, commenting, and review features, facilitating communication and feedback loops.",
     //   ],
-    //   technologies: ["React.js", "Node.js", "Express.js", "Python Flask", "MongoDB Atlas", "LLAMA 3.1", "Databricks"],
-    //   github: "https://github.com/Akshat2634/SurroundShield",
+    //   technologies: ["Node.js", "Express.js", "MongoDB", "bcrypt", "ElasticEmail API"],
+    //   github: "https://github.com/akshat2634/pawpal",
     //   demo: null,
     // },
-    {
-      title: "PawPal",
-      period: "March 2024 — May 2024",
-      description:
-        "A full-stack web app connecting pet owners with pet care service providers for pet management and adoption.",
-      features: [
-        "Developed PawPal, a full-stack web app using Node.js, Express.js, and MongoDB connecting pet owners with pet care service providers for pet management and adoption.",
-        "Implemented secure authentication and session management with bcrypt for password hashing and express-session for user sessions, protecting user and service provider data.",
-        "Integrated ElasticEmail API for sending appointment confirmation emails with dynamic details and checklists, as well as enabling secure password recovery with one-time passwords (OTPs).",
-        "Enhanced PawPal community engagement through appointment scheduling, post creation, commenting, and review features, facilitating communication and feedback loops.",
-      ],
-      technologies: ["Node.js", "Express.js", "MongoDB", "bcrypt", "ElasticEmail API"],
-      github: "https://github.com/akshat2634/pawpal",
-      demo: null,
-    },
   ]
 
   const containerRef = useRef(null)
@@ -251,7 +251,10 @@ export default function Projects() {
 
                       {project.demo && (
                         <Link href={project.demo} target="_blank" rel="noopener noreferrer">
-                          <Button size="sm" className="gap-2 hover:scale-105 transition-transform">
+                          <Button 
+                            size="sm" 
+                            className="gap-2 hover:scale-105 transition-all duration-300 backdrop-blur-md bg-gradient-to-r from-blue-600/80 via-purple-600/80 to-pink-600/80 hover:from-blue-700/90 hover:via-purple-700/90 hover:to-pink-700/90 border border-white/20 text-white shadow-lg hover:shadow-xl backdrop-saturate-150"
+                          >
                             <ExternalLink className="h-4 w-4" />
                             Live Demo
                           </Button>

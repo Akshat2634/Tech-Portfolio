@@ -119,7 +119,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={socialVariants} custom={2}>
-            <Link href="mailto:asahu3@stevens.edu">
+            <Link href="mailto:akshatsahu2634@gmail.com">
               <Button variant="outline" size="lg" className="gap-2 hover:scale-105 transition-transform">
                 <Mail className="h-5 w-5" />
                 Email
