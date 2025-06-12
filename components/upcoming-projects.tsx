@@ -68,10 +68,10 @@ export default function UpcomingProjects() {
       title: "DocuChat AI",
       status: "Released",
       progress: 100,
-      description: "Enterprise-grade AI-powered document chat platform that enables natural language interaction with documents using RAG technology",
-      tech: ["FastAPI", "LanceDB", "OpenAI", "React", "Next.js", "Python"],
+      description: "Enterprise-grade AI-powered document intelligence platform that transforms documents into intelligent, conversational knowledge bases using advanced RAG (Retrieval-Augmented Generation) technology",
+      tech: ["FastAPI", "LanceDB", "OpenAI GPT-4.1", "Redis", "Next.js", "React", "Python"],
       expectedLaunch: "Live Now",
-      features: ["Multi-format support", "RAG based vector search", "Real-time chat", "Enterprise security"],
+      features: ["Multi-format document processing", "Vector search with LanceDB", "Persistent conversations", "Enterprise-level security"],
       github: "https://github.com/Akshat2634/DocuChat-AI",
       demo: "https://docu-chat-ai-self.vercel.app",
       isPublic: true
