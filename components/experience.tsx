@@ -2,24 +2,23 @@
 
 import { motion } from "framer-motion"
 import SectionHeading from "./section-heading"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin } from "lucide-react"
+import { ease, staggerContainer, staggerItem } from "@/lib/animations"
 
 export default function Experience() {
   const experiences = [
     {
-      title: "Founding AI Engineer",
+      title: "Founding Software Engineer",
       company: "Future Path AI",
       location: "Cupertino, CA",
       period: "January 2024 — Present",
       responsibilities: [
-        "Built real-time voice and chat agents integrated with Microsoft Teams and SIP telephony, orchestrating text-to-speech and speech-to-text pipelines for interruption handling and dialogue state management. Achieved around 400ms end-to-end latency at 10k+ concurrent sessions.",
-        "Engineered multi-tenant AI agents with a modular RAG architecture leveraging vector databases (LanceDB, Qdrant) for semantic retrieval and deployed secure on-prem solutions for Fortune 500 pharma/finance that boosted factual accuracy by 30%.",
-        "Developed AI-based intent classifiers integrated with various ITSM tools such as ServiceNow, Intune, MS365 to automate IT support workflows by leveraging LLMs for generative UI rendering via dynamic adaptive cards, reducing average ticket resolution time by 60% compared to manual triage processes.",
-        "Built follow-up suggestion and citation systems using semantic context linking and retrieval-grounded prompting, lowering ungrounded responses by 45% and improving accuracy and reliability across interactions.",
+        "Architected core AI agent infrastructure powering an enterprise platform that autonomously resolves IT operations at scale — designing multimodal RAG pipelines with vector databases and contextual retrieval and reranking layers, delivering 30% improvement in retrieval accuracy across Fortune 500 clients in pharmaceutical and financial services.",
+        "Built comprehensive evaluation frameworks using DeepEval to benchmark agent performance, RAG accuracy, and tool-use reliability across key metrics — including hallucination detection, faithfulness, contextual relevancy, and task completion rates — driving data-backed model selection and prompt optimization decisions.",
+        "Developed a multi-agent orchestration platform leveraging LangGraph and the DeepAgents framework, enabling autonomous agents to reason, plan, and execute complex multi-step tasks with dynamic tool selection and adaptive skill composition across enterprise procurement and IT automation workflows.",
+        "Designed an MCP orchestration layer integrating 10+ enterprise tools (ServiceNow, Kubernetes, Prometheus) with a modular skills architecture — powering chat agents on Microsoft Teams and ServiceNow ITSM that resolve end-user IT issues with seamless human handoff and real-time copilot assistance, reducing ticket resolution time by 60%.",
       ],
-      skills: ["RAG", "LLMs", "Vector Databases", "NLP", "Microsoft Teams", "ServiceNow"],
+      skills: ["RAG", "LLMs", "DeepEval", "LangGraph", "MCP", "Vector Databases", "Kubernetes", "Microsoft Teams", "ServiceNow"],
     },
     {
       title: "Software Engineering Intern",
@@ -36,155 +35,66 @@ export default function Experience() {
     },
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  }
-
-  const listVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const listItemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  }
-
   return (
-    <section id="experience" className="py-20">
-      <div className="container mx-auto px-4">
-        <SectionHeading title="Work Experience" subtitle="My professional journey" />
+    <section id="experience" className="py-24">
+      <div className="container mx-auto max-w-5xl px-4 md:px-8">
+        <SectionHeading title="Work Experience" subtitle="Professional journey" />
 
         <motion.div
-          className="space-y-12 max-w-4xl mx-auto"
-          variants={containerVariants}
+          className="space-y-8 max-w-3xl mx-auto"
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
         >
           {experiences.map((exp, index) => (
-            <motion.div key={index} variants={itemVariants} className="relative">
-              {/* Timeline connector */}
-              {index < experiences.length - 1 && (
-                <div className="absolute left-[50%] top-full h-12 w-0.5 bg-gradient-to-b from-blue-600 to-transparent z-0 hidden md:block"></div>
-              )}
+            <motion.div key={index} variants={staggerItem} className="relative">
+              {/* Timeline dot and line */}
+              <div className="absolute left-0 top-0 bottom-0 hidden md:flex flex-col items-center" style={{ width: '20px', marginLeft: '-30px' }}>
+                <div className="w-3 h-3 rounded-full bg-primary mt-2 shrink-0" />
+                {index < experiences.length - 1 && (
+                  <div className="w-px flex-1 bg-border mt-2" />
+                )}
+              </div>
 
-              <Card className="overflow-hidden border-l-4 border-l-blue-600 shadow-lg hover:shadow-xl transition-all duration-300 relative z-10">
-                <CardContent className="p-0">
-                  <div className="p-6">
-                    <div className="flex flex-wrap justify-between items-start gap-2 mb-4">
-                      <div>
-                        <motion.h3
-                          className="text-xl font-bold text-gray-800 dark:text-white"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: 0.1 }}
-                        >
-                          {exp.title}
-                        </motion.h3>
-                        <motion.p
-                          className="text-blue-600 dark:text-blue-400 font-medium"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: 0.2 }}
-                        >
-                          {exp.company}
-                        </motion.p>
-                      </div>
-                      <div className="flex flex-col items-end">
-                        <motion.div
-                          className="flex items-center text-gray-600 dark:text-gray-400 mb-1"
-                          initial={{ opacity: 0, x: 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: 0.3 }}
-                        >
-                          <MapPin className="h-4 w-4 mr-1" />
-                          <span className="text-sm">{exp.location}</span>
-                        </motion.div>
-                        <motion.div
-                          className="flex items-center text-gray-600 dark:text-gray-400"
-                          initial={{ opacity: 0, x: 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: 0.4 }}
-                        >
-                          <Calendar className="h-4 w-4 mr-1" />
-                          <span className="text-sm">{exp.period}</span>
-                        </motion.div>
-                      </div>
-                    </div>
-
-                    <motion.ul
-                      className="space-y-2 mb-4"
-                      variants={listVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                    >
-                      {exp.responsibilities.map((resp, idx) => (
-                        <motion.li
-                          key={idx}
-                          className="text-gray-600 dark:text-gray-300 pl-4 border-l-2 border-gray-300 dark:border-gray-700"
-                          variants={listItemVariants}
-                        >
-                          {resp}
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-
-                    <motion.div
-                      className="flex flex-wrap gap-2 mt-4"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.5 }}
-                    >
-                      {exp.skills.map((skill, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="secondary"
-                          className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 hover:scale-105 transition-transform"
-                        >
-                          {skill}
-                        </Badge>
-                      ))}
-                    </motion.div>
+              <div className="border border-border rounded-xl p-6 bg-card hover:bg-muted/30 transition-colors duration-200">
+                <div className="flex flex-wrap justify-between items-start gap-2 mb-3">
+                  <div>
+                    <h3 className="text-lg font-semibold tracking-tight text-foreground">{exp.title}</h3>
+                    <p className="text-sm text-primary font-medium">{exp.company}</p>
                   </div>
-                </CardContent>
-              </Card>
+                  <div className="text-right text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {exp.location}
+                    </div>
+                    <div className="flex items-center gap-1.5 mt-1">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {exp.period}
+                    </div>
+                  </div>
+                </div>
+
+                <ul className="mt-4 space-y-2.5">
+                  {exp.responsibilities.map((resp, idx) => (
+                    <li key={idx} className="text-[15px] text-muted-foreground leading-relaxed flex gap-2">
+                      <span className="mt-2 w-1 h-1 rounded-full bg-muted-foreground/50 shrink-0" />
+                      {resp}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {exp.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-2.5 py-1 rounded-md bg-muted text-[11px] font-mono font-medium text-muted-foreground tracking-wide uppercase hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -192,4 +102,3 @@ export default function Experience() {
     </section>
   )
 }
-
