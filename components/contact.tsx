@@ -4,11 +4,11 @@ import type React from "react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import SectionHeading from "./section-heading"
-import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { Mail, Phone, MapPin, Linkedin, Github, Send, Loader2 } from "lucide-react"
+import { Mail, Linkedin, Send, Loader2 } from "lucide-react"
+import { ease } from "@/lib/animations"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -21,199 +21,148 @@ export default function Contact() {
     try {
       const form = e.currentTarget
       const formData = new FormData(form)
-      
-      const response = await fetch('https://formspree.io/f/xqapyvve', {
-        method: 'POST',
+
+      const response = await fetch("https://formspree.io/f/xqapyvve", {
+        method: "POST",
         body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { Accept: "application/json" },
       })
 
       if (response.ok) {
         setIsSubmitted(true)
         form.reset()
-        setTimeout(() => {
-          setIsSubmitted(false)
-        }, 5000)
+        setTimeout(() => setIsSubmitted(false), 5000)
       }
     } catch (error) {
-      console.error('Error submitting form:', error)
+      console.error("Error submitting form:", error)
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <section id="contact" className="py-20">
-      <div className="container mx-auto px-4">
-        <SectionHeading title="Contact Me" subtitle="Let's get in touch" />
+    <section id="contact" className="py-24">
+      <div className="max-w-xl mx-auto px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, ease }}
+        >
+          <p className="text-[12px] font-mono text-primary tracking-widest uppercase mb-2">Get in touch</p>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mb-3">
+            Let&apos;s work together
+          </h2>
+          <p className="text-[15px] text-muted-foreground leading-relaxed mb-8">
+            Have a project in mind or want to discuss opportunities? I&apos;d love to hear from you.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+        {/* Quick links */}
+        <motion.div
+          className="flex items-center justify-center gap-4 mb-10"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, delay: 0.1, ease }}
+        >
+          <a
+            href="mailto:akshatsahu2634@gmail.com"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:border-primary/30 hover:bg-muted/50 transition-all text-sm text-muted-foreground hover:text-foreground"
           >
-            <Card className="h-full shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6">Contact Information</h3>
-
-                <div className="space-y-6">
-                  <div className="flex items-start">
-                    <div className="mr-4 p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-                      <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 dark:text-white">Email</h4>
-                      <a href="mailto:akshatsahu2634@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">
-                        akshatsahu2634@gmail.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="mr-4 p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-                      <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 dark:text-white">Phone</h4>
-                      <a href="tel:+12012757594" className="text-blue-600 dark:text-blue-400 hover:underline">
-                        +1 (201) 275-7594
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="mr-4 p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-                      <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-800 dark:text-white">Location</h4>
-                      <p className="text-gray-600 dark:text-gray-400">Hoboken, New Jersey</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <h4 className="font-medium text-gray-800 dark:text-white mb-4">Connect with me</h4>
-                  <div className="flex gap-4">
-                    <a
-                      href="https://linkedin.com/in/akshat2634"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-                    >
-                      <Linkedin className="h-6 w-6" />
-                    </a>
-                    <a
-                      href="https://github.com/akshat2634"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-                    >
-                      <Github className="h-6 w-6" />
-                    </a>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            <Mail className="h-4 w-4" />
+            Email me
+          </a>
+          <a
+            href="https://linkedin.com/in/akshat2634"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:border-primary/30 hover:bg-muted/50 transition-all text-sm text-muted-foreground hover:text-foreground"
           >
-            <Card className="h-full shadow-lg">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6">Send Me a Message</h3>
+            <Linkedin className="h-4 w-4" />
+            LinkedIn
+          </a>
+        </motion.div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Name
-                      </label>
-                      <Input id="name" name="name" placeholder="Your name" required disabled={isSubmitting} />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                      >
-                        Email
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="Your email"
-                        required
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                  </div>
+        {/* Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          className="space-y-4 text-left"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, delay: 0.2, ease }}
+        >
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="name" className="text-[13px] font-medium text-foreground mb-1.5 block">
+                Name
+              </label>
+              <Input
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+                disabled={isSubmitting}
+                className="bg-muted/50 border-border focus:border-primary focus:ring-primary/20 rounded-lg h-11"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="text-[13px] font-medium text-foreground mb-1.5 block">
+                Email
+              </label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Your email"
+                required
+                disabled={isSubmitting}
+                className="bg-muted/50 border-border focus:border-primary focus:ring-primary/20 rounded-lg h-11"
+              />
+            </div>
+          </div>
 
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >
-                      Subject
-                    </label>
-                    <Input id="subject" name="subject" placeholder="Subject" required disabled={isSubmitting} />
-                  </div>
+          <div>
+            <label htmlFor="message" className="text-[13px] font-medium text-foreground mb-1.5 block">
+              Message
+            </label>
+            <Textarea
+              id="message"
+              name="message"
+              placeholder="Your message"
+              rows={5}
+              required
+              disabled={isSubmitting}
+              className="bg-muted/50 border-border focus:border-primary focus:ring-primary/20 rounded-lg min-h-[140px]"
+            />
+          </div>
 
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                    >
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Your message"
-                      rows={5}
-                      required
-                      disabled={isSubmitting}
-                    />
-                  </div>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-11 rounded-lg font-medium transition-colors"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              <>
+                <Send className="mr-2 h-4 w-4" />
+                Send Message
+              </>
+            )}
+          </Button>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-
-                  {isSubmitted && (
-                    <div className="p-3 bg-green-100 border border-green-200 text-green-800 rounded-md text-sm">
-                      Thank you! Your message has been sent successfully.
-                    </div>
-                  )}
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+          {isSubmitted && (
+            <div className="p-3 bg-accent/10 border border-accent/20 text-accent rounded-lg text-sm text-center">
+              Thank you! Your message has been sent successfully.
+            </div>
+          )}
+        </motion.form>
       </div>
     </section>
   )
 }
-

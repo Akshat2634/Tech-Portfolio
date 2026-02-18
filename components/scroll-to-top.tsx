@@ -10,22 +10,15 @@ export function ScrollToTop() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 500) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
+      setIsVisible(window.scrollY > 500)
     }
 
-    window.addEventListener("scroll", toggleVisibility)
+    window.addEventListener("scroll", toggleVisibility, { passive: true })
     return () => window.removeEventListener("scroll", toggleVisibility)
   }, [])
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   return (
@@ -33,24 +26,22 @@ export function ScrollToTop() {
       {isVisible && (
         <motion.div
           className="fixed bottom-6 right-6 z-50"
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          transition={{ duration: 0.3 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.2 }}
         >
           <Button
             onClick={scrollToTop}
             size="icon"
-            className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg"
+            variant="outline"
+            className="h-9 w-9 rounded-lg bg-card border-border hover:bg-muted"
             aria-label="Scroll to top"
           >
-            <ArrowUp className="h-5 w-5" />
+            <ArrowUp className="h-4 w-4" />
           </Button>
         </motion.div>
       )}
     </AnimatePresence>
   )
 }
-
