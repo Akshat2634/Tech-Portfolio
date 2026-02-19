@@ -21,9 +21,42 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 })
 
+const siteUrl = "https://akshat-sahu.vercel.app"
+
 export const metadata: Metadata = {
-  title: "Akshat Sahu | Portfolio",
-  description: "Software Engineer",
+  title: "Akshat Sahu | Software Engineer",
+  description:
+    "Software Engineer passionate about building and startups. Specializing in production-grade AI agent systems, multi-agent orchestration, and RAG pipelines.",
+  keywords: [
+    "Akshat Sahu",
+    "Software Engineer",
+    "AI Engineer",
+    "Full Stack Developer",
+    "AI Agents",
+    "RAG",
+    "LangChain",
+    "LangGraph",
+    "Python",
+    "Next.js",
+  ],
+  authors: [{ name: "Akshat Sahu" }],
+  creator: "Akshat Sahu",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    title: "Akshat Sahu | Software Engineer",
+    description:
+      "Software Engineer passionate about building and startups. Specializing in AI agent systems, multi-agent orchestration, and RAG pipelines.",
+    siteName: "Akshat Sahu",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Akshat Sahu | Software Engineer",
+    description:
+      "Software Engineer passionate about building and startups. Specializing in AI agent systems and RAG pipelines.",
+  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

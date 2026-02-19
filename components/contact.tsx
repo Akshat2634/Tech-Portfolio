@@ -13,10 +13,12 @@ import { ease } from "@/lib/animations"
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setIsError(false)
 
     try {
       const form = e.currentTarget
@@ -32,9 +34,13 @@ export default function Contact() {
         setIsSubmitted(true)
         form.reset()
         setTimeout(() => setIsSubmitted(false), 5000)
+      } else {
+        setIsError(true)
+        setTimeout(() => setIsError(false), 5000)
       }
-    } catch (error) {
-      console.error("Error submitting form:", error)
+    } catch {
+      setIsError(true)
+      setTimeout(() => setIsError(false), 5000)
     } finally {
       setIsSubmitting(false)
     }
@@ -157,9 +163,23 @@ export default function Contact() {
           </Button>
 
           {isSubmitted && (
-            <div className="p-3 bg-accent/10 border border-accent/20 text-accent rounded-lg text-sm text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-3 bg-accent/10 border border-accent/20 text-accent rounded-lg text-sm text-center"
+            >
               Thank you! Your message has been sent successfully.
-            </div>
+            </motion.div>
+          )}
+
+          {isError && (
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-3 bg-destructive/10 border border-destructive/20 text-destructive rounded-lg text-sm text-center"
+            >
+              Something went wrong. Please try again or email me directly.
+            </motion.div>
           )}
         </motion.form>
       </div>
