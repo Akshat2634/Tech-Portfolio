@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <span className="text-sm font-semibold text-foreground">Akshat Sahu</span>
             <nav className="hidden md:flex items-center gap-4">
-              {["About", "Experience", "Projects", "Contact"].map((link) => (
+              {["About", "Experience", "Education", "Skills", "Projects", "Contact"].map((link) => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}

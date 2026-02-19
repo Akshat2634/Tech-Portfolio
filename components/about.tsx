@@ -8,7 +8,7 @@ import { ease } from "@/lib/animations"
 
 const stats = [
   { value: 2, suffix: "+", label: "Years Building", decimals: 0 },
-  { value: 5, suffix: "+", label: "Autonomous AI Agents", decimals: 0 },
+  { value: 100, suffix: "+", label: "Autonomous AI Agents", decimals: 0 },
   { value: 10, suffix: "k+", label: "Enterprise Users Impacted", decimals: 0 },
   { value: 3.9, suffix: "", label: "GPA · MS CS", decimals: 1 },
 ]
