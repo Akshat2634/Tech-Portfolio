@@ -7,13 +7,6 @@ import Link from "next/link"
 import { ease } from "@/lib/animations"
 
 export default function Hero() {
-  const scrollToAbout = () => {
-    const aboutSection = document.querySelector("#about")
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
-  }
-
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Dot grid background */}
