@@ -26,9 +26,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.DS_Store
-node_modules
+# os
 .DS_Store
 
-# env files
-.env*
+# claude code
+.claude/
+.agents/
+skills-lock.json
