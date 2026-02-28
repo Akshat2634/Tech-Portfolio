@@ -78,7 +78,7 @@ export default function Navbar() {
         className={cn(
           "fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 hidden md:block",
           isScrolled
-            ? "bg-background/80 backdrop-blur-xl border border-border shadow-sm rounded-full px-2 py-1.5"
+            ? "bg-background/80 backdrop-blur-xl border border-border shadow-md shadow-primary/5 rounded-full px-2 py-1.5"
             : "bg-transparent px-2 py-1.5"
         )}
         initial={{ y: -20, opacity: 0 }}
@@ -89,7 +89,7 @@ export default function Navbar() {
           <Link
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="text-sm font-semibold text-foreground px-3 py-1.5"
+            className="text-sm font-bold gradient-text px-3 py-1.5"
           >
             AS
           </Link>
@@ -106,8 +106,8 @@ export default function Navbar() {
                 className={cn(
                   "px-3 py-1.5 text-[13px] font-medium rounded-full transition-colors duration-200",
                   isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-gradient-to-r from-primary/15 to-accent/10 text-primary font-semibold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                 )}
               >
                 {link.name}
@@ -137,7 +137,7 @@ export default function Navbar() {
           <Link
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="text-sm font-semibold text-foreground"
+            className="text-sm font-bold gradient-text"
           >
             AS
           </Link>

@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion"
 import SectionHeading from "./section-heading"
-import { Calendar, MapPin } from "lucide-react"
-import { ease, staggerContainer, staggerItem } from "@/lib/animations"
+import { Calendar, MapPin, ChevronRight } from "lucide-react"
+import { staggerContainer, staggerItem } from "@/lib/animations"
+
+const coreSkills = new Set(["RAG", "LLMs", "LangGraph", "MCP", "FastAPI", "Python", "DeepEval"])
 
 export default function Experience() {
   const experiences = [
@@ -41,58 +43,94 @@ export default function Experience() {
         <SectionHeading title="Work Experience" subtitle="Professional journey" />
 
         <motion.div
-          className="space-y-8 max-w-3xl mx-auto"
+          className="space-y-0 max-w-3xl mx-auto"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
           {experiences.map((exp, index) => (
-            <motion.div key={index} variants={staggerItem} className="relative">
-              {/* Timeline dot and line */}
-              <div className="absolute left-0 top-0 bottom-0 hidden md:flex flex-col items-center" style={{ width: '20px', marginLeft: '-30px' }}>
-                <div className="w-3 h-3 rounded-full bg-primary mt-2 shrink-0" />
+            <motion.div
+              key={index}
+              variants={staggerItem}
+              className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0 md:gap-6"
+            >
+              {/* Left rail: dot + connecting line */}
+              <div className="hidden md:flex flex-col items-center">
+                <div className="relative mt-7 shrink-0">
+                  <div className="w-4 h-4 rounded-full bg-primary shadow-md shadow-primary/30 ring-4 ring-background" />
+                  {index === 0 && (
+                    <div className="absolute inset-0 rounded-full bg-primary/40 animate-ping" />
+                  )}
+                </div>
                 {index < experiences.length - 1 && (
-                  <div className="w-px flex-1 bg-border mt-2" />
+                  <div className="w-px flex-1 mt-2 bg-gradient-to-b from-primary/40 to-border" />
                 )}
               </div>
 
-              <div className="border border-border rounded-xl p-6 bg-card hover:bg-muted/30 transition-colors duration-200">
-                <div className="flex flex-wrap justify-between items-start gap-2 mb-3">
-                  <div>
-                    <h3 className="text-lg font-semibold tracking-tight text-foreground">{exp.title}</h3>
-                    <p className="text-sm text-primary font-medium">{exp.company}</p>
-                  </div>
-                  <div className="text-right text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1.5">
-                      <MapPin className="h-3.5 w-3.5" />
-                      {exp.location}
-                    </div>
-                    <div className="flex items-center gap-1.5 mt-1">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {exp.period}
-                    </div>
-                  </div>
-                </div>
+              {/* Card */}
+              <div className="mb-8 relative border border-border rounded-xl overflow-hidden bg-card hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 group">
+                {/* Left edge accent bar */}
+                <div className={`absolute left-0 top-0 bottom-0 w-1 ${index === 0 ? "bg-gradient-to-b from-primary to-accent" : "bg-primary/30"}`} />
 
-                <ul className="mt-4 space-y-2.5">
-                  {exp.responsibilities.map((resp, idx) => (
-                    <li key={idx} className="text-[15px] text-muted-foreground leading-relaxed flex gap-2">
-                      <span className="mt-2 w-1 h-1 rounded-full bg-muted-foreground/50 shrink-0" />
-                      {resp}
-                    </li>
-                  ))}
-                </ul>
+                <div className="pl-5 pr-6 pt-6 pb-5">
+                  {/* Header */}
+                  <div className="flex flex-wrap justify-between items-start gap-3 mb-4">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-sm font-bold shrink-0">
+                        {exp.company[0]}
+                      </div>
+                      <div>
+                        <h3 className="text-base font-semibold tracking-tight text-foreground leading-tight">
+                          {exp.title}
+                        </h3>
+                        <p className="text-[13px] text-primary font-medium">{exp.company}</p>
+                      </div>
+                    </div>
 
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {exp.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2.5 py-1 rounded-md bg-muted text-[11px] font-mono font-medium text-muted-foreground tracking-wide uppercase hover:bg-primary/10 hover:text-primary transition-colors cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                    <div className="text-right text-xs text-muted-foreground space-y-1">
+                      <div className="flex items-center gap-1.5 justify-end">
+                        <MapPin className="h-3 w-3" />
+                        {exp.location}
+                      </div>
+                      <div className="flex items-center gap-1.5 justify-end">
+                        <Calendar className="h-3 w-3" />
+                        {exp.period}
+                      </div>
+                      {index === 0 && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[10px] font-mono tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                          Current
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Responsibilities */}
+                  <ul className="mt-3 space-y-3">
+                    {exp.responsibilities.map((resp, idx) => (
+                      <li key={idx} className="flex gap-3 text-[14px] text-muted-foreground leading-relaxed group/item">
+                        <ChevronRight className="h-3.5 w-3.5 text-primary/50 mt-0.5 shrink-0 group-hover/item:text-primary transition-colors duration-200" />
+                        <span>{resp}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Skill tags */}
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {exp.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className={`px-2.5 py-1 rounded-md text-[11px] font-mono font-medium tracking-wide uppercase cursor-default transition-colors
+                          ${coreSkills.has(skill)
+                            ? "bg-primary/10 text-primary border border-primary/20"
+                            : "bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                          }`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
