@@ -2,8 +2,25 @@
 
 import { motion } from "framer-motion"
 import SectionHeading from "./section-heading"
-import { GraduationCap, Calendar, MapPin } from "lucide-react"
+import { GraduationCap, Calendar, MapPin, Star } from "lucide-react"
 import { staggerContainer, staggerItem } from "@/lib/animations"
+
+const degreeConfig: Record<string, {
+  gradient: string
+  badge: string
+  badgeColor: string
+}> = {
+  "Master of Science in Computer Science": {
+    gradient: "from-primary to-accent",
+    badge: "MS · Graduate",
+    badgeColor: "bg-primary/10 text-primary border-primary/20",
+  },
+  "Bachelor of Engineering in Information Technology": {
+    gradient: "from-accent/70 to-primary/50",
+    badge: "BE · Undergraduate",
+    badgeColor: "bg-accent/10 text-accent border-accent/20",
+  },
+}
 
 export default function Education() {
   const educationData = [
@@ -37,46 +54,64 @@ export default function Education() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          {educationData.map((edu, index) => (
-            <motion.div key={index} variants={staggerItem}>
-              <div className="border border-border rounded-xl p-6 bg-card">
-                <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-lg bg-primary/10 shrink-0">
-                    <GraduationCap className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold tracking-tight text-foreground">{edu.institution}</h3>
-                    <p className="text-sm text-muted-foreground mt-0.5">{edu.degree}</p>
+          {educationData.map((edu, index) => {
+            const config = degreeConfig[edu.degree]
+            return (
+              <motion.div key={index} variants={staggerItem}>
+                <div className="border border-border rounded-xl overflow-hidden bg-card hover:border-primary/20 transition-colors duration-200 group">
+                  {/* Top gradient bar */}
+                  <div className={`h-1 bg-gradient-to-r ${config.gradient}`} />
 
-                    <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="h-3.5 w-3.5" />
-                        {edu.period}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="h-3.5 w-3.5" />
-                        {edu.location}
-                      </span>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-accent/10 text-accent text-[11px] font-mono font-medium tracking-wide">
-                        GPA {edu.gpa}
-                      </span>
+                  <div className="p-6">
+                    <div className="flex items-start gap-4">
+                      {/* Icon */}
+                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 shrink-0 group-hover:from-primary/25 transition-all duration-200">
+                        <GraduationCap className="h-5 w-5 text-primary" />
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        {/* Institution + degree badge */}
+                        <div className="flex items-start justify-between gap-3 mb-1">
+                          <h3 className="text-lg font-semibold tracking-tight text-foreground">{edu.institution}</h3>
+                          <span className={`shrink-0 px-2 py-0.5 rounded-md border text-[10px] font-mono tracking-wide ${config.badgeColor}`}>
+                            {config.badge}
+                          </span>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{edu.degree}</p>
+
+                        {/* Meta row */}
+                        <div className="flex flex-wrap items-center gap-3 mt-3">
+                          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                            <Calendar className="h-3.5 w-3.5" />
+                            {edu.period}
+                          </span>
+                          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                            <MapPin className="h-3.5 w-3.5" />
+                            {edu.location}
+                          </span>
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-accent/10 text-accent text-[11px] font-mono font-medium border border-accent/20">
+                            GPA {edu.gpa}
+                          </span>
+                        </div>
+
+                        {/* Detail bullets */}
+                        {edu.details.length > 0 && (
+                          <div className="mt-4 pt-4 border-t border-border/50 space-y-1.5">
+                            {edu.details.map((detail, idx) => (
+                              <div key={idx} className="flex items-center gap-2.5 text-[14px] text-muted-foreground">
+                                <Star className="h-3 w-3 text-primary/50 shrink-0" />
+                                {detail}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
-
-                    {edu.details.length > 0 && (
-                      <ul className="mt-3 space-y-1.5">
-                        {edu.details.map((detail, idx) => (
-                          <li key={idx} className="text-[15px] text-muted-foreground flex gap-2">
-                            <span className="mt-2 w-1 h-1 rounded-full bg-muted-foreground/50 shrink-0" />
-                            {detail}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>
