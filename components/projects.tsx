@@ -89,7 +89,7 @@ export default function Projects() {
       ],
       technologies: ["Node.js", "Express.js", "Chart.js", "JavaScript"],
       github: "https://github.com/Akshat2634/Codelens-AI",
-      demo: null,
+      demo: "https://codelensai-dev.vercel.app",
       color: "from-orange-500/15 via-orange-500/5 to-transparent",
       accentColor: "text-orange-500",
       borderColor: "border-orange-500/20",
