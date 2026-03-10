@@ -29,7 +29,7 @@ function CliBlock() {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("npx claude-roi").then(() => {
+    navigator.clipboard.writeText("npx codelens-ai").then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     })
@@ -54,7 +54,7 @@ function CliBlock() {
       <div className="flex items-center justify-between gap-3 px-4 py-3.5 bg-zinc-950">
         <div className="flex items-center gap-2 font-mono text-[13px] min-w-0">
           <span className="text-orange-400 shrink-0">$</span>
-          <span className="text-orange-300 font-semibold tracking-wide">npx claude-roi</span>
+          <span className="text-orange-300 font-semibold tracking-wide">npx codelens-ai</span>
           <span className="inline-block w-[7px] h-[14px] bg-orange-400/70 ml-0.5 cursor-blink shrink-0" />
         </div>
         <button
@@ -78,7 +78,7 @@ export default function Projects() {
     {
       title: "CodeLens AI",
       tagline: "Agent Productivity-to-Cost Correlator" as string | undefined,
-      cliCommand: "npx claude-roi" as string | undefined,
+      cliCommand: "npx codelens-ai" as string | undefined,
       period: "February 2026",
       description:
         "Analyzes whether your AI coding agent is actually shipping code by correlating Claude Code token usage with git commits. Reads local session files, matches with git history by timestamp, and generates an ROI dashboard — zero config.",
