@@ -1,11 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
+import { motion } from "motion/react"
+import { FileText, Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import { ease } from "@/lib/animations"
 import { useState, useEffect } from "react"
+import { useResumeModal } from "./resume-modal-provider"
 
 const roles = ["Software Engineer", "AI Systems Builder", "Multi-Agent Architect"]
 
@@ -57,6 +58,7 @@ function useTypewriter(words: string[], typingSpeed = 75, deletingSpeed = 45, pa
 
 export default function Hero() {
   const { displayed: roleText, enabled: typewriterEnabled } = useTypewriter(roles)
+  const { open: openResume, prefetch: prefetchResume } = useResumeModal()
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -68,17 +70,17 @@ export default function Hero() {
       {/* Dot grid */}
       <div className="absolute inset-0 bg-[radial-gradient(hsl(var(--border))_1px,transparent_1px)] [background-size:26px_26px] opacity-35 pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 items-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto] gap-10 xl:gap-20 items-center">
 
           {/* Left: main content */}
-          <div className="text-center lg:text-left">
+          <div className="text-center xl:text-left">
             {/* Status pill */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1, ease }}
-              className="flex justify-center lg:justify-start"
+              className="flex justify-center xl:justify-start"
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-mono font-medium tracking-wide border border-primary/20">
                 <span className="relative flex h-2 w-2">
@@ -89,9 +91,9 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Name */}
+            {/* Name — fluid type so it scales smoothly across all viewports */}
             <motion.h1
-              className="mt-7 text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-[-0.03em] leading-none gradient-text"
+              className="mt-7 font-bold tracking-[-0.03em] leading-[1.05] gradient-text text-[clamp(2.75rem,9vw,5.5rem)]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease }}
@@ -99,24 +101,24 @@ export default function Hero() {
               Akshat Sahu
             </motion.h1>
 
-            {/* Typewriter role */}
+            {/* Typewriter role — nowrap + min-h prevents the long word from wrapping or clipping */}
             <motion.div
-              className="mt-5 h-8 flex items-center justify-center lg:justify-start"
+              className="mt-5 min-h-8 flex items-center justify-center xl:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35, ease }}
             >
-              <span className="text-lg md:text-xl font-mono text-muted-foreground tracking-wide">
+              <span className="font-mono text-muted-foreground tracking-wide whitespace-nowrap text-[clamp(1rem,2vw,1.25rem)]">
                 {roleText}
               </span>
               {typewriterEnabled && (
-                <span className="inline-block w-0.5 h-5 bg-primary ml-1 align-middle cursor-blink" />
+                <span className="inline-block w-0.5 h-5 bg-primary ml-1 align-middle cursor-blink shrink-0" />
               )}
             </motion.div>
 
             {/* One-liner */}
             <motion.p
-              className="mt-4 text-[15px] text-muted-foreground max-w-md mx-auto lg:mx-0 leading-relaxed"
+              className="mt-4 text-[15px] text-muted-foreground max-w-md mx-auto xl:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45, ease }}
@@ -126,7 +128,7 @@ export default function Hero() {
 
             {/* Social links + Resume CTA */}
             <motion.div
-              className="mt-8 flex items-center justify-center lg:justify-start gap-3"
+              className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.55, ease }}
@@ -151,22 +153,21 @@ export default function Hero() {
 
               <div className="w-px h-6 bg-border mx-1" />
 
-              <Link
-                href="https://drive.google.com/file/d/192o047jClbKZ0vEDSFlkJrTJqOOuBSgL/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Button
+                onClick={() => openResume("hero")}
+                onMouseEnter={prefetchResume}
+                onFocus={prefetchResume}
+                className="bg-gradient-to-r from-primary to-accent/80 hover:from-primary/90 hover:to-accent/70 text-white h-10 px-6 text-sm font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all duration-200"
               >
-                <Button className="bg-gradient-to-r from-primary to-accent/80 hover:from-primary/90 hover:to-accent/70 text-white h-10 px-6 text-sm font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all duration-200">
-                  View Resume
-                  <ArrowUpRight className="h-4 w-4 ml-1.5" />
-                </Button>
-              </Link>
+                <FileText className="h-4 w-4 mr-1.5" />
+                View Resume
+              </Button>
             </motion.div>
           </div>
 
-          {/* Right: decorative code card (lg+ only) */}
+          {/* Right: decorative code card (xl+ only — needs the room) */}
           <motion.div
-            className="hidden lg:block shrink-0"
+            className="hidden xl:block shrink-0"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease }}

@@ -63,10 +63,13 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    /* Defend against any decorative/animated element pushing past the viewport. */
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+    overflow-x: clip;
   }
 }
 

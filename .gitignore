@@ -33,3 +33,8 @@ next-env.d.ts
 .claude/
 .agents/
 skills-lock.json
+
+# playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
