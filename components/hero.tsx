@@ -71,16 +71,16 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(hsl(var(--border))_1px,transparent_1px)] [background-size:26px_26px] opacity-35 pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto] gap-10 xl:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-20 items-center">
 
           {/* Left: main content */}
-          <div className="text-center xl:text-left">
+          <div className="text-center lg:text-left">
             {/* Status pill */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1, ease }}
-              className="flex justify-center xl:justify-start"
+              className="flex justify-center lg:justify-start"
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-mono font-medium tracking-wide border border-primary/20">
                 <span className="relative flex h-2 w-2">
@@ -103,7 +103,7 @@ export default function Hero() {
 
             {/* Typewriter role — nowrap + min-h prevents the long word from wrapping or clipping */}
             <motion.div
-              className="mt-5 min-h-8 flex items-center justify-center xl:justify-start"
+              className="mt-5 min-h-8 flex items-center justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35, ease }}
@@ -118,7 +118,7 @@ export default function Hero() {
 
             {/* One-liner */}
             <motion.p
-              className="mt-4 text-[15px] text-muted-foreground max-w-md mx-auto xl:mx-0 leading-relaxed"
+              className="mt-4 text-[15px] text-muted-foreground max-w-md mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45, ease }}
@@ -128,7 +128,7 @@ export default function Hero() {
 
             {/* Social links + Resume CTA */}
             <motion.div
-              className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-3"
+              className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.55, ease }}
@@ -165,9 +165,9 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: decorative code card (xl+ only — needs the room) */}
+          {/* Right: decorative code card (lg+ — shows on most laptops including 14" with sidebar) */}
           <motion.div
-            className="hidden xl:block shrink-0"
+            className="hidden lg:block shrink-0"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease }}
