@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView } from "motion/react"
 import SectionHeading from "./section-heading"
 import Image from "next/image"
 import { ease } from "@/lib/animations"
@@ -15,10 +15,10 @@ const stats = [
 ]
 
 const whatIDo = [
-  { icon: BrainCircuit, label: "Multi-Agent Orchestration Platforms" },
-  { icon: Database,     label: "RAG Pipelines & Vector Databases" },
-  { icon: Layers,       label: "Enterprise AI Systems at Scale" },
-  { icon: Code,         label: "FastAPI · LangGraph · Python · TypeScript" },
+  { icon: BrainCircuit, label: "Multi-Agent Orchestration & LLM Evaluation" },
+  { icon: Database,     label: "Hybrid Retrieval RAG · pgvector + BM25 · Reranking" },
+  { icon: Layers,       label: "MCP Integrations Across 80+ Enterprise Tools" },
+  { icon: Code,         label: "Python · FastAPI · LangGraph · DeepAgents" },
 ]
 
 function useCountUp(target: number, decimals: number, shouldStart: boolean, duration = 1800, delay = 0) {
@@ -116,7 +116,7 @@ export default function About() {
               <div className="relative p-[3px] rounded-2xl bg-gradient-to-br from-primary/60 via-primary/20 to-accent/60 shadow-xl shadow-primary/10">
                 <div className="relative w-full aspect-square rounded-[13px] overflow-hidden">
                   <Image
-                    src="/images/profile.png"
+                    src="/images/profile.jpg"
                     alt="Akshat Sahu"
                     fill
                     className="object-cover"
@@ -152,7 +152,7 @@ export default function About() {
             </p>
 
             <p className="text-[15px] leading-7 text-muted-foreground mb-6">
-              I&apos;m a Software Engineer with a Master&apos;s in Computer Science, passionate about building and startups. I specialize in production-grade AI agent systems at scale — designing multi-agent orchestration platforms, RAG pipelines, and MCP-driven tool integrations with LangGraph, vector databases (LanceDB, Qdrant), Python, FastAPI, and LangChain. At Future Path AI, I&apos;ve architected autonomous enterprise agents for Fortune 500 clients in pharma and financial services, delivering measurable gains in retrieval accuracy, evaluation rigor, and ticket resolution efficiency.
+              I&apos;m a Software Engineer with a Master&apos;s in Computer Science, passionate about building and startups. I specialize in production-grade AI agent systems at scale — multi-agent orchestration on LangGraph and DeepAgents, hybrid retrieval RAG (pgvector + BM25 via RRF) with cross-encoder reranking, and MCP-driven integrations spanning 80+ enterprise tools. At Future Path AI, I&apos;ve architected autonomous agents for Fortune 500 pharma and finance clients, with rigorous DeepEval / RAGAS / Langfuse evaluation pipelines guiding model selection across OpenAI, Anthropic, and Gemini.
             </p>
 
             {/* What I Do */}

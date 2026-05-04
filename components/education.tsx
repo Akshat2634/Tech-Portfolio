@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
 import { GraduationCap, Calendar, MapPin, Star } from "lucide-react"
 import { staggerContainer, staggerItem } from "@/lib/animations"

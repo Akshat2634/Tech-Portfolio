@@ -5,9 +5,10 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X, FileText } from "lucide-react"
+import { motion, AnimatePresence } from "motion/react"
 import { cn } from "@/lib/utils"
+import { useResumeModal } from "@/components/resume-modal-provider"
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -23,6 +24,12 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
+  const { open: openResume, prefetch: prefetchResume } = useResumeModal()
+
+  const handleResumeClick = () => {
+    setMobileMenuOpen(false)
+    openResume("navbar_mobile")
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,16 +80,17 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Desktop nav */}
+      {/* Desktop nav — lg+ so the pill never overflows on tablets.
+          motion owns BOTH x and y so its inline transform doesn't wipe Tailwind's centering. */}
       <motion.header
         className={cn(
-          "fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 hidden md:block",
+          "fixed top-4 left-1/2 z-50 transition-all duration-300 hidden lg:block max-w-[calc(100vw-2rem)]",
           isScrolled
             ? "bg-background/80 backdrop-blur-xl border border-border shadow-md shadow-primary/5 rounded-full px-2 py-1.5"
             : "bg-transparent px-2 py-1.5"
         )}
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ x: "-50%", y: -20, opacity: 0 }}
+        animate={{ x: "-50%", y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <nav className="flex items-center gap-1">
@@ -117,14 +125,25 @@ export default function Navbar() {
 
           <div className="w-px h-4 bg-border mx-1" />
 
+          <button
+            onClick={() => openResume("navbar_desktop")}
+            onMouseEnter={prefetchResume}
+            onFocus={prefetchResume}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-semibold rounded-full bg-gradient-to-r from-primary to-accent/80 text-white shadow-sm shadow-primary/20 hover:shadow-md hover:shadow-primary/30 hover:scale-[1.03] transition-all duration-200"
+            aria-label="View resume"
+          >
+            <FileText className="h-3.5 w-3.5" />
+            Resume
+          </button>
+
           <ModeToggle />
         </nav>
       </motion.header>
 
-      {/* Mobile nav */}
+      {/* Mobile + tablet nav (below lg) */}
       <motion.header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 lg:hidden transition-all duration-300",
           isScrolled
             ? "bg-background/80 backdrop-blur-xl border-b border-border"
             : "bg-transparent"
@@ -176,6 +195,15 @@ export default function Navbar() {
                     {link.name}
                   </Link>
                 ))}
+                <button
+                  onClick={handleResumeClick}
+                  onMouseEnter={prefetchResume}
+                  onFocus={prefetchResume}
+                  className="mt-2 mb-3 flex items-center justify-center gap-1.5 w-full py-2.5 text-sm font-semibold rounded-xl bg-gradient-to-r from-primary to-accent/80 text-white shadow-md shadow-primary/20"
+                >
+                  <FileText className="h-4 w-4" />
+                  View Resume
+                </button>
               </div>
             </motion.div>
           )}

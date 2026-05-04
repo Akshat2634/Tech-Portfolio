@@ -1,11 +1,14 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
 import { Calendar, MapPin, ChevronRight } from "lucide-react"
 import { staggerContainer, staggerItem } from "@/lib/animations"
 
-const coreSkills = new Set(["RAG", "LLMs", "LangGraph", "MCP", "FastAPI", "Python", "DeepEval"])
+const coreSkills = new Set([
+  "RAG", "Hybrid Search", "Cross-Encoder Reranking", "LangGraph", "DeepAgents",
+  "MCP", "DeepEval", "RAGAS", "Langfuse", "pgvector", "FastAPI", "Python",
+])
 
 export default function Experience() {
   const experiences = [
@@ -15,12 +18,16 @@ export default function Experience() {
       location: "Cupertino, CA",
       period: "January 2024 — Present",
       responsibilities: [
-        "Architected core AI agent infrastructure powering an enterprise platform that autonomously resolves IT operations at scale — designing multimodal RAG pipelines with vector databases and contextual retrieval and reranking layers, delivering 30% improvement in retrieval accuracy across Fortune 500 clients in pharmaceutical and financial services.",
-        "Built comprehensive evaluation frameworks using DeepEval to benchmark agent performance, RAG accuracy, and tool-use reliability across key metrics — including hallucination detection, faithfulness, contextual relevancy, and task completion rates — driving data-backed model selection and prompt optimization decisions.",
-        "Developed a multi-agent orchestration platform leveraging LangGraph and the DeepAgents framework, enabling autonomous agents to reason, plan, and execute complex multi-step tasks with dynamic tool selection and adaptive skill composition across enterprise procurement and IT automation workflows.",
-        "Designed an MCP orchestration layer integrating 10+ enterprise tools (ServiceNow, Kubernetes, Prometheus) with a modular skills architecture — powering chat agents on Microsoft Teams and ServiceNow ITSM that resolve end-user IT issues with seamless human handoff and real-time copilot assistance, reducing ticket resolution time by 60%.",
+        "Architected AI agent infrastructure for an enterprise platform autonomously resolving business and IT operations at Fortune 500 pharma and finance clients — built the multimodal RAG layer with hybrid retrieval (pgvector + BM25 via RRF), cross-encoder reranking, and a vendor-agnostic embedding layer over 10K+ documents.",
+        "Built agent and RAG evaluation pipelines using DeepEval, RAGAS, and Langfuse — 200+ per-client test cases across tool-use reliability, task completion, faithfulness, and context precision — driving model selection and prompt iteration across OpenAI, Anthropic, and Gemini.",
+        "Developed a multi-agent orchestration platform on LangGraph and DeepAgents with manifest-driven agent definitions (config-as-code) — leveraging planning loops, sub-agent delegation, and file-system context management to autonomously execute multi-step IT and business operations workflows.",
+        "Architected an MCP orchestration layer spanning 80+ enterprise integrations (ServiceNow, Kubernetes, Splunk, Dynatrace, Azure, SAP, Salesforce) with multi-tenant credential injection and dynamic per-query skill selection — powering LangGraph autonomous AI and chat agents handling 100+ tickets daily across ITSM, observability, and ERP workflows.",
       ],
-      skills: ["RAG", "LLMs", "DeepEval", "LangGraph", "MCP", "Vector Databases", "Kubernetes", "Microsoft Teams", "ServiceNow"],
+      skills: [
+        "RAG", "Hybrid Search", "Cross-Encoder Reranking", "LangGraph", "DeepAgents",
+        "MCP", "DeepEval", "RAGAS", "Langfuse", "pgvector", "FastAPI", "Python",
+        "ServiceNow", "Kubernetes",
+      ],
     },
     {
       title: "Software Engineering Intern",
@@ -28,10 +35,10 @@ export default function Experience() {
       location: "Gurugram, India",
       period: "March 2023 — July 2023",
       responsibilities: [
-        "Engineered a comprehensive Product Community Website leveraging Java, Spring Boot, Hibernate, MySQL, and Angular to deliver modular services for user registration, product browsing, and review management—boosting new user sign-ups by 50% through a scalable, event-driven architecture.",
-        "Developed high-performance RESTful APIs using Java Spring Boot for secure user authentication, registration, product search, and review management. Optimized API workflows with microservices design and strategic caching, reducing 95th percentile response times by 30%.",
-        "Integrated Hibernate ORM with MySQL to enforce secure and efficient data storage/retrieval for user and product information. Implemented advanced indexing and query optimization strategies, resulting in a 40% improvement in database query efficiency.",
-        "Created interactive, responsive front-end interfaces using Angular that leverage dynamic content rendering and client-side caching, leading to a 25% increase in page views per user and improved session engagement.",
+        "Built a full-stack product community web application end-to-end using Java, Spring Boot, Hibernate, MySQL, and Angular, delivering modular services for user registration, product browsing, and review management.",
+        "Designed and implemented RESTful APIs with Spring Boot for user authentication, product search, and review workflows, applying caching and connection pooling to optimize response latency.",
+        "Engineered Hibernate ORM data models with MySQL — relational schema design, lazy loading, and indexed queries for product and review entities.",
+        "Developed responsive Angular interfaces with component-based architecture, reactive forms, and client-side state management for product browsing and review submission flows.",
       ],
       skills: ["Java", "Spring Boot", "Hibernate", "MySQL", "Angular", "RESTful APIs"],
     },

@@ -2,7 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
+import { track } from "@vercel/analytics"
 import SectionHeading from "./section-heading"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -31,14 +32,17 @@ export default function Contact() {
       })
 
       if (response.ok) {
+        track("contact_submit", { status: "success" })
         setIsSubmitted(true)
         form.reset()
         setTimeout(() => setIsSubmitted(false), 5000)
       } else {
+        track("contact_submit", { status: "error" })
         setIsError(true)
         setTimeout(() => setIsError(false), 5000)
       }
     } catch {
+      track("contact_submit", { status: "network_error" })
       setIsError(true)
       setTimeout(() => setIsError(false), 5000)
     } finally {
