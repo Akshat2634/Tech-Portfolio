@@ -23,7 +23,7 @@ export default function ResumeModal({
           <Dialog.Portal forceMount>
             <Dialog.Overlay asChild forceMount>
               <motion.div
-                className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-md"
+                className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -40,7 +40,7 @@ export default function ResumeModal({
                 transition={{ duration: 0.2, ease }}
               >
                 <motion.div
-                  className="relative w-full max-w-5xl h-[92vh] flex flex-col rounded-2xl border border-border bg-card shadow-2xl shadow-primary/10 overflow-hidden"
+                  className="relative w-full max-w-5xl h-[92vh] flex flex-col rounded-2xl glass glass-strong shadow-2xl shadow-primary/10 overflow-hidden"
                   initial={{ opacity: 0, scale: 0.96, y: 12 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.97, y: 8 }}
@@ -50,7 +50,7 @@ export default function ResumeModal({
                   <div className="h-1 bg-gradient-to-r from-primary via-accent to-primary shrink-0" />
 
                   {/* Header */}
-                  <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 border-b border-border bg-card/95 backdrop-blur-sm shrink-0">
+                  <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 glass-thin shrink-0">
                     <div className="flex items-center gap-2.5 min-w-0">
                       <div className="p-2 rounded-lg bg-primary/10 shrink-0">
                         <FileText className="h-4 w-4 text-primary" />

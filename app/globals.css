@@ -27,6 +27,23 @@
 
     --primary-rgb: 157 141 255;
     --accent-rgb: 111 201 164;
+
+    /* ─── Liquid Glass material — base knobs (the only values you tune) ─── */
+    --glass-fill-base: 0.55;   --glass-fill: var(--glass-fill-base);  /* card translucency */
+    --glass-hi-base:   0.55;   --glass-hi:   var(--glass-hi-base);    /* top-left diagonal sheen */
+    --glass-spec-base: 0.60;   --glass-spec: var(--glass-spec-base);  /* inset top specular line */
+    --glass-cast-base: 0.12;   --glass-cast: var(--glass-cast-base);  /* float / drop shadow */
+    --glass-sat:         180%;
+    --glass-blur:        18px;
+    --glass-blur-strong: 28px;
+    --glass-blur-thin:   10px;
+    --glass-edge-hi:     0.65;  /* bright top-left hairline */
+    --glass-edge-lo:     0.10;  /* dark bottom-right hairline */
+    --scrim-fill:        0.32;
+
+    /* ─── Ambient aurora field ─── */
+    --orb-1: 0.10;  --orb-2: 0.08;  --orb-3: 0.06;
+    --grain-opacity: 0.035;
   }
 
   .dark {
@@ -52,6 +69,20 @@
 
     --primary-rgb: 209 196 255;
     --accent-rgb: 120 218 174;
+
+    /* ─── Liquid Glass — dark overrides ─── */
+    --glass-fill-base: 0.42;   /* smokier: lets the vivid aurora through */
+    --glass-hi-base:   0.10;   /* white sheen must drop hard in dark or glass greys out */
+    --glass-spec-base: 0.14;   /* a lit rim, not a white line */
+    --glass-cast-base: 0.45;   /* depth comes from shadow in dark, not highlight */
+    --glass-sat:       160%;
+    --glass-blur:      20px;
+    --glass-edge-hi:   0.18;
+    --glass-edge-lo:   0.40;
+    --scrim-fill:      0.30;
+
+    --orb-1: 0.20;  --orb-2: 0.15;  --orb-3: 0.12;
+    --grain-opacity: 0.06;
   }
 }
 
@@ -97,6 +128,126 @@
   50%       { background-position: 100% 50%; }
 }
 
+/* ─── Ambient aurora field (one paint, fixed, zero backdrop-filter) ─── */
+
+@layer components {
+  .ambient-field {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    pointer-events: none;
+    overflow: hidden;
+    background: radial-gradient(140% 120% at 50% -10%, hsl(252 40% 97%), hsl(var(--background)) 55%);
+  }
+  .dark .ambient-field {
+    background:
+      radial-gradient(120% 120% at 50% 0%, transparent 60%, hsl(0 0% 0% / 0.25)),
+      radial-gradient(140% 120% at 50% -10%, hsl(240 12% 14%), hsl(var(--background)) 60%);
+  }
+
+  .ambient-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(110px);
+    will-change: transform;
+  }
+
+  .ambient-grain {
+    position: absolute;
+    inset: 0;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+  .dark .ambient-grain { mix-blend-mode: overlay; }
+}
+
+/* ─── Canonical Liquid Glass material ─── */
+
+@layer components {
+  /* BASE PANE — the canonical material reused everywhere */
+  .glass {
+    position: relative;
+    background:
+      linear-gradient(135deg,
+        hsl(0 0% 100% / var(--glass-hi)) 0%,
+        hsl(0 0% 100% / calc(var(--glass-hi) * 0.35)) 40%,
+        hsl(0 0% 100% / 0) 100%),
+      hsl(var(--card) / var(--glass-fill));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+    border-radius: var(--radius);
+    box-shadow:
+      inset 0 1px 0 0 hsl(0 0% 100% / var(--glass-spec)),
+      inset 0 0 0 1px hsl(0 0% 100% / calc(var(--glass-spec) * 0.16)),
+      0 8px 24px -10px hsl(240 30% 12% / var(--glass-cast)),
+      0 2px 6px -2px hsl(240 30% 12% / calc(var(--glass-cast) * 0.7));
+  }
+
+  /* Directional lit bevel: bright top-left → dark bottom-right, one crisp masked ring */
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg,
+      hsl(0 0% 100% / var(--glass-edge-hi)) 0%,
+      hsl(0 0% 100% / calc(var(--glass-edge-hi) * 0.15)) 42%,
+      hsl(240 30% 8% / var(--glass-edge-lo)) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* STRONG — hero code card, contact cards, resume modal (combine: `glass glass-strong`) */
+  .glass-strong {
+    --glass-fill: calc(var(--glass-fill-base) + 0.10);
+    --glass-blur: var(--glass-blur-strong);
+    --glass-hi:   calc(var(--glass-hi-base) * 1.4);
+    --glass-spec: calc(var(--glass-spec-base) * 1.15);
+    --glass-cast: calc(var(--glass-cast-base) * 1.4);
+  }
+
+  /* THIN — chips, pills, icon keys, inputs. Cheap blur, no bevel, never deep-stacked */
+  .glass-thin {
+    position: relative;
+    background: hsl(var(--card) / calc(var(--glass-fill) * 0.8));
+    -webkit-backdrop-filter: blur(var(--glass-blur-thin)) saturate(140%);
+    backdrop-filter: blur(var(--glass-blur-thin)) saturate(140%);
+    border: 1px solid hsl(0 0% 100% / var(--glass-edge-hi));
+    border-radius: var(--radius);
+    box-shadow:
+      inset 0 1px 0 0 hsl(0 0% 100% / calc(var(--glass-spec) * 0.7)),
+      0 2px 8px -4px hsl(240 30% 12% / calc(var(--glass-cast) * 0.6));
+  }
+  .dark .glass-thin { border-color: hsl(0 0% 100% / calc(var(--glass-edge-hi) + 0.06)); }
+
+  /* SCRIM — alternating-section background, replaces bg-muted/30.
+     A flat translucent tint (no backdrop-filter): sections are huge, and the
+     cards inside already run their own blur — a section-wide filter would be a
+     costly nested pass for no visual gain over the fixed ambient field. */
+  .glass-scrim {
+    background: hsl(var(--card) / var(--scrim-fill));
+    border-top: 1px solid hsl(0 0% 100% / calc(var(--glass-edge-hi) * 0.6));
+    border-bottom: 1px solid hsl(240 30% 8% / calc(var(--glass-edge-lo) * 0.7));
+  }
+
+  /* HOVER LIFT — opt-in, compositor-only. Add next to `.glass` */
+  .glass-hover { transition: transform .3s ease, box-shadow .3s ease; }
+  .glass-hover:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 0 hsl(0 0% 100% / calc(var(--glass-spec) * 1.2)),
+      inset 0 0 0 1px hsl(0 0% 100% / calc(var(--glass-spec) * 0.16)),
+      0 16px 40px -14px hsl(var(--primary) / 0.28),
+      0 4px 10px -4px hsl(240 30% 12% / var(--glass-cast));
+  }
+}
+
 /* ─── Utility Classes ─── */
 
 @layer utilities {
@@ -127,6 +278,50 @@
   .cursor-blink {
     animation: typewriter-blink 1s step-end infinite;
   }
+
+  /* Signature interactive light — JS sets --mx/--my (see useGlassSheen). Add next to `.glass`. */
+  .glass-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .25s ease;
+    mix-blend-mode: soft-light;
+    background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%),
+      hsl(0 0% 100% / 0.18), transparent 60%);
+    /* Sit above the frosted fill but below card content (parent is a stacking
+       context via backdrop-filter), so the glow never tints text. */
+    z-index: -1;
+  }
+  .dark .glass-sheen::after {
+    mix-blend-mode: screen;
+    background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%),
+      hsl(var(--primary) / 0.14), transparent 60%);
+  }
+  .glass-sheen[data-active="true"]::after { opacity: 1; }
+  @media (hover: none), (prefers-reduced-motion: reduce) {
+    .glass-sheen::after { display: none; }
+  }
+
+  /* Frosted form field — used by ui/input + ui/textarea */
+  .glass-input {
+    background: hsl(var(--card) / 0.6);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid hsl(var(--border) / 0.7);
+  }
+  .glass-input:focus-visible { background: hsl(var(--card) / 0.92); }
+}
+
+/* ─── Graceful fallback: no backdrop-filter → near-opaque cards, layout intact ─── */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .glass-thin { background: hsl(var(--card) / 0.94); }
+  .glass-scrim { background: hsl(var(--card) / 0.85); }
+  .glass-input { background: hsl(var(--card) / 0.92); }
+  .dark .glass, .dark .glass-thin { background: hsl(var(--card) / 0.92); }
+  .dark .glass-scrim { background: hsl(var(--card) / 0.8); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -95,7 +95,7 @@ export default function About() {
   const statsInView = useInView(statsRef, { once: true, margin: "-100px" })
 
   return (
-    <section id="about" className="py-24 bg-muted/30">
+    <section id="about" className="py-24 glass-scrim">
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="About Me" subtitle="Get to know me" />
 
@@ -126,7 +126,7 @@ export default function About() {
                 </div>
 
                 {/* Floating badge */}
-                <div className="absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border shadow-lg text-xs font-mono z-10">
+                <div className="absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass-thin text-xs font-mono z-10">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
@@ -172,7 +172,7 @@ export default function About() {
         {/* Stats bar */}
         <div
           ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 py-10 px-6 border border-border rounded-2xl bg-card/50 shadow-sm"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 py-10 px-6 rounded-2xl glass"
         >
           {stats.map((stat, index) => (
             <StatCard

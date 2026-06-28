@@ -34,8 +34,8 @@ export function ScrollToTop() {
           <Button
             onClick={scrollToTop}
             size="icon"
-            variant="outline"
-            className="h-9 w-9 rounded-lg bg-card border-border hover:bg-muted"
+            variant="glass"
+            className="h-9 w-9 rounded-full"
             aria-label="Scroll to top"
           >
             <ArrowUp className="h-4 w-4" />

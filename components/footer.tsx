@@ -4,7 +4,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-border bg-muted/20">
+    <footer className="glass-scrim">
       <div className="container mx-auto max-w-5xl px-4 py-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           {/* Brand */}
@@ -21,7 +21,7 @@ export default function Footer() {
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
-                className="text-[13px] text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="text-[13px] text-muted-foreground hover:text-primary transition-colors duration-200 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {link}
               </a>
@@ -41,7 +41,7 @@ export default function Footer() {
                 aria-label={label}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <Icon className="h-4 w-4" />
               </a>
