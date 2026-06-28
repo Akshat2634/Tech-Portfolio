@@ -2,7 +2,8 @@
 
 import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
-import { GraduationCap, Calendar, MapPin, Star } from "lucide-react"
+import { CompanyLogo } from "./company-logo"
+import { Calendar, MapPin, Star } from "lucide-react"
 import { staggerContainer, useGlassReveal } from "@/lib/animations"
 
 const degreeConfig: Record<string, {
@@ -28,6 +29,7 @@ export default function Education() {
     {
       institution: "Stevens Institute of Technology",
       degree: "Master of Science in Computer Science",
+      logo: "/logos/stevens.png",
       location: "Hoboken, NJ",
       period: "September 2023 — May 2025",
       gpa: "3.9/4",
@@ -36,6 +38,7 @@ export default function Education() {
     {
       institution: "Manipal University Jaipur",
       degree: "Bachelor of Engineering in Information Technology",
+      logo: "/logos/manipal.png",
       location: "Jaipur, India",
       period: "July 2019 — July 2023",
       gpa: "8.62/10",
@@ -65,10 +68,8 @@ export default function Education() {
 
                   <div className="p-6">
                     <div className="flex items-start gap-4">
-                      {/* Icon */}
-                      <div className="p-2.5 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 shrink-0 group-hover:from-primary/25 transition-all duration-200">
-                        <GraduationCap className="h-5 w-5 text-primary" />
-                      </div>
+                      {/* Institution logo */}
+                      <CompanyLogo logo={edu.logo} company={edu.institution} size={48} />
 
                       <div className="flex-1 min-w-0">
                         {/* Institution + degree badge */}
