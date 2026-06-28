@@ -236,26 +236,28 @@ export default function Projects() {
       borderColor: "border-primary/20",
       bulletColor: "bg-primary/10 text-primary",
     },
-    {
-      title: "Pawpal",
-      tagline: "Full-Stack Pet Services Platform" as string | undefined,
-      cliCommand: undefined as string | undefined,
-      period: "March 2024 — May 2024",
-      description:
-        "Full-stack pet services platform supporting pet adoption, provider matching, and appointment scheduling, with secure authentication and community-driven review features.",
-      features: [
-        "Built a full-stack pet services platform on Node.js, Express, MongoDB, and React — supporting pet adoption, provider matching, and appointment scheduling through Mongoose-modeled schemas and RESTful APIs.",
-        "Implemented secure authentication with bcrypt salted hashing, express-session server stores, and OTP-based password recovery with token expiration and rate-limited endpoints.",
-        "Built community features — threaded comments, review analytics, and booking flows — powered by MongoDB aggregation pipelines for review scoring and ElasticEmail for transactional notifications.",
-      ],
-      technologies: ["Node.js", "Express", "MongoDB", "Mongoose", "React", "bcrypt", "ElasticEmail"],
-      github: "https://github.com/Akshat2634/Pawpal",
-      demo: null,
-      color: "from-accent/15 via-accent/5 to-transparent",
-      accentColor: "text-accent",
-      borderColor: "border-accent/20",
-      bulletColor: "bg-accent/10 text-accent",
-    },
+    // Pawpal — student-grade MERN CRUD; commented out to keep the section at the
+    // level of the founding-engineer work. Re-enable if a quantity boost is needed.
+    // {
+    //   title: "Pawpal",
+    //   tagline: "Full-Stack Pet Services Platform" as string | undefined,
+    //   cliCommand: undefined as string | undefined,
+    //   period: "March 2024 — May 2024",
+    //   description:
+    //     "Full-stack pet services platform supporting pet adoption, provider matching, and appointment scheduling, with secure authentication and community-driven review features.",
+    //   features: [
+    //     "Built a full-stack pet services platform on Node.js, Express, MongoDB, and React — supporting pet adoption, provider matching, and appointment scheduling through Mongoose-modeled schemas and RESTful APIs.",
+    //     "Implemented secure authentication with bcrypt salted hashing, express-session server stores, and OTP-based password recovery with token expiration and rate-limited endpoints.",
+    //     "Built community features — threaded comments, review analytics, and booking flows — powered by MongoDB aggregation pipelines for review scoring and ElasticEmail for transactional notifications.",
+    //   ],
+    //   technologies: ["Node.js", "Express", "MongoDB", "Mongoose", "React", "bcrypt", "ElasticEmail"],
+    //   github: "https://github.com/Akshat2634/Pawpal",
+    //   demo: null,
+    //   color: "from-accent/15 via-accent/5 to-transparent",
+    //   accentColor: "text-accent",
+    //   borderColor: "border-accent/20",
+    //   bulletColor: "bg-accent/10 text-accent",
+    // },
     // {
     //   title: "DocuChat AI",
     //   tagline: undefined as string | undefined,
