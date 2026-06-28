@@ -23,7 +23,7 @@ export default function Home() {
       <ScrollProgress />
       <SectionViewTracker />
       <Navbar />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-transparent">
         <Hero />
         <About />
         <Experience />

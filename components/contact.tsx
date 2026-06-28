@@ -9,12 +9,14 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Mail, Linkedin, Send, Loader2, ArrowUpRight } from "lucide-react"
-import { ease } from "@/lib/animations"
+import { ease, useGlassSheen } from "@/lib/animations"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isError, setIsError] = useState(false)
+  const emailRef = useGlassSheen<HTMLAnchorElement>()
+  const linkedinRef = useGlassSheen<HTMLAnchorElement>()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -74,8 +76,9 @@ export default function Contact() {
             {/* Contact cards */}
             <div className="space-y-3">
               <a
+                ref={emailRef}
                 href="mailto:akshatsahu2634@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/30 hover:bg-muted/50 transition-all duration-200 group"
+                className="glass glass-hover glass-sheen flex items-center gap-4 p-4 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background group"
               >
                 <div className="p-2.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                   <Mail className="h-4 w-4 text-primary" />
@@ -88,10 +91,11 @@ export default function Contact() {
               </a>
 
               <a
+                ref={linkedinRef}
                 href="https://linkedin.com/in/akshat2634"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/30 hover:bg-muted/50 transition-all duration-200 group"
+                className="glass glass-hover glass-sheen flex items-center gap-4 p-4 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background group"
               >
                 <div className="p-2.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                   <Linkedin className="h-4 w-4 text-primary" />
@@ -105,7 +109,8 @@ export default function Contact() {
             </div>
 
             {/* Decorative quote card */}
-            <div className="mt-8 p-5 rounded-2xl bg-gradient-to-br from-primary/8 to-accent/8 border border-primary/10">
+            <div className="glass relative mt-8 p-5 rounded-2xl">
+              <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-primary/8 to-accent/8" />
               <p className="text-[13px] text-muted-foreground font-mono leading-relaxed">
                 &ldquo;I&apos;m particularly interested in early-stage AI infrastructure, multi-agent systems, and founding engineering roles.&rdquo;
               </p>
@@ -132,7 +137,7 @@ export default function Contact() {
                   placeholder="Your name"
                   required
                   disabled={isSubmitting}
-                  className="bg-background border-border h-12 rounded-xl focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary transition-all duration-200 placeholder:text-muted-foreground/50"
+                  className="h-12 rounded-xl focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary transition-all duration-200 placeholder:text-muted-foreground"
                 />
               </div>
               <div className="space-y-1.5">
@@ -146,7 +151,7 @@ export default function Contact() {
                   placeholder="Your email"
                   required
                   disabled={isSubmitting}
-                  className="bg-background border-border h-12 rounded-xl focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary transition-all duration-200 placeholder:text-muted-foreground/50"
+                  className="h-12 rounded-xl focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary transition-all duration-200 placeholder:text-muted-foreground"
                 />
               </div>
             </div>
@@ -162,7 +167,7 @@ export default function Contact() {
                 rows={5}
                 required
                 disabled={isSubmitting}
-                className="bg-background border-border rounded-xl min-h-[140px] focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary transition-all duration-200 placeholder:text-muted-foreground/50"
+                className="rounded-xl min-h-[140px] focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary transition-all duration-200 placeholder:text-muted-foreground"
               />
             </div>
 

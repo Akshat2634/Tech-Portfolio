@@ -3,7 +3,7 @@
 import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
 import { Calendar, MapPin, ChevronRight } from "lucide-react"
-import { staggerContainer, staggerItem } from "@/lib/animations"
+import { staggerContainer, useGlassReveal } from "@/lib/animations"
 
 const coreSkills = new Set([
   "RAG", "Hybrid Search", "Cross-Encoder Reranking", "LangGraph", "DeepAgents",
@@ -11,6 +11,7 @@ const coreSkills = new Set([
 ])
 
 export default function Experience() {
+  const reveal = useGlassReveal()
   const experiences = [
     {
       title: "Founding Software Engineer",
@@ -59,7 +60,7 @@ export default function Experience() {
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              variants={staggerItem}
+              variants={reveal}
               className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0 md:gap-6"
             >
               {/* Left rail: dot + connecting line */}
@@ -76,7 +77,7 @@ export default function Experience() {
               </div>
 
               {/* Card */}
-              <div className="mb-8 relative border border-border rounded-xl overflow-hidden bg-card hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 group">
+              <div className="mb-8 relative glass glass-hover rounded-xl overflow-hidden transition-all duration-300 group">
                 {/* Left edge accent bar */}
                 <div className={`absolute left-0 top-0 bottom-0 w-1 ${index === 0 ? "bg-gradient-to-b from-primary to-accent" : "bg-primary/30"}`} />
 
@@ -131,7 +132,7 @@ export default function Experience() {
                         className={`px-2.5 py-1 rounded-md text-[11px] font-mono font-medium tracking-wide uppercase cursor-default transition-colors
                           ${coreSkills.has(skill)
                             ? "bg-primary/10 text-primary border border-primary/20"
-                            : "bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                            : "glass-thin text-foreground/80 hover:bg-primary/10 hover:text-primary"
                           }`}
                       >
                         {skill}

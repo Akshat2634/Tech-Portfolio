@@ -3,7 +3,7 @@
 import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
 import { GraduationCap, Calendar, MapPin, Star } from "lucide-react"
-import { staggerContainer, staggerItem } from "@/lib/animations"
+import { staggerContainer, useGlassReveal } from "@/lib/animations"
 
 const degreeConfig: Record<string, {
   gradient: string
@@ -23,6 +23,7 @@ const degreeConfig: Record<string, {
 }
 
 export default function Education() {
+  const reveal = useGlassReveal()
   const educationData = [
     {
       institution: "Stevens Institute of Technology",
@@ -43,7 +44,7 @@ export default function Education() {
   ]
 
   return (
-    <section id="education" className="py-24 bg-muted/30">
+    <section id="education" className="py-24 glass-scrim">
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Education" subtitle="Academic background" />
 
@@ -57,8 +58,8 @@ export default function Education() {
           {educationData.map((edu, index) => {
             const config = degreeConfig[edu.degree]
             return (
-              <motion.div key={index} variants={staggerItem}>
-                <div className="border border-border rounded-xl overflow-hidden bg-card hover:border-primary/20 transition-colors duration-200 group">
+              <motion.div key={index} variants={reveal}>
+                <div className="glass glass-hover rounded-xl overflow-hidden group">
                   {/* Top gradient bar */}
                   <div className={`h-1 bg-gradient-to-r ${config.gradient}`} />
 

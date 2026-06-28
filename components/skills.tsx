@@ -139,10 +139,10 @@ export default function Skills() {
               <button
                 key={idx}
                 onClick={() => setActiveCategory(idx)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
                   ${isActive
                     ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                    : "bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80"
+                    : "glass-thin text-muted-foreground hover:text-foreground"
                   }`}
               >
                 <Icon className="h-3.5 w-3.5" />
@@ -160,8 +160,13 @@ export default function Skills() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease }}
-            className={`p-8 rounded-2xl border border-border bg-gradient-to-br ${active.color}`}
+            className="glass relative p-8 rounded-2xl"
           >
+            {/* Per-category tint overlay (frost + tint coexist) */}
+            <div
+              className={`absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br ${active.color} opacity-40 pointer-events-none`}
+            />
+
             {/* Category header */}
             <div className="flex items-center gap-3 mb-6">
               <div className={`p-3 rounded-xl ${active.iconColor}`}>
@@ -180,10 +185,10 @@ export default function Skills() {
               {active.skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className={`px-3 py-1.5 rounded-xl text-[13px] font-medium transition-all duration-200 border
+                  className={`px-3 py-1.5 rounded-xl text-[13px] font-medium transition-all duration-200
                     ${skill.core
-                      ? "bg-primary/15 text-primary border-primary/25 font-semibold"
-                      : "bg-background/60 text-muted-foreground border-border"
+                      ? "bg-primary/15 text-primary border border-primary/25 font-semibold"
+                      : "glass-thin text-foreground/80"
                     }`}
                 >
                   {skill.name}

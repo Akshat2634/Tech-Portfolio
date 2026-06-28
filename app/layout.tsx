@@ -2,6 +2,7 @@ import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ResumeModalProvider } from "@/components/resume-modal-provider"
+import AmbientField from "@/components/ambient-field"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
@@ -72,6 +73,7 @@ export default function RootLayout({
       <head />
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <AmbientField />
           <ResumeModalProvider>
             {children}
             <Analytics />

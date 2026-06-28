@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { motion } from "motion/react"
 import { FileText, Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
-import { ease } from "@/lib/animations"
+import { ease, useGlassSheen } from "@/lib/animations"
 import { useState, useEffect } from "react"
 import { useResumeModal } from "./resume-modal-provider"
 
@@ -59,13 +59,11 @@ function useTypewriter(words: string[], typingSpeed = 75, deletingSpeed = 45, pa
 export default function Hero() {
   const { displayed: roleText, enabled: typewriterEnabled } = useTypewriter(roles)
   const { open: openResume, prefetch: prefetchResume } = useResumeModal()
+  const cardRef = useGlassSheen<HTMLDivElement>()
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Floating orbs */}
-      <div className="absolute -top-40 -left-32 w-[580px] h-[580px] rounded-full bg-primary/10 blur-[110px] animate-float-orb pointer-events-none" />
-      <div className="absolute -bottom-40 -right-20 w-[480px] h-[480px] rounded-full bg-accent/[0.08] blur-[100px] animate-float-orb-2 pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 w-[280px] h-[280px] rounded-full bg-primary/[0.06] blur-[80px] animate-float-orb-slow pointer-events-none" />
+      {/* Floating aurora orbs now live globally in <AmbientField /> so every section refracts the same light. */}
 
       {/* Dot grid */}
       <div className="absolute inset-0 bg-[radial-gradient(hsl(var(--border))_1px,transparent_1px)] [background-size:26px_26px] opacity-35 pointer-events-none" />
@@ -82,7 +80,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1, ease }}
               className="flex justify-center xl:justify-start"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-mono font-medium tracking-wide border border-primary/20">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-thin text-primary text-xs font-mono font-medium tracking-wide">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
@@ -134,19 +132,19 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.55, ease }}
             >
               <Link href="https://github.com/akshat2634" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="icon" className="h-10 w-10 rounded-xl border-border hover:border-primary/40 hover:bg-primary/5 hover:scale-105 transition-all duration-200">
+                <Button variant="glass" size="icon" className="h-10 w-10 rounded-xl">
                   <Github className="h-4 w-4" />
                 </Button>
               </Link>
 
               <Link href="https://linkedin.com/in/akshat2634" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="icon" className="h-10 w-10 rounded-xl border-border hover:border-primary/40 hover:bg-primary/5 hover:scale-105 transition-all duration-200">
+                <Button variant="glass" size="icon" className="h-10 w-10 rounded-xl">
                   <Linkedin className="h-4 w-4" />
                 </Button>
               </Link>
 
               <Link href="mailto:akshatsahu2634@gmail.com">
-                <Button variant="outline" size="icon" className="h-10 w-10 rounded-xl border-border hover:border-primary/40 hover:bg-primary/5 hover:scale-105 transition-all duration-200">
+                <Button variant="glass" size="icon" className="h-10 w-10 rounded-xl">
                   <Mail className="h-4 w-4" />
                 </Button>
               </Link>
@@ -172,7 +170,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease }}
           >
-            <div className="relative w-64 rounded-2xl border border-border/70 bg-card/70 backdrop-blur-md p-5 shadow-2xl shadow-primary/[0.08]">
+            <div ref={cardRef} className="glass glass-strong glass-sheen relative w-64 rounded-2xl p-5">
               {/* Window chrome */}
               <div className="flex items-center gap-1.5 mb-5">
                 <div className="w-3 h-3 rounded-full bg-red-400/70" />

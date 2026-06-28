@@ -25,7 +25,7 @@ export function ModeToggle() {
       variant="ghost"
       size="icon"
       onClick={cycleTheme}
-      className="h-9 w-9 rounded-lg"
+      className="h-9 w-9 rounded-lg hover:bg-primary/10"
       aria-label="Toggle theme"
     >
       {theme === "light" && <Sun className="h-4 w-4" />}

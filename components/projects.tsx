@@ -7,7 +7,7 @@ import SectionHeading from "./section-heading"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github, ArrowRight, Copy, Check, Terminal } from "lucide-react"
 import Link from "next/link"
-import { staggerContainer, staggerItem } from "@/lib/animations"
+import { staggerContainer, useGlassReveal, useGlassSheen } from "@/lib/animations"
 
 const techColors: Record<string, string> = {
   "FastAPI":              "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
@@ -86,7 +86,115 @@ function CliBlock() {
   )
 }
 
+type Project = {
+  title: string
+  tagline: string | undefined
+  cliCommand: string | undefined
+  period: string
+  description: string
+  features: string[]
+  technologies: string[]
+  github: string | null
+  demo: string | null
+  color: string
+  accentColor: string
+  borderColor: string
+  bulletColor: string
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const ref = useGlassSheen<HTMLDivElement>()
+
+  return (
+    <div ref={ref} className={`glass glass-hover glass-sheen border ${project.borderColor} rounded-2xl overflow-hidden group`}>
+
+      {/* Gradient header */}
+      <div className={`px-6 pt-6 pb-5 bg-gradient-to-br ${project.color}`}>
+        <div className="flex items-start justify-between">
+          <div>
+            <p className={`text-[10px] font-mono tracking-widest uppercase mb-2 ${project.accentColor} opacity-60`}>
+              Project 0{index + 1}
+            </p>
+            <div className="flex items-center gap-2.5">
+              <h3 className="text-xl font-bold tracking-tight text-foreground">{project.title}</h3>
+              {project.demo && (
+                <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/15 text-accent text-[10px] font-mono tracking-wider border border-accent/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                  Live
+                </span>
+              )}
+            </div>
+            {project.tagline && (
+              <p className={`text-[11px] font-mono mt-1 ${project.accentColor} opacity-70`}>
+                {project.tagline}
+              </p>
+            )}
+            <p className="text-xs text-muted-foreground font-mono mt-1">{project.period}</p>
+          </div>
+
+          <div className="flex gap-2">
+            {project.github && (
+              <Link
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("project_github_click", { project: project.title })}
+              >
+                <Button variant="glass" size="icon" className="h-9 w-9 rounded-xl">
+                  <Github className="h-4 w-4" />
+                </Button>
+              </Link>
+            )}
+            {project.demo && (
+              <Link
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("project_demo_click", { project: project.title })}
+              >
+                <Button size="icon" className="h-9 w-9 rounded-xl bg-primary/10 text-primary hover:bg-primary/20 border-0 shadow-none">
+                  <ExternalLink className="h-4 w-4" />
+                </Button>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="p-6">
+        {project.cliCommand && <CliBlock />}
+
+        <p className="text-[15px] text-muted-foreground leading-relaxed mb-5">{project.description}</p>
+
+        <div className="space-y-3 mb-6">
+          {project.features.map((feature, idx) => (
+            <div key={idx} className="flex gap-3">
+              <div className={`mt-0.5 shrink-0 w-5 h-5 rounded-md flex items-center justify-center ${project.bulletColor}`}>
+                <ArrowRight className="h-3 w-3" />
+              </div>
+              <p className="text-[14px] text-muted-foreground leading-relaxed">{feature}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-1.5">
+          {project.technologies.map((tech) => (
+            <span
+              key={tech}
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium border ${techColors[tech] ?? "bg-muted text-muted-foreground border-border"}`}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Projects() {
+  const reveal = useGlassReveal()
   const projects = [
     {
       title: "CodeLens AI",
@@ -172,7 +280,7 @@ export default function Projects() {
   ]
 
   return (
-    <section id="projects" className="py-24 bg-muted/30">
+    <section id="projects" className="py-24 glass-scrim">
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Projects" subtitle="Recent work" />
 
@@ -184,91 +292,8 @@ export default function Projects() {
           viewport={{ once: true, margin: "-80px" }}
         >
           {projects.map((project, index) => (
-            <motion.div key={index} variants={staggerItem}>
-              <div className={`border ${project.borderColor} rounded-2xl overflow-hidden bg-card group hover:shadow-lg hover:shadow-primary/5 transition-all duration-300`}>
-
-                {/* Gradient header */}
-                <div className={`px-6 pt-6 pb-5 bg-gradient-to-br ${project.color}`}>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <p className={`text-[10px] font-mono tracking-widest uppercase mb-2 ${project.accentColor} opacity-60`}>
-                        Project 0{index + 1}
-                      </p>
-                      <div className="flex items-center gap-2.5">
-                        <h3 className="text-xl font-bold tracking-tight text-foreground">{project.title}</h3>
-                        {project.demo && (
-                          <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent/15 text-accent text-[10px] font-mono tracking-wider border border-accent/20">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                            Live
-                          </span>
-                        )}
-                      </div>
-                      {project.tagline && (
-                        <p className={`text-[11px] font-mono mt-1 ${project.accentColor} opacity-70`}>
-                          {project.tagline}
-                        </p>
-                      )}
-                      <p className="text-xs text-muted-foreground font-mono mt-1">{project.period}</p>
-                    </div>
-
-                    <div className="flex gap-2">
-                      {project.github && (
-                        <Link
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => track("project_github_click", { project: project.title })}
-                        >
-                          <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl border-border hover:border-primary/30 hover:bg-primary/5">
-                            <Github className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                      )}
-                      {project.demo && (
-                        <Link
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => track("project_demo_click", { project: project.title })}
-                        >
-                          <Button size="icon" className="h-9 w-9 rounded-xl bg-primary/10 text-primary hover:bg-primary/20 border-0 shadow-none">
-                            <ExternalLink className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Body */}
-                <div className="p-6">
-                  {project.cliCommand && <CliBlock />}
-
-                  <p className="text-[15px] text-muted-foreground leading-relaxed mb-5">{project.description}</p>
-
-                  <div className="space-y-3 mb-6">
-                    {project.features.map((feature, idx) => (
-                      <div key={idx} className="flex gap-3">
-                        <div className={`mt-0.5 shrink-0 w-5 h-5 rounded-md flex items-center justify-center ${project.bulletColor}`}>
-                          <ArrowRight className="h-3 w-3" />
-                        </div>
-                        <p className="text-[14px] text-muted-foreground leading-relaxed">{feature}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium border ${techColors[tech] ?? "bg-muted text-muted-foreground border-border"}`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            <motion.div key={index} variants={reveal}>
+              <ProjectCard project={project} index={index} />
             </motion.div>
           ))}
         </motion.div>

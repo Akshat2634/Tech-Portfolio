@@ -84,9 +84,9 @@ export default function Navbar() {
           motion owns BOTH x and y so its inline transform doesn't wipe Tailwind's centering. */}
       <motion.header
         className={cn(
-          "fixed top-4 left-1/2 z-50 transition-all duration-300 hidden lg:block max-w-[calc(100vw-2rem)]",
+          "fixed top-4 left-1/2 z-50 transition-[background-color,box-shadow] duration-300 hidden lg:block max-w-[calc(100vw-2rem)]",
           isScrolled
-            ? "bg-background/80 backdrop-blur-xl border border-border shadow-md shadow-primary/5 rounded-full px-2 py-1.5"
+            ? "glass glass-strong rounded-full px-2 py-1.5"
             : "bg-transparent px-2 py-1.5"
         )}
         initial={{ x: "-50%", y: -20, opacity: 0 }}
@@ -97,7 +97,7 @@ export default function Navbar() {
           <Link
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="text-sm font-bold gradient-text px-3 py-1.5"
+            className="text-sm font-bold gradient-text px-3 py-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             AS
           </Link>
@@ -112,10 +112,10 @@ export default function Navbar() {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
-                  "px-3 py-1.5 text-[13px] font-medium rounded-full transition-colors duration-200",
+                  "px-3 py-1.5 text-[13px] font-medium rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   isActive
                     ? "bg-gradient-to-r from-primary/15 to-accent/10 text-primary font-semibold"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                    : "text-muted-foreground hover:text-foreground hover:bg-primary/10"
                 )}
               >
                 {link.name}
@@ -143,9 +143,9 @@ export default function Navbar() {
       {/* Mobile + tablet nav (below lg) */}
       <motion.header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 lg:hidden transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 lg:hidden transition-[background-color,box-shadow] duration-300",
           isScrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border"
+            ? "glass glass-strong rounded-none"
             : "bg-transparent"
         )}
         initial={{ y: -20, opacity: 0 }}
@@ -182,14 +182,14 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="bg-background border-b border-border"
+              className="glass glass-strong rounded-none"
             >
               <div className="px-4 py-2">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="block py-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="block py-2.5 px-2 rounded-md text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     onClick={(e) => handleNavClick(e, link.href)}
                   >
                     {link.name}
