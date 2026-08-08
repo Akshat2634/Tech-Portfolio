@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="g" x1="8%" y1="60%" x2="92%" y2="40%">
+      <stop offset="0%"   stop-color="#1B4FD8"/>
+      <stop offset="28%"  stop-color="#2472E6"/>
+      <stop offset="58%"  stop-color="#2FA8E0"/>
+      <stop offset="82%"  stop-color="#3ED9C9"/>
+      <stop offset="100%" stop-color="#4CF5C4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Two rounded squares on the diagonal, overlapping into a diamond at the
+       centre — the interlocking-links motif. Outline only, single gradient
+       across both so the blue-to-mint sweep is continuous. -->
+  <g fill="none" stroke="url(#g)" stroke-width="17" stroke-linejoin="round">
+    <rect x="38" y="54" width="92" height="92" rx="22" transform="rotate(45 84 100)"/>
+    <rect x="70" y="54" width="92" height="92" rx="22" transform="rotate(45 116 100)"/>
+  </g>
+</svg>
