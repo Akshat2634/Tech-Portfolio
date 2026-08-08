@@ -28,9 +28,6 @@ export const experiences: Experience[] = [
     slug: "intapp",
     title: "AI Engineer",
     company: "Intapp",
-    // Pre-wired: drop the mark at public/logos/intapp.png and it renders on the
-    // next build with no code change. Until the file exists CompanyLogo's
-    // onError path keeps showing the monogram tile rather than a broken image.
     logo: "/logos/intapp.png",
     location: "Palo Alto, CA",
     period: "July 2026 — Present",
