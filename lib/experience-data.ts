@@ -20,19 +20,41 @@ export type Experience = {
 export const coreSkills = new Set([
   "RAG", "Hybrid Search", "Cross-Encoder Reranking", "LangGraph", "DeepAgents",
   "MCP", "DeepEval", "RAGAS", "Langfuse", "pgvector", "FastAPI", "Python",
+  "AI Agents", "Agentic Workflows",
 ])
 
 export const experiences: Experience[] = [
   {
+    slug: "intapp",
+    title: "AI Engineer",
+    company: "Intapp",
+    // No brand mark checked in yet — CompanyLogo falls back to an "I" monogram
+    // tile. Drop a PNG at public/logos/intapp.png and set the path to use it.
+    logo: "",
+    location: "Palo Alto, CA",
+    period: "July 2026 — Present",
+    periodShort: "2026 — Now",
+    summary:
+      "Building AI Coworkers for Celeste — autonomous agents that transform firm knowledge and complex workflows into intelligent action.",
+    // Chips carry the themes; the skill tags below carry the stack — kept
+    // deliberately non-overlapping so the card never repeats itself.
+    impact: ["Generative AI", "Autonomous agents", "Knowledge graphs"],
+    // Intentionally empty while the role is new — the card collapses to summary +
+    // skills rather than restating the headline. Add quantified highlights here as
+    // the work ships and the "View N highlights" affordance comes back on its own.
+    responsibilities: [],
+    skills: ["AI Agents", "Agentic Workflows", "LLM Orchestration", "RAG", "Enterprise AI"],
+  },
+  {
     slug: "futurepath",
-    title: "Founding Software Engineer",
-    company: "Future Path AI",
+    title: "Founding AI Engineer",
+    company: "FuturePath AI",
     logo: "/logos/futurepath.png",
     location: "Cupertino, CA",
-    period: "January 2024 — Present",
-    periodShort: "2024 — Now",
+    period: "January 2024 — July 2026",
+    periodShort: "2024 — 2026",
     summary:
-      "Building the AI agent infrastructure — multimodal RAG, multi-agent orchestration, evaluation pipelines, and an 80+ integration MCP layer — behind an enterprise automation platform for Fortune 500 pharma & finance.",
+      "Built the AI agent infrastructure — multimodal RAG, multi-agent orchestration, evaluation pipelines, and an 80+ integration MCP layer — behind an enterprise automation platform for Fortune 500 pharma & finance.",
     impact: ["100+ tickets/day", "80+ integrations", "10K+ docs indexed"],
     responsibilities: [
       "Architected AI agent infrastructure for an enterprise platform autonomously resolving business and IT operations at Fortune 500 pharma and finance clients — built the multimodal RAG layer with hybrid retrieval (pgvector + BM25 via RRF), cross-encoder reranking, and a vendor-agnostic embedding layer over 10K+ documents.",
