@@ -46,6 +46,9 @@ export default function Experience() {
             const isCurrent = index === 0
             const panelId = `exp-panel-${index}`
             const btnId = `exp-btn-${index}`
+            // A brand-new role may have no highlights written yet; the panel then
+            // carries only the skill tags, so label the affordance accordingly.
+            const hasHighlights = exp.responsibilities.length > 0
 
             return (
               <motion.div
@@ -133,7 +136,13 @@ export default function Experience() {
                               isOpen && "rotate-180",
                             )}
                           />
-                          {isOpen ? "Hide details" : `View ${exp.responsibilities.length} highlights`}
+                          {isOpen
+                            ? `Hide ${hasHighlights ? "details" : "skills"}`
+                            : hasHighlights
+                              ? `View ${exp.responsibilities.length} ${
+                                  exp.responsibilities.length === 1 ? "highlight" : "highlights"
+                                }`
+                              : "View skills"}
                         </div>
                       </div>
                     </div>
@@ -156,20 +165,22 @@ export default function Experience() {
                         <div className="px-5 md:px-6 pb-6 md:pl-[88px]">
                           <div className="border-t border-foreground/10 pt-4">
                             {/* Responsibilities */}
-                            <ul className="space-y-3">
-                              {exp.responsibilities.map((resp, idx) => (
-                                <li
-                                  key={idx}
-                                  className="flex gap-3 text-[14px] text-muted-foreground leading-relaxed group/item"
-                                >
-                                  <ChevronRight className="h-3.5 w-3.5 text-primary/50 mt-0.5 shrink-0 group-hover/item:text-primary transition-colors duration-200" />
-                                  <span>{resp}</span>
-                                </li>
-                              ))}
-                            </ul>
+                            {hasHighlights && (
+                              <ul className="space-y-3">
+                                {exp.responsibilities.map((resp, idx) => (
+                                  <li
+                                    key={idx}
+                                    className="flex gap-3 text-[14px] text-muted-foreground leading-relaxed group/item"
+                                  >
+                                    <ChevronRight className="h-3.5 w-3.5 text-primary/50 mt-0.5 shrink-0 group-hover/item:text-primary transition-colors duration-200" />
+                                    <span>{resp}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
 
                             {/* Skill tags */}
-                            <div className="mt-5 flex flex-wrap gap-1.5">
+                            <div className={cn("flex flex-wrap gap-1.5", hasHighlights && "mt-5")}>
                               {exp.skills.map((skill) => (
                                 <span
                                   key={skill}
