@@ -3,6 +3,7 @@ import Navbar from "@/components/navbar"
 import ScrollProgress from "@/components/scroll-progress"
 import Hero from "@/components/hero"
 import SectionViewTracker from "@/components/section-view-tracker"
+import SystemStory from "@/components/system-story"
 
 // Below-the-fold sections — split into per-component chunks so hydration
 // for the hero doesn't wait on the rest of the page's JS.
@@ -25,6 +26,7 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen bg-transparent">
         <Hero />
+        <SystemStory />
         <About />
         <Experience />
         <Education />
