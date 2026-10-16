@@ -22,7 +22,9 @@ test.describe("navbar", () => {
     expect(Math.abs(centerX - viewportCenter)).toBeLessThan(8)
   })
 
-  test("mobile menu opens with nav links and a Resume CTA inside", async ({ page }) => {
+  test("mobile menu opens with nav links and a Resume CTA inside", async ({
+    page,
+  }) => {
     await page.setViewportSize({ width: 390, height: 844 }) // iPhone 14
     await page.goto("/")
 
@@ -32,6 +34,36 @@ test.describe("navbar", () => {
     // on the page (the Hero "View Resume" CTA, etc.).
     const mobileNav = page.getByRole("banner")
     await expect(mobileNav.getByRole("link", { name: "About" })).toBeVisible()
-    await expect(mobileNav.getByRole("button", { name: /view resume/i })).toBeVisible()
+    await expect(mobileNav.getByRole("link", { name: "Projects", exact: true })).toHaveCount(0)
+    await expect(
+      mobileNav.getByRole("button", { name: /view resume/i }),
+    ).toBeVisible()
   })
+})
+
+test("the hero opens work experience while projects are hidden", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 960 })
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await page.goto("/")
+  await expect(page.locator("[data-motion]")).toHaveAttribute(
+    "data-motion",
+    "off",
+  )
+  await page.getByRole("link", { name: "My experience", exact: true }).click()
+  await expect(page).toHaveURL(/#experience$/)
+  await expect(
+    page.getByRole("heading", { name: "Work Experience", exact: true }),
+  ).toBeVisible()
+  expect(
+    await page
+      .locator("#experience")
+      .evaluate((element) =>
+        Boolean(
+          element.compareDocumentPosition(document.querySelector("#systems")!) &
+          Node.DOCUMENT_POSITION_FOLLOWING,
+        ),
+      ),
+  ).toBe(true)
 })

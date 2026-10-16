@@ -164,13 +164,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       </div>
 
-      {project.title === "CodeLens AI" && <ProjectWorkflow kind="codelens" />}
-      {project.title === "PitchPilot" && <ProjectWorkflow kind="pitchpilot" />}
-
       {/* Body */}
       <div className="p-6">
-        {project.cliCommand && <CliBlock />}
-
         <p className="text-[15px] text-muted-foreground leading-relaxed mb-5">{project.description}</p>
 
         <div className="space-y-3 mb-6">
@@ -184,6 +179,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           ))}
         </div>
 
+        {project.cliCommand && <CliBlock />}
+
         <div className="flex flex-wrap gap-1.5">
           {project.technologies.map((tech) => (
             <span
@@ -194,6 +191,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </span>
           ))}
         </div>
+      </div>
+      <div className="pb-6">
+        {project.title === "CodeLens AI" && <ProjectWorkflow kind="codelens" />}
+        {project.title === "PitchPilot" && <ProjectWorkflow kind="pitchpilot" />}
       </div>
     </div>
   )
@@ -208,7 +209,7 @@ export default function Projects() {
       cliCommand: "npx codelens-ai" as string | undefined,
       period: "February 2026",
       description:
-        "Analyzes whether your AI coding agent is actually shipping code by correlating Claude Code token usage with git commits. Reads local session files, matches with git history by timestamp, and generates an ROI dashboard — zero config.",
+        "I built CodeLens AI to connect coding-agent usage with what actually ships. It matches local Claude Code sessions to Git history and surfaces cost per commit, code survival, and unproductive sessions.",
       features: [
         "Cost per Commit: calculates token expenses per AI-assisted commit to surface the true dollar cost of each code change.",
         "Line Survival Rate: tracks the percentage of AI-written code still present after 24 hours, distinguishing genuine contributions from throwaway drafts.",
@@ -228,7 +229,7 @@ export default function Projects() {
       cliCommand: undefined as string | undefined,
       period: "March 2025 — May 2025",
       description:
-        "Solo AI coaching platform helping startup founders refine pitch decks through automated analysis, real-time voice and chat investor simulation, and feedback grounded in Y Combinator pitch heuristics.",
+        "I built PitchPilot as a solo project to help founders refine their pitch decks through automated analysis, voice and chat investor simulations, and actionable feedback.",
       features: [
         "Built PitchPilot, a solo AI coaching platform helping startup founders refine pitch decks through automated analysis, real-time voice and chat investor simulation via the OpenAI Realtime API, and feedback grounded in Y Combinator pitch heuristics.",
         "Designed multi-agent workflows on FastAPI and LangGraph with persistent state, ingesting PDF/PPTX/DOCX decks via a document parsing pipeline backed by PostgreSQL, Prisma, and Supabase Storage.",
@@ -290,7 +291,7 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 glass-scrim">
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
-        <SectionHeading title="Projects" subtitle="Recent work" />
+        <SectionHeading title="Projects" subtitle="Things I’ve built" />
 
         <div className="max-w-3xl mx-auto space-y-6">
           {projects.map((project, index) => (

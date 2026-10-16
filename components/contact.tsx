@@ -69,10 +69,10 @@ export default function Contact() {
             transition={{ duration: 0.5, ease }}
           >
             <h3 className="text-2xl font-bold tracking-tight text-foreground mb-3">
-              Let&apos;s build something together.
+              Projects, opportunities, or just a hello.
             </h3>
             <p className="text-[15px] text-muted-foreground leading-relaxed mb-8">
-              Have a project in mind or want to discuss opportunities? I&apos;d love to hear from you.
+              Want to work together, talk about AI agents, or compare notes on something you’re building? My inbox is open.
             </p>
 
             {/* Contact cards */}

@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef } from "react"
+import Image from "next/image"
 import { motion, useInView } from "motion/react"
 import {
   ArrowDown,
@@ -9,7 +10,7 @@ import {
   Linkedin,
   Mail,
   Network,
-  Target,
+  Briefcase,
   Braces,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -42,19 +43,19 @@ export default function Hero() {
             Akshat Sahu
           </motion.h1>
           <p className="hero-statement">
-            Building AI coworkers.
+            AI engineer.
             <br />
-            Agents that <span>get work done.</span>
+            <span>Builder at heart.</span>
           </p>
           <p className="hero-description">
-            AI Engineer at Intapp. Previously Founding AI Engineer at FuturePath
-            AI. I build autonomous agents that plan, collaborate, and turn goals
-            into completed work.
+            I build autonomous agents and developer tools. Currently an AI
+            engineer at Intapp; previously a founding AI engineer at FuturePath
+            AI. Here’s a little about me and the things I’ve built.
           </p>
           <div className="hero-actions">
             <Button asChild size="lg">
-              <a href="#systems">
-                Meet the AI coworker <ArrowDown size={16} />
+              <a href="#experience">
+                My experience <ArrowDown size={16} />
               </a>
             </Button>
             <Button
@@ -87,12 +88,12 @@ export default function Hero() {
             <a href="mailto:akshatsahu2634@gmail.com" aria-label="Email Akshat">
               <Mail size={18} />
             </a>
-            <span>AI COWORKERS · AUTONOMOUS AGENTS</span>
+            <span>SOFTWARE ENGINEER · AI & AGENTS</span>
           </div>
         </div>
         <div
           className="orbital-scene"
-          aria-label="An orbital sculpture connecting goals, collaborating agents, and tools"
+          aria-label="Akshat Sahu, AI engineer at Intapp"
           role="img"
         >
           <div className="orbital-halo" />
@@ -106,43 +107,51 @@ export default function Hero() {
             <span />
           </div>
           <div className="orbital-core">
-            <Network size={43} strokeWidth={1} />
-            <span>AI COWORKER</span>
-            <small>Intent → action</small>
+            <div className="hero-profile-image">
+              <Image
+                src="/images/portrait-lake.jpeg"
+                alt="Akshat Sahu"
+                fill
+                sizes="160px"
+                className="object-cover"
+                priority
+              />
+            </div>
+            <span>AKSHAT SAHU</span>
+            <small>Engineer. Builder. Curious human.</small>
           </div>
           <div className="orbit-label orbit-knowledge">
-            <Target size={19} />
+            <Briefcase size={19} />
             <div>
-              <span>01 / INTENT</span>
-              <strong>A goal worth doing.</strong>
+              <span>CURRENTLY / INTAPP</span>
+              <strong>AI Engineer</strong>
             </div>
           </div>
           <div className="orbit-label orbit-agents">
             <Network size={19} />
             <div>
-              <span>02 / TEAMWORK</span>
-              <strong>Agents, in sync.</strong>
+              <span>PREVIOUSLY / FUTUREPATH AI</span>
+              <strong>Founding AI Engineer</strong>
             </div>
           </div>
           <div className="orbit-label orbit-tools">
             <Braces size={19} />
             <div>
-              <span>03 / AUTONOMY</span>
-              <strong>From plan to action.</strong>
+              <span>WHAT I BUILD</span>
+              <strong>Agents &amp; developer tools</strong>
             </div>
           </div>
           <span className="orbital-coordinate coordinate-top">
-            SYSTEM / AS.01
+            A LITTLE ABOUT ME
           </span>
           <span className="orbital-coordinate coordinate-bottom">
-            DESIGNED TO WORK TOGETHER
+            IDEAS, CODE, AND CURIOSITY
           </span>
         </div>
       </div>
       <div className="hero-bottom">
-        <a href="#systems">
-          <span className="scroll-line" /> Scroll to meet your AI coworker{" "}
-          <ArrowDown size={14} />
+        <a href="#about">
+          <span className="scroll-line" /> More about me <ArrowDown size={14} />
         </a>
         <MotionToggle />
       </div>

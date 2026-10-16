@@ -6,12 +6,12 @@ export default function Footer() {
   return (
     <footer className="portfolio-footer glass-scrim">
       <div className="footer-signoff">
-        <p>HUMAN AMBITION. AUTONOMOUS ACTION.</p>
+        <p>THANKS FOR TAKING A LOOK.</p>
         <a href="#home" className="footer-wordmark" aria-label="Back to top">
           <span className="footer-name-first">AKSHAT</span>
           <span className="footer-name-last">SAHU<ArrowUpRight strokeWidth={.8} /></span>
         </a>
-        <span className="footer-signoff-note">LET’S BUILD WHAT’S NEXT.</span>
+        <span className="footer-signoff-note">LET’S STAY IN TOUCH.</span>
       </div>
       <div className="container mx-auto max-w-5xl px-4 py-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -25,7 +25,7 @@ export default function Footer() {
 
           {/* Nav links */}
           <nav className="hidden md:flex items-center gap-5">
-            {["About", "Experience", "Education", "Skills", "Projects", "Contact"].map((link) => (
+            {["About", "Experience", "Education", "Skills", "Contact"].map((link) => (
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}

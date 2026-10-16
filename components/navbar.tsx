@@ -14,10 +14,10 @@ import { useResumeModal } from "@/components/resume-modal-provider"
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
+  // { name: "Projects", href: "#projects" }, // Temporarily hidden with the section.
   { name: "Experience", href: "#experience" },
   { name: "Education", href: "#education" },
   { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ]
 
@@ -37,7 +37,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
 
-      const sections = ["home", "about", "experience", "education", "skills", "projects", "contact"]
+      const sections = ["home", "about", "experience", "education", "skills", "contact"]
       const scrollPosition = window.scrollY + 100
       const windowHeight = window.innerHeight
       const documentHeight = document.documentElement.scrollHeight

@@ -32,7 +32,7 @@ export function CareerFlight() {
   return (
     <div className="career-flight journey-scene" aria-hidden="true">
       <span className="journey-caption">
-        ONE JOURNEY. EVER MORE AUTONOMOUS.
+        A FEW STOPS ALONG THE WAY
       </span>
       <div className="career-flight-line">
         <i />

@@ -362,9 +362,11 @@
 .track-two > span::after { background: hsl(var(--accent)); }
 .track-three > span { animation-duration: 30s; }
 .system-hero[data-playing="true"] .orbital-track > span { animation-play-state: running; }
-.orbital-core { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 144px; height: 144px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; color: hsl(var(--primary)); background: radial-gradient(circle at 30% 20%, hsl(var(--primary) / .17), hsl(var(--card) / .95) 70%); border: 1px solid hsl(var(--primary) / .45); box-shadow: inset 0 0 24px hsl(var(--primary) / .12), 0 20px 60px hsl(var(--primary) / .1); }
+.orbital-core { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 198px; height: 232px; border-radius: 26px; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: hsl(var(--primary)); background: radial-gradient(circle at 30% 20%, hsl(var(--primary) / .17), hsl(var(--card) / .95) 70%); border: 1px solid hsl(var(--primary) / .45); box-shadow: inset 0 0 24px hsl(var(--primary) / .12), 0 20px 60px hsl(var(--primary) / .1); }
+.hero-profile-image { position: relative; width: 164px; height: 164px; overflow: clip; border-radius: 18px; flex-shrink: 0; }
+.hero-profile-image img { object-position: 50% 15%; transform: scale(1.65); transform-origin: 50% 28%; }
 .orbital-core > span { font: 9px var(--font-mono), monospace; letter-spacing: .16em; }
-.orbital-core > small { font-size: 10px; color: hsl(var(--foreground) / .65); }
+.orbital-core > small { font-size: 8px; color: hsl(var(--foreground) / .65); }
 .orbit-label { display: flex; align-items: center; gap: 12px; position: absolute; padding: 16px 20px; border: 1px solid hsl(var(--primary) / .2); border-radius: 14px; background: hsl(var(--card) / .92); box-shadow: 0 12px 40px hsl(var(--foreground) / .04); color: hsl(var(--primary)); }
 .orbit-label span { display: block; font: 8px var(--font-mono), monospace; letter-spacing: .12em; margin-bottom: 6px; color: hsl(var(--foreground) / .6); }
 .orbit-label strong { font-size: 12px; font-weight: 500; color: hsl(var(--foreground)); }
@@ -409,7 +411,9 @@
   .hero-actions > * { font-size: 12px; padding-inline: 18px; }
   .hero-socials { margin-top: 18px; }
   .orbital-scene { max-width: 440px; height: 370px; }
-  .orbital-core { width: 120px; height: 120px; }
+  .orbital-core { width: 166px; height: 194px; padding: 10px; gap: 7px; }
+  .hero-profile-image { width: 140px; height: 130px; }
+  .orbital-core > small { font-size: 6.5px; }
   .orbit-knowledge { top: 10%; }
   .orbit-agents { top: 18%; right: 0; }
   .orbit-tools { left: 0; }
@@ -583,7 +587,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 @keyframes film-progress-third { 0%,66% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
 @media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
-  [data-motion="on"] .system-film { height: 360svh; view-timeline-name: --system-film; view-timeline-axis: block; }
+  [data-motion="on"] .system-film { height: 220svh; view-timeline-name: --system-film; view-timeline-axis: block; view-timeline-inset: 0; }
   [data-motion="on"] .film-sticky { position: sticky; top: 0; height: 100svh; padding: 100px 6vw 30px; }
   [data-motion="on"] .film-art { position: absolute; left: 30%; right: 0; top: 9%; bottom: 8%; height: auto; }
   [data-motion="on"] .film-copy-track { position: absolute; left: 6vw; top: 37%; width: 33%; max-width: 440px; }
@@ -633,7 +637,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
   .film-chapters { gap: 14px; }.film-chapters > button { font-size: 7px; gap: 5px; }.film-bottomline > a { font-size: 10px; }
   @media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
-    [data-motion="on"] .system-film { height: 340svh; }
+    [data-motion="on"] .system-film { height: 240svh; }
     [data-motion="on"] .film-sticky { padding: 78px 24px 24px; }
     [data-motion="on"] .film-copy-track { top: 145px; left: 24px; width: calc(100% - 48px); max-width: none; }
     [data-motion="on"] .film-copy h3 { font-size: clamp(2.2rem,9vw,3rem); max-width: 340px; }
@@ -660,7 +664,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 .workflow-stage { perspective: 900px; }
 .project-workflow { view-timeline-name: --project-camera; view-timeline-axis: block; }
 #skills { view-timeline-name: --skills-camera; view-timeline-axis: block; }
-@keyframes hero-camera { from { transform: translate3d(0,0,0) rotateY(0deg) scale(1); opacity: 1; } to { transform: translate3d(-40px,50px,0) rotateY(-28deg) rotateZ(18deg) scale(1.7); opacity: .2; } }
+@keyframes hero-camera { from { transform: translate3d(0,0,0) rotateY(0deg) scale(1); opacity: 1; } to { transform: translate3d(-40px,50px,0) rotateY(-18deg) rotateZ(10deg) scale(1.15); opacity: .3; } }
 @keyframes hero-knowledge-flight { from { transform: translate(0,0) rotate(-6deg); } to { transform: translate(-160px,-180px) rotate(-35deg); } }
 @keyframes hero-agents-flight { from { transform: translate(0,0) rotate(5deg); } to { transform: translate(190px,-100px) rotate(35deg); } }
 @keyframes hero-tools-flight { from { transform: translate(0,0) rotate(-3deg); } to { transform: translate(-120px,170px) rotate(-28deg); } }

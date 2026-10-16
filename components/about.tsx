@@ -160,14 +160,14 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.1, ease }}
           >
             <h3 className="text-xl font-bold tracking-tight text-foreground mb-1">
-              Software Engineer
+              AI Engineer
             </h3>
             <p className="text-sm text-primary font-mono mb-5">
-              AI Engineer @ Intapp
+              Intapp · Previously FuturePath AI
             </p>
 
             <p className="text-[15px] leading-7 text-muted-foreground mb-6">
-              I build AI coworkers and autonomous agents that plan, collaborate, use tools, and carry out multi-step work. At Intapp, I&apos;m building AI Coworkers for Celeste. Previously, as founding AI engineer at FuturePath AI, I architected autonomous agents for Fortune 500 pharma and finance clients. My work spans multi-agent orchestration with LangGraph and DeepAgents, persistent state, MCP integrations across 80+ enterprise tools, and DeepEval / RAGAS / Langfuse evaluation pipelines. Retrieval and memory give these agents context; coordination and evaluation help them take useful, reliable action. I hold a Master&apos;s in Computer Science and love building at the intersection of AI and startups.
+              I&apos;m a software engineer with a Master&apos;s in Computer Science from Stevens. I enjoy taking an idea from a rough sketch to something people can use. At Intapp, I build AI Coworkers for Celeste. Before that, I was the founding AI engineer at FuturePath AI, building autonomous agents for pharma and finance teams. My work connects multi-agent orchestration, MCP integrations, retrieval, and evaluation — usually with Python, FastAPI, LangGraph, and DeepAgents.
             </p>
 
             {/* What I Do */}
