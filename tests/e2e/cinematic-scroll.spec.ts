@@ -77,6 +77,7 @@ test("reduced motion presents all cinematic chapters in normal document flow", a
 test("project workflow nodes follow document scrolling through their clipped card", async ({
   page,
 }) => {
+  test.skip(true, "Projects section is temporarily commented out; retain coverage for restoration.")
   await page.setViewportSize({ width: 1440, height: 960 })
   await page.emulateMedia({ reducedMotion: "no-preference" })
   await page.goto("/")

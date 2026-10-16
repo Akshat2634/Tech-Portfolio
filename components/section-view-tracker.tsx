@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { track } from "@vercel/analytics"
 
-const SECTIONS = ["about", "experience", "education", "skills", "projects", "contact"] as const
+const SECTIONS = ["about", "experience", "education", "skills", "contact"] as const
 
 export default function SectionViewTracker() {
   useEffect(() => {

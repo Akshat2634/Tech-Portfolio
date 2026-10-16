@@ -25,7 +25,7 @@ export default function Footer() {
 
           {/* Nav links */}
           <nav className="hidden md:flex items-center gap-5">
-            {["About", "Projects", "Experience", "Education", "Skills", "Contact"].map((link) => (
+            {["About", "Experience", "Education", "Skills", "Contact"].map((link) => (
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}

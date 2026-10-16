@@ -21,18 +21,14 @@ test.describe("home page", () => {
     expect(description!.length).toBeGreaterThan(50)
   })
 
-  test("each project card has a valid GitHub URL", async ({ page }) => {
+  test("projects are temporarily hidden without leaving broken section links", async ({ page }) => {
     await page.goto("/")
-    // Scroll projects into view so dynamic-imported chunks hydrate.
-    await page.locator("#projects").scrollIntoViewIfNeeded()
-
-    const githubLinks = page.locator('#projects a[href*="github.com"]')
-    const count = await githubLinks.count()
-    expect(count).toBeGreaterThan(0)
-
-    for (let i = 0; i < count; i++) {
-      const href = await githubLinks.nth(i).getAttribute("href")
-      expect(href).toMatch(/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+/)
+    await expect(page.locator("#projects")).toHaveCount(0)
+    await expect(page.locator('a[href="#projects"]')).toHaveCount(0)
+    for (const href of await page.locator('a[href^="#"]').evaluateAll(
+      (links) => links.map((link) => link.getAttribute("href")!),
+    )) {
+      await expect(page.locator(href)).toHaveCount(1)
     }
   })
 })

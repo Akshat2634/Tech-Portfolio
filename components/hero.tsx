@@ -54,8 +54,8 @@ export default function Hero() {
           </p>
           <div className="hero-actions">
             <Button asChild size="lg">
-              <a href="#projects">
-                View my work <ArrowDown size={16} />
+              <a href="#experience">
+                My experience <ArrowDown size={16} />
               </a>
             </Button>
             <Button

@@ -38,6 +38,7 @@ test("skills categories replace the map without duplicate content or scroll jump
 test("project workflows support keyboard selection independently on mobile with motion reduced", async ({
   page,
 }) => {
+  test.skip(true, "Projects section is temporarily commented out; retain coverage for restoration.")
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto("/")
   const codelens = page.getByRole("group", {

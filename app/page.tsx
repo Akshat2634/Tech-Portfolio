@@ -11,7 +11,8 @@ const About = dynamic(() => import("@/components/about"))
 const Experience = dynamic(() => import("@/components/experience"))
 const Education = dynamic(() => import("@/components/education"))
 const Skills = dynamic(() => import("@/components/skills"))
-const Projects = dynamic(() => import("@/components/projects"))
+// Projects are temporarily hidden; keep the component available to restore later.
+// const Projects = dynamic(() => import("@/components/projects"))
 const Contact = dynamic(() => import("@/components/contact"))
 const Footer = dynamic(() => import("@/components/footer"))
 const ScrollToTop = dynamic(() =>
@@ -27,7 +28,7 @@ export default function Home() {
       <main className="min-h-screen bg-transparent">
         <Hero />
         <About />
-        <Projects />
+        {/* <Projects /> */}
         <Experience />
         <Education />
         <Skills />

@@ -224,8 +224,8 @@ export default function SystemStory() {
           <span className="film-scroll-hint">
             <ArrowDown size={13} /> A LOOK AT MY PROCESS
           </span>
-          <a href="#projects">
-            See the projects <ArrowUpRight size={15} />
+          <a href="#contact">
+            Let’s connect <ArrowUpRight size={15} />
           </a>
         </div>
       </div>
