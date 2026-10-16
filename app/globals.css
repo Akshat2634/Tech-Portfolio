@@ -383,8 +383,10 @@
 .reading-progress { position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 60; background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent))); transform: scaleX(0); transform-origin: left; }
 @keyframes orbit-travel { to { transform: rotate(360deg); } }
 @keyframes reading-progress { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: scroll()) {
   .reading-progress { animation: reading-progress linear both; animation-timeline: scroll(); }
+}
 }
 [data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after { animation-play-state: paused !important; transition-duration: 0s !important; scroll-behavior: auto !important; }
 [data-motion="off"] .orbital-scene { animation: none; }
@@ -473,9 +475,11 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 .workflow-node:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 5px; }
 @keyframes portrait-travel { from { transform: translateY(45px) rotate(-3deg) scale(.96); } to { transform: translateY(-45px) rotate(3deg) scale(1.04); } }
 @keyframes career-fill { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
   .portrait-image { animation: portrait-travel linear both; animation-timeline: --portrait; animation-range: entry 0% exit 100%; }
   .career-rail > span { animation: career-fill linear both; animation-timeline: --career; animation-range: entry 10% cover 70%; }
+}
 }
 [data-motion="off"] .portrait-image { animation: none; }
 [data-motion="off"] .career-rail > span { animation: none; transform: scaleY(1); }
@@ -577,6 +581,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 @keyframes film-progress-first { 0% { transform: scaleX(0); } 33%,100% { transform: scaleX(1); } }
 @keyframes film-progress-second { 0%,33% { transform: scaleX(0); } 66%,100% { transform: scaleX(1); } }
 @keyframes film-progress-third { 0%,66% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+@media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
   [data-motion="on"] .system-film { height: 360svh; view-timeline-name: --system-film; view-timeline-axis: block; }
   [data-motion="on"] .film-sticky { position: sticky; top: 0; height: 100svh; padding: 100px 6vw 30px; }
@@ -606,6 +611,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
   [data-motion="on"] .film-chapters > button:nth-child(3) i { animation: film-progress-third linear both; }
   [data-motion="on"] .film-engine, [data-motion="on"] .film-plane, [data-motion="on"] .film-fragment, [data-motion="on"] .film-copy, [data-motion="on"] .film-ghost > span, [data-motion="on"] .film-chapters i { animation-timeline: --system-film; animation-range: contain 0% contain 100%; }
 }
+}
 @media (max-width: 767px) {
   .film-sticky { padding: 90px 24px 24px; }
   .film-topline > span { font-size: 8px; letter-spacing: .08em; }
@@ -625,7 +631,8 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
   .agent-coordinate { font-size: 6px; }.agent-planner { top: 74px; }.agent-research { top: 74px; }.agent-execute { bottom: 74px; }
   .film-description { font-size: 13px; line-height: 1.65; margin-top: 15px; }.film-stack { font-size: 8px; margin-top: 14px; }
   .film-chapters { gap: 14px; }.film-chapters > button { font-size: 7px; gap: 5px; }.film-bottomline > a { font-size: 10px; }
-  @supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+@supports (animation-timeline: view()) {
     [data-motion="on"] .system-film { height: 340svh; }
     [data-motion="on"] .film-sticky { padding: 78px 24px 24px; }
     [data-motion="on"] .film-copy-track { top: 145px; left: 24px; width: calc(100% - 48px); max-width: none; }
@@ -637,6 +644,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
     [data-motion="on"] .film-bottomline { left: 24px; right: 24px; bottom: 22px; }
     [data-motion="on"] .film-scroll-hint { display: none; }
   }
+}
 }
 @media (max-height: 650px) and (min-width: 768px) {
   [data-motion="on"] .film-sticky { padding-top: 80px; }
@@ -664,6 +672,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 @keyframes skill-drift-one { from { translate: -30px -30px; } to { translate: 25px 20px; } }
 @keyframes skill-drift-two { from { translate: 30px -20px; } to { translate: -25px 25px; } }
 @keyframes skill-drift-three { from { translate: -20px 30px; } to { translate: 30px -20px; } }
+@media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
   [data-motion="on"] .orbital-scene { animation: hero-camera linear both; animation-timeline: --hero-camera; animation-range: exit 0% exit 100%; }
   [data-motion="on"] .orbit-knowledge { animation: hero-knowledge-flight linear both; animation-timeline: --hero-camera; animation-range: exit 0% exit 100%; }
@@ -680,16 +689,19 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
   [data-motion="on"] .satellite-2 { animation: skill-drift-three linear both; }
   [data-motion="on"] .stack-satellite { animation-timeline: --skills-camera; animation-range: entry 0% exit 100%; }
 }
+}
 @media (prefers-reduced-motion: reduce) {
   .system-film { height: auto !important; }
   .film-sticky { position: relative !important; height: auto !important; }
 }
+@media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
   [data-motion="on"] .film-sticky .film-ghost > span,
   [data-motion="on"] .film-sticky .film-chapters > button i {
     animation-timeline: --system-film;
     animation-range: contain 0% contain 100%;
   }
+}
 }
 
 @media (max-width: 767px) and (min-height: 601px) and (max-height: 740px) {
@@ -771,6 +783,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 @keyframes finale-first { from { transform: translate(-110px,50px) rotate(-5deg); } to { transform: translate(0,0) rotate(0deg); } }
 @keyframes finale-last { from { transform: translate(110px,50px) rotate(5deg); } to { transform: translate(0,0) rotate(0deg); } }
 @keyframes finale-arrow { from { rotate: -80deg; scale: .6; } to { rotate: 0deg; scale: 1; } }
+@media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
   [data-motion="on"] .sheet-one { animation: portrait-layer-one linear both; }
   [data-motion="on"] .sheet-two { animation: portrait-layer-two linear both; }
@@ -802,6 +815,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
   [data-motion="on"] .footer-name-last { animation: finale-last linear both; }
   [data-motion="on"] .footer-name-last svg { animation: finale-arrow linear both; }
   [data-motion="on"] .footer-name-first, [data-motion="on"] .footer-name-last, [data-motion="on"] .footer-name-last svg { animation-timeline: --footer-finale; animation-range: entry 0% entry 100%; }
+}
 }
 @media (max-width: 767px) {
   .portrait-token { font-size: 8px; padding: 10px 12px; gap: 7px; }

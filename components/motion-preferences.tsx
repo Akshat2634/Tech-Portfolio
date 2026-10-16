@@ -16,7 +16,7 @@ export function MotionPreferences({ children }: { children: React.ReactNode }) {
   const [paused, setPaused] = useState(false)
   const [ready, setReady] = useState(false)
   // Match the server on the first client render, then apply browser preferences.
-  const enabled = ready && !reduced && !paused
+  const enabled = !paused && (!ready || !reduced)
   const systemReduced = ready && !!reduced
   useEffect(() => {
     setPaused(localStorage.getItem("portfolio-motion") === "paused")
