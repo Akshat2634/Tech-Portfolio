@@ -191,11 +191,11 @@ export function ContactSignal() {
   return (
     <div className="contact-signal" aria-hidden="true">
       <div className="signal-copy">
-        <span>THE NEXT CHAPTER</span>
+        <span>SAY HELLO</span>
         <strong>
-          Good work starts
+          Have something in mind?
           <br />
-          with a conversation.
+          I’d love to hear it.
         </strong>
       </div>
       <div className="signal-launch">
@@ -203,7 +203,7 @@ export function ContactSignal() {
         <div className="signal-orbit signal-orbit-two" />
         <div className="signal-envelope">
           <span className="signal-letter">
-            <span>YOUR NEXT IDEA</span>
+            <span>LET’S TALK</span>
             <i />
             <i />
             <ArrowUpRight size={26} />

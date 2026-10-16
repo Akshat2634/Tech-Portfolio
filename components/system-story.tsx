@@ -16,24 +16,24 @@ import { MotionToggle, usePortfolioMotion } from "./motion-preferences"
 
 const chapters = [
   {
-    label: "INTENT",
-    title: "Meet your AI coworker.",
+    label: "WORKFLOW",
+    title: "I start with the workflow.",
     description:
-      "Autonomous agents that understand a goal, plan the next steps, and get to work.",
+      "I map the goal, the tools, and the decisions an autonomous agent needs to make.",
     stack: "Goal-driven planning · Context + memory · Persistent state",
   },
   {
-    label: "TEAMWORK",
-    title: "One goal. Many agents.",
+    label: "AGENTS",
+    title: "I give each agent a role.",
     description:
-      "Specialist agents research, reason, and coordinate—sharing context as the work moves forward.",
+      "I use LangGraph and DeepAgents to coordinate specialist agents with shared state.",
     stack: "LangGraph · DeepAgents · Multi-agent orchestration",
   },
   {
-    label: "AUTONOMY",
-    title: "From goal to done.",
+    label: "EVALUATION",
+    title: "I check the outcomes.",
     description:
-      "AI coworkers that use connected tools, check their results, and carry multi-step work through to completion.",
+      "I connect tools through MCP and use evaluations to check whether the system actually works.",
     stack: "MCP integrations · DeepEval · Langfuse",
   },
 ]
@@ -46,7 +46,7 @@ function SystemSculpture() {
       <div className="film-engine">
         <div className="film-plane plane-action">
           <div className="plane-chrome">
-            <span>03 / AUTONOMY</span>
+            <span>03 / EVALUATION</span>
             <Braces size={18} />
           </div>
           <div className="plane-tool-row">
@@ -72,7 +72,7 @@ function SystemSculpture() {
         </div>
         <div className="film-plane plane-agents">
           <div className="plane-chrome">
-            <span>02 / TEAMWORK</span>
+            <span>02 / AGENTS</span>
             <Network size={18} />
           </div>
           <svg className="plane-circuit" viewBox="0 0 340 340" fill="none">
@@ -84,7 +84,7 @@ function SystemSculpture() {
           </svg>
           <div className="film-chip">
             <Network size={46} strokeWidth={1} />
-            <strong>AI COWORKER</strong>
+            <strong>AGENT SYSTEM</strong>
             <span>PLAN · REASON · ACT</span>
           </div>
           <span className="agent-coordinate agent-planner">PLANNER</span>
@@ -94,7 +94,7 @@ function SystemSculpture() {
         </div>
         <div className="film-plane plane-knowledge">
           <div className="plane-chrome">
-            <span>01 / INTENT</span>
+            <span>01 / WORKFLOW</span>
             <Target size={18} />
           </div>
           <div className="plane-documents">
@@ -175,17 +175,17 @@ export default function SystemStory() {
       aria-labelledby="systems-heading"
     >
       <h2 id="systems-heading" className="sr-only">
-        AI coworkers and autonomous agents: how I build systems that work
+        How I build autonomous agents
       </h2>
       <div className="film-sticky">
         <div className="film-topline">
-          <span>THE ANATOMY OF AN AI COWORKER</span>
+          <span>HOW I APPROACH AGENT SYSTEMS</span>
           <MotionToggle />
         </div>
         <div className="film-ghost" aria-hidden="true">
-          <span>INTENT</span>
-          <span>TEAMWORK</span>
-          <span>ACTION</span>
+          <span>PLAN</span>
+          <span>BUILD</span>
+          <span>CHECK</span>
         </div>
         <SystemSculpture />
         <div className="film-copy-track">
@@ -208,7 +208,7 @@ export default function SystemStory() {
           ))}
         </div>
         <div className="film-bottomline">
-          <nav className="film-chapters" aria-label="AI coworker chapters">
+          <nav className="film-chapters" aria-label="My engineering approach">
             {chapters.map((chapter, index) => (
               <button
                 key={chapter.label}
@@ -222,10 +222,10 @@ export default function SystemStory() {
             ))}
           </nav>
           <span className="film-scroll-hint">
-            <ArrowDown size={13} /> SCROLL TO SEE IT WORK
+            <ArrowDown size={13} /> A LOOK AT MY PROCESS
           </span>
           <a href="#projects">
-            Explore the work <ArrowUpRight size={15} />
+            See the projects <ArrowUpRight size={15} />
           </a>
         </div>
       </div>

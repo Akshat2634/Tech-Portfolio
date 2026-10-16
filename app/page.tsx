@@ -26,12 +26,12 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen bg-transparent">
         <Hero />
-        <SystemStory />
         <About />
+        <Projects />
         <Experience />
         <Education />
         <Skills />
-        <Projects />
+        <SystemStory />
         <Contact />
         <ScrollToTop />
       </main>
