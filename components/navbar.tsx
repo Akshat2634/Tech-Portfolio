@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { usePortfolioMotion } from "@/components/motion-preferences"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ const navLinks = [
 ]
 
 export default function Navbar() {
+  const { enabled: motionEnabled } = usePortfolioMotion()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
@@ -66,13 +68,13 @@ export default function Navbar() {
     setMobileMenuOpen(false)
 
     if (href === "#home") {
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      window.scrollTo({ top: 0, behavior: motionEnabled ? "smooth" : "instant" })
     } else {
       const element = document.querySelector(href)
       if (element) {
         window.scrollTo({
           top: element.getBoundingClientRect().top + window.scrollY - 80,
-          behavior: "smooth",
+          behavior: motionEnabled ? "smooth" : "instant",
         })
       }
     }

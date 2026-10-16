@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import { usePortfolioMotion } from "./motion-preferences"
 import { ease } from "@/lib/animations"
 
 interface SectionHeadingProps {
@@ -10,10 +11,11 @@ interface SectionHeadingProps {
 }
 
 export default function SectionHeading({ title, subtitle, center = true }: SectionHeadingProps) {
+  const { enabled } = usePortfolioMotion()
   return (
     <motion.div
       className={`mb-16 ${center ? "text-center" : ""}`}
-      initial={{ opacity: 0, y: 15 }}
+      initial={enabled ? { opacity: 0, y: 15 } : false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease }}
@@ -29,7 +31,7 @@ export default function SectionHeading({ title, subtitle, center = true }: Secti
         {title}
       </h2>
       <div className={`mt-4 ${center ? "flex justify-center" : ""}`}>
-        <div className="h-1 w-16 rounded-full bg-gradient-to-r from-primary to-accent" />
+        <motion.div className="h-1 w-16 rounded-full bg-gradient-to-r from-primary to-accent" initial={enabled ? { scaleX: 0 } : false} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: .65, delay: .1, ease }} />
       </div>
     </motion.div>
   )

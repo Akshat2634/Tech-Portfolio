@@ -5,6 +5,7 @@ import { useState } from "react"
 import { motion } from "motion/react"
 import { track } from "@vercel/analytics"
 import SectionHeading from "./section-heading"
+import { ContactSignal } from "./section-visuals"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -56,6 +57,7 @@ export default function Contact() {
     <section id="contact" className="py-24">
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Get In Touch" subtitle="Contact" />
+        <ContactSignal />
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.3fr] gap-12 items-start">
 
@@ -107,6 +109,7 @@ export default function Contact() {
                 <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0" />
               </a>
             </div>
+
 
             {/* Decorative quote card */}
             <div className="glass relative mt-8 p-5 rounded-2xl">

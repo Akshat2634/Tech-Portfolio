@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { useReducedMotion } from "motion/react"
+import { usePortfolioMotion } from "@/components/motion-preferences"
 
 export const ease = [0.25, 0.46, 0.45, 0.94] as const
 
@@ -28,31 +28,27 @@ export const staggerItem = {
 }
 
 /**
- * glassReveal — the liquid-glass entrance: each pane "focuses into" existence,
- * fading + rising while a soft blur resolves to sharp, like a lens settling.
+ * glassReveal — each pane fades and rises into place using compositor properties.
  * Use on card grids in place of staggerItem (pair with staggerContainer).
  */
 export const glassReveal = {
-  hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.55, ease },
   },
 }
 
 /**
- * Reduced-motion-aware glassReveal. framer-motion animations are JS-driven and
- * are NOT stopped by the global prefers-reduced-motion CSS rule, so we gate the
- * blur/travel here: reduced-motion users get a plain, quick opacity fade.
+ * Honor both the site toggle and system preference for JS-driven reveals.
  */
 export function useGlassReveal() {
-  const reduce = useReducedMotion()
-  if (reduce) {
+  const { enabled } = usePortfolioMotion()
+  if (!enabled) {
     return {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { duration: 0.2 } },
+      hidden: { opacity: 1 },
+      visible: { opacity: 1, transition: { duration: 0 } },
     }
   }
   return glassReveal
@@ -69,10 +65,11 @@ export function useGlassReveal() {
  */
 export function useGlassSheen<T extends HTMLElement = HTMLDivElement>() {
   const ref = useRef<T>(null)
+  const { enabled } = usePortfolioMotion()
 
   useEffect(() => {
     const el = ref.current
-    if (!el || typeof window === "undefined" || !window.matchMedia) return
+    if (!el || !enabled || typeof window === "undefined" || !window.matchMedia) return
     if (
       window.matchMedia("(pointer: coarse)").matches ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -118,12 +115,13 @@ export function useGlassSheen<T extends HTMLElement = HTMLDivElement>() {
     el.addEventListener("pointerleave", onLeave)
 
     return () => {
+      el.dataset.active = "false"
       el.removeEventListener("pointerenter", onEnter)
       el.removeEventListener("pointerleave", onLeave)
       el.removeEventListener("pointermove", onMove)
       if (raf) cancelAnimationFrame(raf)
     }
-  }, [])
+  }, [enabled])
 
   return ref
 }

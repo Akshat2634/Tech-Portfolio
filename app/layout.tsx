@@ -3,6 +3,7 @@ import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ResumeModalProvider } from "@/components/resume-modal-provider"
 import AmbientField from "@/components/ambient-field"
+import { MotionPreferences } from "@/components/motion-preferences"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
@@ -73,12 +74,14 @@ export default function RootLayout({
       <head />
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AmbientField />
-          <ResumeModalProvider>
-            {children}
-            <Analytics />
-            <SpeedInsights />
-          </ResumeModalProvider>
+          <MotionPreferences>
+            <AmbientField />
+            <ResumeModalProvider>
+              {children}
+              <Analytics />
+              <SpeedInsights />
+            </ResumeModalProvider>
+          </MotionPreferences>
         </ThemeProvider>
       </body>
     </html>

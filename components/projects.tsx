@@ -4,10 +4,11 @@ import { useState } from "react"
 import { motion } from "motion/react"
 import { track } from "@vercel/analytics"
 import SectionHeading from "./section-heading"
+import { ProjectWorkflow } from "./section-visuals"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github, ArrowRight, Copy, Check, Terminal } from "lucide-react"
 import Link from "next/link"
-import { staggerContainer, useGlassReveal, useGlassSheen } from "@/lib/animations"
+import { useGlassReveal, useGlassSheen } from "@/lib/animations"
 
 const techColors: Record<string, string> = {
   "FastAPI":              "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
@@ -106,7 +107,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useGlassSheen<HTMLDivElement>()
 
   return (
-    <div ref={ref} className={`glass glass-hover glass-sheen border ${project.borderColor} rounded-2xl overflow-hidden group`}>
+    <div ref={ref} className={`glass glass-hover glass-sheen border ${project.borderColor} rounded-2xl overflow-clip group`}>
 
       {/* Gradient header */}
       <div className={`px-6 pt-6 pb-5 bg-gradient-to-br ${project.color}`}>
@@ -135,6 +136,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="flex gap-2">
             {project.github && (
               <Link
+                aria-label={`View ${project.title} on GitHub`}
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -147,6 +149,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             )}
             {project.demo && (
               <Link
+                aria-label={`Open ${project.title} live demo`}
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -160,6 +163,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
         </div>
       </div>
+
+      {project.title === "CodeLens AI" && <ProjectWorkflow kind="codelens" />}
+      {project.title === "PitchPilot" && <ProjectWorkflow kind="pitchpilot" />}
 
       {/* Body */}
       <div className="p-6">
@@ -286,19 +292,13 @@ export default function Projects() {
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Projects" subtitle="Recent work" />
 
-        <motion.div
-          className="max-w-3xl mx-auto space-y-6"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
+        <div className="max-w-3xl mx-auto space-y-6">
           {projects.map((project, index) => (
-            <motion.div key={index} variants={reveal}>
+            <motion.div key={index} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
               <ProjectCard project={project} index={index} />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

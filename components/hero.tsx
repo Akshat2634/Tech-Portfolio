@@ -1,224 +1,151 @@
 "use client"
 
+import { useRef } from "react"
+import { motion, useInView } from "motion/react"
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Github,
+  Linkedin,
+  Mail,
+  Network,
+  Target,
+  Braces,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { motion } from "motion/react"
-import { FileText, Github, Linkedin, Mail } from "lucide-react"
-import Link from "next/link"
-import { ease, useGlassSheen } from "@/lib/animations"
-import { useState, useEffect } from "react"
 import { useResumeModal } from "./resume-modal-provider"
-
-const roles = ["Software Engineer", "AI Systems Builder", "Multi-Agent Architect"]
-
-function useTypewriter(words: string[], typingSpeed = 75, deletingSpeed = 45, pause = 2200) {
-  const [displayed, setDisplayed] = useState(words[0])
-  const [wordIdx, setWordIdx] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [enabled, setEnabled] = useState(false)
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setEnabled(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!enabled) {
-      setDisplayed(words[0])
-      return
-    }
-
-    const current = words[wordIdx]
-    let timeout: ReturnType<typeof setTimeout>
-
-    if (!isDeleting) {
-      if (displayed.length < current.length) {
-        timeout = setTimeout(() => {
-          setDisplayed(current.slice(0, displayed.length + 1))
-        }, typingSpeed)
-      } else {
-        timeout = setTimeout(() => setIsDeleting(true), pause)
-      }
-    } else {
-      if (displayed.length > 0) {
-        timeout = setTimeout(() => {
-          setDisplayed(current.slice(0, displayed.length - 1))
-        }, deletingSpeed)
-      } else {
-        setIsDeleting(false)
-        setWordIdx((i) => (i + 1) % words.length)
-      }
-    }
-
-    return () => clearTimeout(timeout)
-  }, [displayed, isDeleting, wordIdx, words, typingSpeed, deletingSpeed, pause, enabled])
-
-  return { displayed, enabled }
-}
+import { MotionToggle, usePortfolioMotion } from "./motion-preferences"
 
 export default function Hero() {
-  const { displayed: roleText, enabled: typewriterEnabled } = useTypewriter(roles)
-  const { open: openResume, prefetch: prefetchResume } = useResumeModal()
-  const cardRef = useGlassSheen<HTMLDivElement>()
-
+  const { open, prefetch } = useResumeModal()
+  const ref = useRef<HTMLElement>(null)
+  const inView = useInView(ref)
+  const { enabled } = usePortfolioMotion()
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Floating aurora orbs now live globally in <AmbientField /> so every section refracts the same light. */}
-
-      {/* Dot grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(hsl(var(--border))_1px,transparent_1px)] [background-size:26px_26px] opacity-35 pointer-events-none" />
-
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto] gap-10 xl:gap-20 items-center">
-
-          {/* Left: main content */}
-          <div className="text-center xl:text-left">
-            {/* Status pill */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease }}
-              className="flex justify-center xl:justify-start"
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-thin text-primary text-xs font-mono font-medium tracking-wide">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-                </span>
-                Available for opportunities
-              </span>
-            </motion.div>
-
-            {/* Name — fluid type so it scales smoothly across all viewports */}
-            <motion.h1
-              className="mt-7 font-bold tracking-[-0.03em] leading-[1.05] gradient-text text-[clamp(2.75rem,9vw,5.5rem)]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease }}
-            >
-              Akshat Sahu
-            </motion.h1>
-
-            {/* Typewriter role — nowrap + min-h prevents the long word from wrapping or clipping */}
-            <motion.div
-              className="mt-5 min-h-8 flex items-center justify-center xl:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35, ease }}
-            >
-              <span className="font-mono text-muted-foreground tracking-wide whitespace-nowrap text-[clamp(1rem,2vw,1.25rem)]">
-                {roleText}
-              </span>
-              {typewriterEnabled && (
-                <span className="inline-block w-0.5 h-5 bg-primary ml-1 align-middle cursor-blink shrink-0" />
-              )}
-            </motion.div>
-
-            {/* One-liner */}
-            <motion.p
-              className="mt-4 text-[15px] text-muted-foreground max-w-md mx-auto xl:mx-0 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45, ease }}
-            >
-              Building production-grade AI agent systems. Specializing in multi-agent orchestration, RAG pipelines, and enterprise AI.
-            </motion.p>
-
-            {/* Social links + Resume CTA */}
-            <motion.div
-              className="mt-8 flex flex-wrap items-center justify-center xl:justify-start gap-3"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.55, ease }}
-            >
-              <Link href="https://github.com/akshat2634" target="_blank" rel="noopener noreferrer">
-                <Button variant="glass" size="icon" className="h-10 w-10 rounded-xl">
-                  <Github className="h-4 w-4" />
-                </Button>
-              </Link>
-
-              <Link href="https://linkedin.com/in/akshat2634" target="_blank" rel="noopener noreferrer">
-                <Button variant="glass" size="icon" className="h-10 w-10 rounded-xl">
-                  <Linkedin className="h-4 w-4" />
-                </Button>
-              </Link>
-
-              <Link href="mailto:akshatsahu2634@gmail.com">
-                <Button variant="glass" size="icon" className="h-10 w-10 rounded-xl">
-                  <Mail className="h-4 w-4" />
-                </Button>
-              </Link>
-
-              <div className="w-px h-6 bg-border mx-1" />
-
-              <Button
-                onClick={() => openResume("hero")}
-                onMouseEnter={prefetchResume}
-                onFocus={prefetchResume}
-                className="bg-gradient-to-r from-primary to-accent/80 hover:from-primary/90 hover:to-accent/70 text-white h-10 px-6 text-sm font-semibold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:scale-105 transition-all duration-200"
-              >
-                <FileText className="h-4 w-4 mr-1.5" />
-                View Resume
-              </Button>
-            </motion.div>
-          </div>
-
-          {/* Right: decorative code card (xl+ only — needs the room) */}
-          <motion.div
-            className="hidden xl:block shrink-0"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease }}
+    <section
+      id="home"
+      ref={ref}
+      className="system-hero"
+      data-playing={enabled && inView}
+    >
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="hero-editorial">
+        <div className="hero-copy">
+          <p className="system-eyebrow">
+            <span className="status-dot" /> Available for opportunities
+          </p>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            <div ref={cardRef} className="glass glass-strong glass-sheen relative w-64 rounded-2xl p-5">
-              {/* Window chrome */}
-              <div className="flex items-center gap-1.5 mb-5">
-                <div className="w-3 h-3 rounded-full bg-red-400/70" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400/70" />
-                <div className="w-3 h-3 rounded-full bg-green-400/70" />
-                <span className="ml-2 text-[10px] font-mono text-muted-foreground/60">engineer.ts</span>
-              </div>
-
-              {/* Code content */}
-              <div className="space-y-1 font-mono text-[12px] leading-relaxed">
-                <p><span className="text-accent">const</span> <span className="text-primary">engineer</span> <span className="text-muted-foreground/70">= {"{"}</span></p>
-                <p className="pl-4"><span className="text-muted-foreground/60">name:</span> <span className="text-foreground">&quot;Akshat&quot;</span><span className="text-muted-foreground/70">,</span></p>
-                <p className="pl-4"><span className="text-muted-foreground/60">focus:</span> <span className="text-foreground">&quot;AI Agents&quot;</span><span className="text-muted-foreground/70">,</span></p>
-                <p className="pl-4"><span className="text-muted-foreground/60">stack:</span> <span className="text-muted-foreground/70">[</span></p>
-                <p className="pl-8"><span className="text-accent">&quot;Multi-Agentic Workflows&quot;</span><span className="text-muted-foreground/70">,</span></p>
-                <p className="pl-8"><span className="text-accent">&quot;DeepAgents&quot;</span><span className="text-muted-foreground/70">,</span></p>
-                <p className="pl-8"><span className="text-accent">&quot;LangGraph&quot;</span><span className="text-muted-foreground/70">,</span></p>
-                <p className="pl-8"><span className="text-accent">&quot;RAG&quot;</span><span className="text-muted-foreground/70">,</span></p>
-                <p className="pl-8"><span className="text-accent">&quot;MCP&quot;</span></p>
-                <p className="pl-4"><span className="text-muted-foreground/70">],</span></p>
-                <p className="pl-4"><span className="text-muted-foreground/60">degree:</span> <span className="text-foreground">&quot;MS CS&quot;</span><span className="text-muted-foreground/70">,</span></p>
-                <p className="pl-4"><span className="text-muted-foreground/60">gpa:</span> <span className="text-primary font-semibold">3.9</span></p>
-                <p><span className="text-muted-foreground/70">{"}"}</span></p>
-              </div>
-
-              {/* Glow accents */}
-              <div className="absolute -top-px -right-px w-20 h-20 bg-primary/15 rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-px -left-px w-16 h-16 bg-accent/10 rounded-full blur-xl pointer-events-none" />
+            Akshat Sahu
+          </motion.h1>
+          <p className="hero-statement">
+            Building AI coworkers.
+            <br />
+            Agents that <span>get work done.</span>
+          </p>
+          <p className="hero-description">
+            AI Engineer at Intapp. Previously Founding AI Engineer at FuturePath
+            AI. I build autonomous agents that plan, collaborate, and turn goals
+            into completed work.
+          </p>
+          <div className="hero-actions">
+            <Button asChild size="lg">
+              <a href="#systems">
+                Meet the AI coworker <ArrowDown size={16} />
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => open("hero")}
+              onMouseEnter={prefetch}
+              onFocus={prefetch}
+            >
+              View Resume <ArrowUpRight size={16} />
+            </Button>
+          </div>
+          <div className="hero-socials">
+            <a
+              href="https://github.com/akshat2634"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href="https://linkedin.com/in/akshat2634"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a href="mailto:akshatsahu2634@gmail.com" aria-label="Email Akshat">
+              <Mail size={18} />
+            </a>
+            <span>AI COWORKERS · AUTONOMOUS AGENTS</span>
+          </div>
+        </div>
+        <div
+          className="orbital-scene"
+          aria-label="An orbital sculpture connecting goals, collaborating agents, and tools"
+          role="img"
+        >
+          <div className="orbital-halo" />
+          <div className="orbital-track track-one">
+            <span />
+          </div>
+          <div className="orbital-track track-two">
+            <span />
+          </div>
+          <div className="orbital-track track-three">
+            <span />
+          </div>
+          <div className="orbital-core">
+            <Network size={43} strokeWidth={1} />
+            <span>AI COWORKER</span>
+            <small>Intent → action</small>
+          </div>
+          <div className="orbit-label orbit-knowledge">
+            <Target size={19} />
+            <div>
+              <span>01 / INTENT</span>
+              <strong>A goal worth doing.</strong>
             </div>
-          </motion.div>
-
+          </div>
+          <div className="orbit-label orbit-agents">
+            <Network size={19} />
+            <div>
+              <span>02 / TEAMWORK</span>
+              <strong>Agents, in sync.</strong>
+            </div>
+          </div>
+          <div className="orbit-label orbit-tools">
+            <Braces size={19} />
+            <div>
+              <span>03 / AUTONOMY</span>
+              <strong>From plan to action.</strong>
+            </div>
+          </div>
+          <span className="orbital-coordinate coordinate-top">
+            SYSTEM / AS.01
+          </span>
+          <span className="orbital-coordinate coordinate-bottom">
+            DESIGNED TO WORK TOGETHER
+          </span>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, ease }}
-      >
-        <span className="text-[10px] font-mono text-muted-foreground tracking-widest uppercase">Scroll</span>
-        <motion.div
-          className="w-px h-8 bg-gradient-to-b from-muted-foreground/50 to-transparent"
-          animate={{ scaleY: [1, 0.5, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </motion.div>
+      <div className="hero-bottom">
+        <a href="#systems">
+          <span className="scroll-line" /> Scroll to meet your AI coworker{" "}
+          <ArrowDown size={14} />
+        </a>
+        <MotionToggle />
+      </div>
     </section>
   )
 }
