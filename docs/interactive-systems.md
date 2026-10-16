@@ -29,3 +29,15 @@ The build reports a pre-existing workspace-root warning because another lockfile
 - [Motion reduced-motion hook](https://motion.dev/docs/react-use-reduced-motion)
 - [shadcn Button composition](https://ui.shadcn.com/docs/components/radix/button)
 - [User-supplied interaction reference](https://openai.com/index/gpt-6-for-everyone/)
+
+## Lower sections
+
+- About: layered portrait sheets, native scroll-linked portrait travel, and count-up statistics that stop immediately when motion is disabled. Animation frames are canceled on cleanup.
+- Experience: each card reveals as it enters the viewport; a native view timeline fills the connecting rail. Detail expansion respects the global preference.
+- Education: individual card entrances, drawing accent bars, gentle hover elevation, and degree badges that wrap on narrow screens.
+- Skills: a stable category panel, animated selection indicator, staggered skill chips, and a category-specific constellation made from actual skill names. Category buttons expose their pressed state and controlled region.
+- Projects: independent, keyboard-accessible three-step workflow illustrations for CodeLens AI and PitchPilot. Explanations are announced in a polite live region. These illustrate architecture rather than running the products.
+- Contact: a one-time connection-path drawing and envelope entrance. Form submission behavior is unchanged.
+- Shared reveals use transform/opacity instead of blur. Pointer sheens also honor the motion toggle.
+
+Two focused E2E checks cover skills replacement/scroll stability and independent mobile workflow keyboard controls under reduced motion. See `tests/e2e/lower-sections.spec.ts`.

@@ -1,17 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import SectionHeading from "./section-heading"
+import { usePortfolioMotion } from "./motion-preferences"
 import { CompanyLogo } from "./company-logo"
 import { Calendar, MapPin, ChevronRight, ChevronDown } from "lucide-react"
 import { experiences, coreSkills } from "@/lib/experience-data"
-import { ease, staggerContainer, useGlassReveal } from "@/lib/animations"
+import { ease, useGlassReveal } from "@/lib/animations"
 import { cn } from "@/lib/utils"
 
 export default function Experience() {
   const reveal = useGlassReveal()
-  const prefersReduced = useReducedMotion()
+  const { enabled } = usePortfolioMotion()
   // The current role (index 0) starts open; the rest collapse for a scannable list.
   const [openSet, setOpenSet] = useState<Set<number>>(() => new Set([0]))
 
@@ -22,7 +23,7 @@ export default function Experience() {
       return next
     })
 
-  const expandTransition = prefersReduced
+  const expandTransition = !enabled
     ? { duration: 0 }
     : {
         height: { duration: 0.4, ease },
@@ -34,13 +35,7 @@ export default function Experience() {
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Work Experience" subtitle="Professional journey" />
 
-        <motion.div
-          className="space-y-0 max-w-3xl mx-auto"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
+        <div className="space-y-0 max-w-3xl mx-auto">
           {experiences.map((exp, index) => {
             const isOpen = openSet.has(index)
             const isCurrent = index === 0
@@ -54,7 +49,10 @@ export default function Experience() {
               <motion.div
                 key={exp.slug}
                 variants={reveal}
-                className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0 md:gap-6"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                className="experience-entry grid grid-cols-1 md:grid-cols-[auto_1fr] gap-0 md:gap-6"
               >
                 {/* Left rail: dot + connecting line */}
                 <div className="hidden md:flex flex-col items-center">
@@ -65,12 +63,12 @@ export default function Experience() {
                     )}
                   </div>
                   {index < experiences.length - 1 && (
-                    <div className="w-px flex-1 mt-2 bg-gradient-to-b from-primary/30 to-transparent" />
+                    <div className="career-rail"><span /></div>
                   )}
                 </div>
 
                 {/* Card — light chrome: thin glass, no accent bar */}
-                <div className="mb-5 glass-thin rounded-2xl overflow-hidden transition-all duration-300 group hover:ring-1 hover:ring-primary/20">
+                <div className="career-card mb-5 glass-thin rounded-2xl overflow-hidden transition-all duration-300 group hover:ring-1 hover:ring-primary/20">
                   {/* Summary — the always-visible, clickable trigger */}
                   <button
                     type="button"
@@ -204,7 +202,7 @@ export default function Experience() {
               </motion.div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

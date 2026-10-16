@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView } from "motion/react"
 import SectionHeading from "./section-heading"
+import { usePortfolioMotion } from "./motion-preferences"
 import Image from "next/image"
 import { ease } from "@/lib/animations"
 import { Clock, BrainCircuit, Users, GraduationCap, Code, Database, Layers } from "lucide-react"
@@ -23,24 +24,32 @@ const whatIDo = [
 
 function useCountUp(target: number, decimals: number, shouldStart: boolean, duration = 1800, delay = 0) {
   const [value, setValue] = useState(0)
+  const { enabled } = usePortfolioMotion()
+  const completed = useRef(false)
 
   useEffect(() => {
-    if (!shouldStart) return
-
+    if (!enabled) {
+      completed.current = true
+      setValue(target)
+      return
+    }
+    if (!shouldStart || completed.current) return
+    let frame = 0
     const timeout = setTimeout(() => {
       const startTime = performance.now()
       const step = (now: number) => {
-        const elapsed = now - startTime
-        const progress = Math.min(elapsed / duration, 1)
-        const eased = 1 - Math.pow(1 - progress, 3)
-        setValue(parseFloat((eased * target).toFixed(decimals)))
-        if (progress < 1) requestAnimationFrame(step)
+        const progress = Math.min((now - startTime) / duration, 1)
+        setValue(parseFloat(((1 - Math.pow(1 - progress, 3)) * target).toFixed(decimals)))
+        if (progress < 1) frame = requestAnimationFrame(step)
+        else completed.current = true
       }
-      requestAnimationFrame(step)
+      frame = requestAnimationFrame(step)
     }, delay)
-
-    return () => clearTimeout(timeout)
-  }, [shouldStart, target, duration, delay, decimals])
+    return () => {
+      clearTimeout(timeout)
+      cancelAnimationFrame(frame)
+    }
+  }, [shouldStart, target, duration, delay, decimals, enabled])
 
   return value
 }
@@ -62,7 +71,7 @@ function StatCard({
   isInView: boolean
   icon: React.ElementType
 }) {
-  const count = useCountUp(value, decimals, isInView, 1800, index * 200)
+  const count = useCountUp(value, decimals, isInView, 1200, index * 100)
   const displayValue = decimals > 0 ? count.toFixed(decimals) : count.toString()
 
   return (
@@ -107,13 +116,15 @@ export default function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease }}
           >
-            <div className="relative w-full max-w-sm mx-auto">
+            <div className="portrait-composition relative w-full max-w-sm mx-auto">
+              <div className="portrait-sheet sheet-one" aria-hidden="true" />
+              <div className="portrait-sheet sheet-two" aria-hidden="true" />
               {/* Decorative dot grid accents */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-[radial-gradient(hsl(var(--primary))_1px,transparent_1px)] [background-size:8px_8px] opacity-30 -z-10" />
               <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-[radial-gradient(hsl(var(--accent))_1px,transparent_1px)] [background-size:6px_6px] opacity-25 -z-10" />
 
               {/* Gradient border wrapper */}
-              <div className="relative p-[3px] rounded-2xl bg-gradient-to-br from-primary/60 via-primary/20 to-accent/60 shadow-xl shadow-primary/10">
+              <div className="portrait-image relative p-[3px] rounded-2xl bg-gradient-to-br from-primary/60 via-primary/20 to-accent/60 shadow-xl shadow-primary/10">
                 <div className="relative w-full aspect-square rounded-[13px] overflow-hidden">
                   <Image
                     src="/images/profile.jpg"
@@ -126,7 +137,7 @@ export default function About() {
                 </div>
 
                 {/* Floating badge */}
-                <div className="absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass-thin text-xs font-mono z-10">
+                <div className="portrait-badge absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-1.5 rounded-full glass-thin text-xs font-mono z-10">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
@@ -134,6 +145,7 @@ export default function About() {
                   <span className="text-foreground font-medium">Available for hire</span>
                 </div>
               </div>
+              <p className="portrait-caption"><span>THE BUILDER BEHIND THE SYSTEMS</span><span>AS / 01</span></p>
             </div>
           </motion.div>
 

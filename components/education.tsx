@@ -2,9 +2,10 @@
 
 import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
+import { usePortfolioMotion } from "./motion-preferences"
 import { CompanyLogo } from "./company-logo"
 import { Calendar, MapPin, Star } from "lucide-react"
-import { staggerContainer, useGlassReveal } from "@/lib/animations"
+import { useGlassReveal } from "@/lib/animations"
 
 const degreeConfig: Record<string, {
   gradient: string
@@ -25,6 +26,7 @@ const degreeConfig: Record<string, {
 
 export default function Education() {
   const reveal = useGlassReveal()
+  const { enabled } = usePortfolioMotion()
   const educationData = [
     {
       institution: "Stevens Institute of Technology",
@@ -51,20 +53,14 @@ export default function Education() {
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Education" subtitle="Academic background" />
 
-        <motion.div
-          className="space-y-6 max-w-3xl mx-auto"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
+        <div className="space-y-6 max-w-3xl mx-auto">
           {educationData.map((edu, index) => {
             const config = degreeConfig[edu.degree]
             return (
-              <motion.div key={index} variants={reveal}>
-                <div className="glass glass-hover rounded-xl overflow-hidden group">
+              <motion.div key={index} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
+                <div className="education-card glass rounded-xl overflow-hidden group">
                   {/* Top gradient bar */}
-                  <div className={`h-1 bg-gradient-to-r ${config.gradient}`} />
+                  <motion.div className={`h-1 bg-gradient-to-r ${config.gradient}`} style={{ originX: 0 }} initial={enabled ? { scaleX: 0 } : false} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: .8, delay: index * .12 }} />
 
                   <div className="p-6">
                     <div className="flex items-start gap-4">
@@ -73,7 +69,7 @@ export default function Education() {
 
                       <div className="flex-1 min-w-0">
                         {/* Institution + degree badge */}
-                        <div className="flex items-start justify-between gap-3 mb-1">
+                        <div className="flex flex-wrap items-start justify-between gap-3 mb-1">
                           <h3 className="text-lg font-semibold tracking-tight text-foreground">{edu.institution}</h3>
                           <span className={`shrink-0 px-2 py-0.5 rounded-md border text-[10px] font-mono tracking-wide ${config.badgeColor}`}>
                             {config.badge}
@@ -114,7 +110,7 @@ export default function Education() {
               </motion.div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

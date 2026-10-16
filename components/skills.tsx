@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
+import { StackConstellation } from "./section-visuals"
+import { usePortfolioMotion } from "./motion-preferences"
 import { Code, Database, BrainCircuit, LayoutGrid, MessageSquare, Server, Cloud } from "lucide-react"
 import { ease } from "@/lib/animations"
 
@@ -116,6 +118,7 @@ const skillCategories = [
 ]
 
 export default function Skills() {
+  const { enabled } = usePortfolioMotion()
   const [activeCategory, setActiveCategory] = useState(0)
   const active = skillCategories[activeCategory]
 
@@ -138,13 +141,16 @@ export default function Skills() {
             return (
               <button
                 key={idx}
+                aria-pressed={isActive}
+                aria-controls="skills-panel"
                 onClick={() => setActiveCategory(idx)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
+                className={`relative isolate min-h-11 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background
                   ${isActive
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                    ? "text-foreground"
                     : "glass-thin text-muted-foreground hover:text-foreground"
                   }`}
               >
+                {isActive && <motion.span className="skill-active-pill" layoutId={enabled ? "skill-active-pill" : undefined} transition={{ type: "spring", stiffness: 350, damping: 32 }} aria-hidden="true" />}
                 <Icon className="h-3.5 w-3.5" />
                 {cat.name}
               </button>
@@ -153,20 +159,27 @@ export default function Skills() {
         </motion.div>
 
         {/* Animated category panel */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25, ease }}
-            className="glass relative p-8 rounded-2xl"
-          >
-            {/* Per-category tint overlay (frost + tint coexist) */}
-            <div
-              className={`absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br ${active.color} opacity-40 pointer-events-none`}
-            />
+        <motion.div
+          id="skills-panel"
+          role="region"
+          aria-label={`${active.name} skills`}
+          initial={enabled ? { opacity: 0, y: 10 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: enabled ? 0.25 : 0, ease }}
+          className="skills-panel glass relative p-6 md:p-8 rounded-2xl"
+        >
+          {/* Per-category tint overlay (frost + tint coexist) */}
+          <div
+            className={`absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br ${active.color} opacity-40 pointer-events-none`}
+          />
 
+          <motion.div
+            key={`skills-content-${active.name}`}
+            className="skills-content"
+            initial={enabled ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ duration: enabled ? .2 : 0 }}
+          >
             {/* Category header */}
             <div className="flex items-center gap-3 mb-6">
               <div className={`p-3 rounded-xl ${active.iconColor}`}>
@@ -180,10 +193,14 @@ export default function Skills() {
               </div>
             </div>
 
+            <p className="skill-panel-intro">A layer of the stack I build with. Core tools are marked below.</p>
             {/* Skills — two-tier visual */}
             <div className="flex flex-wrap gap-2">
-              {active.skills.map((skill) => (
-                <span
+              {active.skills.map((skill, index) => (
+                <motion.span
+                  initial={enabled ? { opacity: 0, y: 8 } : false}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: .25, delay: enabled ? index * .025 : 0 }}
                   key={skill.name}
                   className={`px-3 py-1.5 rounded-xl text-[13px] font-medium transition-all duration-200
                     ${skill.core
@@ -197,11 +214,17 @@ export default function Skills() {
                       core
                     </span>
                   )}
-                </span>
+                </motion.span>
               ))}
             </div>
           </motion.div>
-        </AnimatePresence>
+          <StackConstellation
+            key={`skills-map-${active.name}`}
+            name={active.name}
+            skills={active.skills.map(skill => skill.name)}
+            icon={active.icon}
+          />
+        </motion.div>
       </div>
     </section>
   )

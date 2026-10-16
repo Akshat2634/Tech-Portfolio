@@ -5,6 +5,7 @@ import { useState } from "react"
 import { motion } from "motion/react"
 import { track } from "@vercel/analytics"
 import SectionHeading from "./section-heading"
+import { ContactSignal } from "./section-visuals"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -107,6 +108,8 @@ export default function Contact() {
                 <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0" />
               </a>
             </div>
+
+            <ContactSignal />
 
             {/* Decorative quote card */}
             <div className="glass relative mt-8 p-5 rounded-2xl">
