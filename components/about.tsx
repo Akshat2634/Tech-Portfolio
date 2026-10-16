@@ -164,7 +164,7 @@ export default function About() {
             </p>
 
             <p className="text-[15px] leading-7 text-muted-foreground mb-6">
-              I&apos;m a Software Engineer with a Master&apos;s in Computer Science, passionate about building and startups. I specialize in production-grade AI agent systems at scale — multi-agent orchestration on LangGraph and DeepAgents, hybrid retrieval RAG (pgvector + BM25 via RRF) with cross-encoder reranking, and MCP-driven integrations spanning 80+ enterprise tools. At Intapp, I&apos;m building AI Coworkers for Celeste — autonomous agents that turn firm knowledge and complex workflows into intelligent action. Previously, as founding AI engineer at FuturePath AI, I architected autonomous agents for Fortune 500 pharma and finance clients, with rigorous DeepEval / RAGAS / Langfuse evaluation pipelines guiding model selection across OpenAI, Anthropic, and Gemini.
+              I build AI coworkers and autonomous agents that plan, collaborate, use tools, and carry out multi-step work. At Intapp, I&apos;m building AI Coworkers for Celeste. Previously, as founding AI engineer at FuturePath AI, I architected autonomous agents for Fortune 500 pharma and finance clients. My work spans multi-agent orchestration with LangGraph and DeepAgents, persistent state, MCP integrations across 80+ enterprise tools, and DeepEval / RAGAS / Langfuse evaluation pipelines. Retrieval and memory give these agents context; coordination and evaluation help them take useful, reliable action. I hold a Master&apos;s in Computer Science and love building at the intersection of AI and startups.
             </p>
 
             {/* What I Do */}

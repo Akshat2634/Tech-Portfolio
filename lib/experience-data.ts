@@ -33,7 +33,7 @@ export const experiences: Experience[] = [
     period: "July 2026 — Present",
     periodShort: "2026 — Now",
     summary:
-      "Building AI Coworkers for Celeste — autonomous agents that transform firm knowledge and complex workflows into intelligent action.",
+      "Building AI Coworkers for Celeste — autonomous agents that plan, coordinate, and carry out complex workflows across connected tools.",
     // Chips carry the themes; the skill tags below carry the stack — kept
     // deliberately non-overlapping so the card never repeats itself.
     impact: ["Generative AI", "Autonomous agents", "Knowledge graphs"],

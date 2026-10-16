@@ -2,10 +2,12 @@
 
 import { useRef } from "react"
 import {
-  Database,
+  Target,
+  BrainCircuit,
+  Zap,
   Network,
   Braces,
-  FileText,
+  Users,
   Check,
   ArrowDown,
   ArrowUpRight,
@@ -14,24 +16,24 @@ import { MotionToggle, usePortfolioMotion } from "./motion-preferences"
 
 const chapters = [
   {
-    label: "KNOWLEDGE",
-    title: "First, find the signal.",
+    label: "INTENT",
+    title: "Meet your AI coworker.",
     description:
-      "Turn scattered enterprise knowledge into context an agent can actually use.",
-    stack: "Hybrid retrieval · pgvector + BM25 · Reranking",
+      "Autonomous agents that understand a goal, plan the next steps, and get to work.",
+    stack: "Goal-driven planning · Context + memory · Persistent state",
   },
   {
-    label: "ORCHESTRATION",
-    title: "Then, give it direction.",
+    label: "TEAMWORK",
+    title: "One goal. Many agents.",
     description:
-      "Specialized agents. Shared context. One coordinated system that can plan and act.",
-    stack: "LangGraph · DeepAgents · Persistent state",
+      "Specialist agents research, reason, and coordinate—sharing context as the work moves forward.",
+    stack: "LangGraph · DeepAgents · Multi-agent orchestration",
   },
   {
-    label: "ACTION",
-    title: "Intelligence. Put to work.",
+    label: "AUTONOMY",
+    title: "From goal to done.",
     description:
-      "Connect the tools. Evaluate the outcomes. Build something people can depend on.",
+      "AI coworkers that use connected tools, check their results, and carry multi-step work through to completion.",
     stack: "MCP integrations · DeepEval · Langfuse",
   },
 ]
@@ -44,7 +46,7 @@ function SystemSculpture() {
       <div className="film-engine">
         <div className="film-plane plane-action">
           <div className="plane-chrome">
-            <span>03 / EXECUTION</span>
+            <span>03 / AUTONOMY</span>
             <Braces size={18} />
           </div>
           <div className="plane-tool-row">
@@ -60,17 +62,17 @@ function SystemSculpture() {
           </div>
           <div className="plane-result">
             <Check size={13} />
-            <span>Connected to the real world</span>
+            <span>Tools that turn plans into action</span>
           </div>
           <div className="plane-result">
             <Check size={13} />
-            <span>Measured. Refined. Reliable.</span>
+            <span>Check results. Keep work moving.</span>
           </div>
-          <div className="plane-edge">ACTION LAYER / OUTPUT</div>
+          <div className="plane-edge">ACT / EVALUATE / COMPLETE</div>
         </div>
         <div className="film-plane plane-agents">
           <div className="plane-chrome">
-            <span>02 / ORCHESTRATION</span>
+            <span>02 / TEAMWORK</span>
             <Network size={18} />
           </div>
           <svg className="plane-circuit" viewBox="0 0 340 340" fill="none">
@@ -82,24 +84,28 @@ function SystemSculpture() {
           </svg>
           <div className="film-chip">
             <Network size={46} strokeWidth={1} />
-            <strong>AGENT CORE</strong>
+            <strong>AI COWORKER</strong>
             <span>PLAN · REASON · ACT</span>
           </div>
           <span className="agent-coordinate agent-planner">PLANNER</span>
           <span className="agent-coordinate agent-research">RESEARCH</span>
           <span className="agent-coordinate agent-execute">EXECUTOR</span>
-          <div className="plane-edge">SHARED CONTEXT / PERSISTENT STATE</div>
+          <div className="plane-edge">SPECIALIST AGENTS / SHARED GOAL</div>
         </div>
         <div className="film-plane plane-knowledge">
           <div className="plane-chrome">
-            <span>01 / KNOWLEDGE</span>
-            <Database size={18} />
+            <span>01 / INTENT</span>
+            <Target size={18} />
           </div>
           <div className="plane-documents">
-            {[0, 1, 2].map((index) => (
+            {[
+              { icon: Target, label: "GOAL" },
+              { icon: BrainCircuit, label: "PLAN" },
+              { icon: Zap, label: "ACT" },
+            ].map(({ icon: Icon, label }, index) => (
               <div key={index} className={`plane-document document-${index}`}>
-                <FileText size={25} strokeWidth={1.2} />
-                <i />
+                <Icon size={25} strokeWidth={1.2} />
+                <strong>{label}</strong>
                 <i />
                 <i />
               </div>
@@ -107,19 +113,19 @@ function SystemSculpture() {
           </div>
           <div className="plane-context">
             <span />
-            <strong>THE RIGHT CONTEXT.</strong>
+            <strong>A GOAL. A PLAN. A NEXT STEP.</strong>
           </div>
-          <div className="plane-edge">RETRIEVE / RANK / GROUND</div>
+          <div className="plane-edge">UNDERSTAND / PLAN / DELEGATE</div>
         </div>
         <div className="film-spine" />
       </div>
       <div className="film-fragment fragment-one">
-        <FileText size={17} />
-        <span>Firm knowledge</span>
+        <Target size={17} />
+        <span>A clear goal</span>
       </div>
       <div className="film-fragment fragment-two">
-        <Database size={17} />
-        <span>Relevant context</span>
+        <Users size={17} />
+        <span>Specialist agents</span>
       </div>
       <div className="film-fragment fragment-three">
         <Braces size={17} />
@@ -127,7 +133,7 @@ function SystemSculpture() {
       </div>
       <div className="film-fragment fragment-four">
         <Check size={17} />
-        <span>Evaluated outcomes</span>
+        <span>Work carried forward</span>
       </div>
     </div>
   )
@@ -169,16 +175,16 @@ export default function SystemStory() {
       aria-labelledby="systems-heading"
     >
       <h2 id="systems-heading" className="sr-only">
-        From knowledge to intelligent action: how I build AI systems
+        AI coworkers and autonomous agents: how I build systems that work
       </h2>
       <div className="film-sticky">
         <div className="film-topline">
-          <span>THE ANATOMY OF AN AI SYSTEM</span>
+          <span>THE ANATOMY OF AN AI COWORKER</span>
           <MotionToggle />
         </div>
         <div className="film-ghost" aria-hidden="true">
-          <span>CONTEXT</span>
-          <span>REASON</span>
+          <span>INTENT</span>
+          <span>TEAMWORK</span>
           <span>ACTION</span>
         </div>
         <SystemSculpture />
@@ -202,7 +208,7 @@ export default function SystemStory() {
           ))}
         </div>
         <div className="film-bottomline">
-          <nav className="film-chapters" aria-label="System chapters">
+          <nav className="film-chapters" aria-label="AI coworker chapters">
             {chapters.map((chapter, index) => (
               <button
                 key={chapter.label}
@@ -216,7 +222,7 @@ export default function SystemStory() {
             ))}
           </nav>
           <span className="film-scroll-hint">
-            <ArrowDown size={13} /> SCROLL TO TAKE IT APART
+            <ArrowDown size={13} /> SCROLL TO SEE IT WORK
           </span>
           <a href="#projects">
             Explore the work <ArrowUpRight size={15} />

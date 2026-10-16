@@ -1,10 +1,10 @@
 # Interactive AI systems
 
-The portfolio pairs an orbital hero with a cinematic, three-chapter model of Akshat's work: knowledge, orchestration, and execution. The model is an explanatory illustration, not a live production system.
+The portfolio pairs an orbital hero with a cinematic, three-chapter model of Akshat's work: intent, teamwork, and autonomy. The story centers on AI coworkers that plan, collaborate, use tools, and carry work forward. The model is an explanatory illustration, not a live production system.
 
 ## Scroll cinema
 
-`system-story.tsx` provides one large CSS 3D sculpture. On supported browsers, its stage stays pinned for 360 viewport heights (340 on phones). Native CSS view timelines continuously rotate the camera, separate and reposition the layers, gather context fragments, and reveal the execution layer. Scrolling backward reverses every pose. Chapter copy and large background words transition with the same timeline. Chapter buttons scroll to the relevant point and support keyboard activation.
+`system-story.tsx` provides one large CSS 3D sculpture. On supported browsers, its stage stays pinned for 360 viewport heights (340 on phones). Native CSS view timelines continuously rotate the camera, separate and reposition the layers, gather a goal and specialist agents, and reveal the autonomy layer. Scrolling backward reverses every pose. Chapter copy and large background words transition with the same timeline. Chapter buttons scroll to the relevant point and support keyboard activation.
 
 There are no scroll-event listeners, per-frame React updates, or chapter threshold jumps. Animated properties are transforms and opacity. Gradients and shadows remain static. Short phone landscapes, unsupported browsers, and motion-off mode present all three chapters in normal document flow. The persistent pause control honors the operating system's reduced-motion preference.
 

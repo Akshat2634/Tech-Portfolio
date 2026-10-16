@@ -9,7 +9,7 @@ import {
   Linkedin,
   Mail,
   Network,
-  Database,
+  Target,
   Braces,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -42,19 +42,19 @@ export default function Hero() {
             Akshat Sahu
           </motion.h1>
           <p className="hero-statement">
-            Turning intelligence
+            Building AI coworkers.
             <br />
-            into <span>real-world action.</span>
+            Agents that <span>get work done.</span>
           </p>
           <p className="hero-description">
             AI Engineer at Intapp. Previously Founding AI Engineer at FuturePath
-            AI. I build the systems that help autonomous agents do meaningful
-            work.
+            AI. I build autonomous agents that plan, collaborate, and turn goals
+            into completed work.
           </p>
           <div className="hero-actions">
             <Button asChild size="lg">
               <a href="#systems">
-                Explore my thinking <ArrowDown size={16} />
+                Meet the AI coworker <ArrowDown size={16} />
               </a>
             </Button>
             <Button
@@ -87,12 +87,12 @@ export default function Hero() {
             <a href="mailto:akshatsahu2634@gmail.com" aria-label="Email Akshat">
               <Mail size={18} />
             </a>
-            <span>SOFTWARE ENGINEER · AI SYSTEMS</span>
+            <span>AI COWORKERS · AUTONOMOUS AGENTS</span>
           </div>
         </div>
         <div
           className="orbital-scene"
-          aria-label="An orbital sculpture connecting knowledge, agents, and tools"
+          aria-label="An orbital sculpture connecting goals, collaborating agents, and tools"
           role="img"
         >
           <div className="orbital-halo" />
@@ -107,28 +107,28 @@ export default function Hero() {
           </div>
           <div className="orbital-core">
             <Network size={43} strokeWidth={1} />
-            <span>AGENT CORE</span>
+            <span>AI COWORKER</span>
             <small>Intent → action</small>
           </div>
           <div className="orbit-label orbit-knowledge">
-            <Database size={19} />
+            <Target size={19} />
             <div>
-              <span>01 / KNOWLEDGE</span>
-              <strong>Context that matters.</strong>
+              <span>01 / INTENT</span>
+              <strong>A goal worth doing.</strong>
             </div>
           </div>
           <div className="orbit-label orbit-agents">
             <Network size={19} />
             <div>
-              <span>02 / ORCHESTRATION</span>
+              <span>02 / TEAMWORK</span>
               <strong>Agents, in sync.</strong>
             </div>
           </div>
           <div className="orbit-label orbit-tools">
             <Braces size={19} />
             <div>
-              <span>03 / EXECUTION</span>
-              <strong>Connected to the world.</strong>
+              <span>03 / AUTONOMY</span>
+              <strong>From plan to action.</strong>
             </div>
           </div>
           <span className="orbital-coordinate coordinate-top">
@@ -141,7 +141,7 @@ export default function Hero() {
       </div>
       <div className="hero-bottom">
         <a href="#systems">
-          <span className="scroll-line" /> Scroll to assemble a system{" "}
+          <span className="scroll-line" /> Scroll to meet your AI coworker{" "}
           <ArrowDown size={14} />
         </a>
         <MotionToggle />

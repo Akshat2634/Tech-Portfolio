@@ -530,6 +530,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 .plane-edge { position: absolute; bottom: 22px; left: 24px; right: 24px; border-top: 1px solid #ffffff16; padding-top: 14px; font: 8px var(--font-mono), monospace; letter-spacing: .1em; color: #a3a1b2; }
 .plane-documents { position: absolute; inset: 88px 45px 90px; }
 .plane-document { position: absolute; width: 108px; height: 132px; border: 1px solid #e6ddff88; border-radius: 13px; padding: 17px; background: linear-gradient(135deg,#d9d1f6,#8e86b0); color: #403c59; box-shadow: 0 12px 30px #0005; }
+.plane-document > strong { display: block; margin-top: 8px; font: 7px var(--font-mono), monospace; letter-spacing: .12em; }
 .plane-document > i { display: block; height: 3px; border-radius: 2px; background: #51496955; margin-top: 12px; }
 .plane-document > i:last-child { width: 60%; }
 .document-0 { left: 0; transform: rotate(-12deg); }

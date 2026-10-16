@@ -59,9 +59,9 @@ test("reduced motion presents all cinematic chapters in normal document flow", a
   )
   await expect(page.locator(".film-sticky")).toHaveCSS("position", "relative")
   for (const title of [
-    "First, find the signal.",
-    "Then, give it direction.",
-    "Intelligence. Put to work.",
+    "Meet your AI coworker.",
+    "One goal. Many agents.",
+    "From goal to done.",
   ]) {
     await expect(
       page.getByRole("heading", { name: title, exact: true }),
