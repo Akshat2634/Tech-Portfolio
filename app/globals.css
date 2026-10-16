@@ -587,7 +587,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 @keyframes film-progress-third { 0%,66% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
 @media (prefers-reduced-motion: no-preference) {
 @supports (animation-timeline: view()) {
-  [data-motion="on"] .system-film { height: 220svh; view-timeline-name: --system-film; view-timeline-axis: block; }
+  [data-motion="on"] .system-film { height: 220svh; view-timeline-name: --system-film; view-timeline-axis: block; view-timeline-inset: 0; }
   [data-motion="on"] .film-sticky { position: sticky; top: 0; height: 100svh; padding: 100px 6vw 30px; }
   [data-motion="on"] .film-art { position: absolute; left: 30%; right: 0; top: 9%; bottom: 8%; height: auto; }
   [data-motion="on"] .film-copy-track { position: absolute; left: 6vw; top: 37%; width: 33%; max-width: 440px; }
