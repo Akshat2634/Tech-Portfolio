@@ -638,7 +638,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
     [data-motion="on"] .film-copy h3 { font-size: clamp(2.2rem,9vw,3rem); max-width: 340px; }
     [data-motion="on"] .film-kicker { margin-bottom: 14px; font-size: 8px; }
     [data-motion="on"] .film-stack { display: none; }
-    [data-motion="on"] .film-art { left: -24%; right: -24%; top: 40%; bottom: 10%; height: auto; transform: scale(.72); }
+    [data-motion="on"] .film-art { left: -24%; right: -24%; top: 44%; bottom: 10%; height: auto; transform: scale(.68); }
     [data-motion="on"] .film-ghost { top: 39%; left: 0; right: 0; font-size: 25vw; text-align: center; }
     [data-motion="on"] .film-bottomline { left: 24px; right: 24px; bottom: 22px; }
     [data-motion="on"] .film-scroll-hint { display: none; }
@@ -704,7 +704,7 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 @media (max-width: 767px) and (min-height: 601px) and (max-height: 740px) {
   [data-motion="on"] .film-copy-track { top: 125px; }
   [data-motion="on"] .film-copy h3 { font-size: 2.2rem; }
-  [data-motion="on"] .film-art { top: 43%; bottom: 6%; transform: scale(.64); }
+  [data-motion="on"] .film-art { top: 50%; bottom: 6%; transform: scale(.58); }
 }
 /* Short phone landscapes keep the story readable without a cramped pinned stage. */
 @media (max-width: 767px) and (max-height: 600px) {
