@@ -160,10 +160,10 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.1, ease }}
           >
             <h3 className="text-xl font-bold tracking-tight text-foreground mb-1">
-              Software Engineer
+              AI Engineer
             </h3>
             <p className="text-sm text-primary font-mono mb-5">
-              AI Engineer @ Intapp
+              Intapp · Previously FuturePath AI
             </p>
 
             <p className="text-[15px] leading-7 text-muted-foreground mb-6">
