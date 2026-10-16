@@ -73,3 +73,37 @@ test("reduced motion presents all cinematic chapters in normal document flow", a
     ),
   ).toBe(true)
 })
+
+test("project workflow nodes follow document scrolling through their clipped card", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 960 })
+  await page.emulateMedia({ reducedMotion: "no-preference" })
+  await page.goto("/")
+  await expect(page.locator("[data-motion]")).toHaveAttribute(
+    "data-motion",
+    "on",
+  )
+  const workflow = page.getByRole("group", { name: "CodeLens AI workflow" })
+  const camera = () =>
+    workflow
+      .locator(".workflow-camera-node")
+      .first()
+      .evaluate((element) => getComputedStyle(element).transform)
+  async function place(top: number) {
+    await workflow.evaluate(
+      (element, offset) =>
+        window.scrollTo({
+          top: element.getBoundingClientRect().top + scrollY - offset,
+          behavior: "instant",
+        }),
+      top,
+    )
+  }
+  const initial = await camera()
+  await place(800)
+  await expect.poll(camera).not.toBe(initial)
+  const entering = await camera()
+  await place(250)
+  await expect.poll(camera).not.toBe(entering)
+})

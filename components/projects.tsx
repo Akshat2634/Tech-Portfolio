@@ -107,7 +107,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useGlassSheen<HTMLDivElement>()
 
   return (
-    <div ref={ref} className={`glass glass-hover glass-sheen border ${project.borderColor} rounded-2xl overflow-hidden group`}>
+    <div ref={ref} className={`glass glass-hover glass-sheen border ${project.borderColor} rounded-2xl overflow-clip group`}>
 
       {/* Gradient header */}
       <div className={`px-6 pt-6 pb-5 bg-gradient-to-br ${project.color}`}>
