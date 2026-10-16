@@ -134,30 +134,31 @@ export function ProjectWorkflow({ kind }: { kind: keyof typeof workflows }) {
           <span />
         </div>
         {workflow.steps.map(({ label, icon: Icon }, index) => (
-          <motion.button
-            key={label}
-            className="workflow-node"
-            aria-pressed={stage === index}
-            aria-controls={`workflow-detail-${kind}`}
-            onClick={() => setStage(index)}
-            animate={{
-              y: enabled && stage === index ? -8 : 0,
-              rotate: enabled && stage !== index ? (index === 0 ? -4 : 4) : 0,
-            }}
-            transition={{ type: "spring", stiffness: 220, damping: 24 }}
-          >
-            <span className="workflow-number">0{index + 1}</span>
-            <Icon size={30} strokeWidth={1.25} aria-hidden="true" />
-            <strong>{label}</strong>
-            {stage === index && (
-              <motion.span
-                className="workflow-selected"
-                layoutId={enabled ? `workflow-selected-${kind}` : undefined}
-                transition={{ duration: 0.25, ease }}
-                aria-hidden="true"
-              />
-            )}
-          </motion.button>
+          <div key={label} className={`workflow-camera-node camera-${index}`}>
+            <motion.button
+              className="workflow-node"
+              aria-pressed={stage === index}
+              aria-controls={`workflow-detail-${kind}`}
+              onClick={() => setStage(index)}
+              animate={{
+                y: enabled && stage === index ? -8 : 0,
+                rotate: enabled && stage !== index ? (index === 0 ? -4 : 4) : 0,
+              }}
+              transition={{ type: "spring", stiffness: 220, damping: 24 }}
+            >
+              <span className="workflow-number">0{index + 1}</span>
+              <Icon size={30} strokeWidth={1.25} aria-hidden="true" />
+              <strong>{label}</strong>
+              {stage === index && (
+                <motion.span
+                  className="workflow-selected"
+                  layoutId={enabled ? `workflow-selected-${kind}` : undefined}
+                  transition={{ duration: 0.25, ease }}
+                  aria-hidden="true"
+                />
+              )}
+            </motion.button>
+          </div>
         ))}
       </div>
       <div

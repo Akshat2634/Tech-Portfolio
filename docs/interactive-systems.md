@@ -1,43 +1,38 @@
 # Interactive AI systems
 
-The portfolio now opens with an orbital sculpture connecting knowledge, orchestration, and execution. A three-chapter section illustrates Akshat's approach to production AI: grounding with hybrid retrieval, coordinating specialized agents, and connecting tools with evaluation.
+The portfolio pairs an orbital hero with a cinematic, three-chapter model of Akshat's work: knowledge, orchestration, and execution. The model is an explanatory illustration, not a live production system.
 
-## Implementation
+## Scroll cinema
 
-- `hero.tsx`: responsive editorial hero, labeled social links, existing résumé modal, and orbital sculpture. CSS animates only small orbital markers; Motion's visibility observer pauses them offscreen.
-- `system-story.tsx`: sticky blueprint with scroll-triggered assembly. IntersectionObserver follows a narrow reading line at 65% of viewport height, recreated on resize. Pixel margins avoid percentage margins resolving against viewport width. Native buttons also select and scroll to chapters, including keyboard activation.
-- `motion-preferences.tsx`: site-wide pause control with local persistence, system reduced-motion support, and MotionConfig. Chapter content and controls remain available with motion disabled.
-- `globals.css`: scoped responsive layouts, transform/opacity motion, native scroll timelines for the hero exit and reading progress. Unsupported scroll timelines simply omit those two enhancements.
-- `navbar.tsx`: navigation respects motion preferences.
+`system-story.tsx` provides one large CSS 3D sculpture. On supported browsers, its stage stays pinned for 360 viewport heights (340 on phones). Native CSS view timelines continuously rotate the camera, separate and reposition the layers, gather context fragments, and reveal the execution layer. Scrolling backward reverses every pose. Chapter copy and large background words transition with the same timeline. Chapter buttons scroll to the relevant point and support keyboard activation.
 
-No dependencies were added. The existing portfolio sections, theme controls, résumé, projects, and contact form remain in place. The blueprint is an explanatory illustration, not a live production system.
+There are no scroll-event listeners, per-frame React updates, or chapter threshold jumps. Animated properties are transforms and opacity. Gradients and shadows remain static. Short phone landscapes, unsupported browsers, and motion-off mode present all three chapters in normal document flow. The persistent pause control honors the operating system's reduced-motion preference.
+
+## Surrounding sections
+
+- Hero: the orbital sculpture enlarges and rotates away as its labels disperse with scrolling. Its small idle markers pause offscreen.
+- About: layered portrait sheets travel and rotate with scroll. Count-up statistics cancel their animation frames on cleanup and when motion stops.
+- Experience: individual card entrances and a scroll-linked connecting rail. Detail expansion honors the global preference.
+- Education: individual entrances, drawing accents, hover elevation, and wrapping degree badges.
+- Skills: stable category content and an animated selection indicator. A constellation uses actual skill names, with scroll-linked orbit rotation and satellite travel. Controls expose their pressed state and controlled region.
+- Projects: the three workflow nodes assemble from separated, tilted positions as they enter view, then lift apart on exit. Independent keyboard-accessible controls explain CodeLens AI and PitchPilot in a polite live region.
+- Contact: a connection path and envelope entrance, plus scroll-linked envelope flight. Form behavior is unchanged.
+
+No dependencies were added. Existing theme controls, résumé, projects, and contact behavior remain available.
 
 ## Verification
 
-- `pnpm typecheck`: passed.
-- `pnpm build`: passed, including Next.js TypeScript validation and static generation.
-- `git diff --check`: passed.
-- Browser QA uses the production build in the Codex in-app browser. Verified chapter selection by mouse and keyboard, activation by scrolling to chapter content, reverse navigation, motion pause and persistence after reload, offscreen orbit pause, résumé modal open/close, and mobile menu.
-- Desktop and phone layouts inspected in light and dark themes. Responsive overflow and short-landscape behavior checked during the review.
-- The existing Playwright suite was not run locally. OS reduced-motion emulation and physical-device performance profiling were not performed.
+Use `pnpm typecheck`, `pnpm build`, and `git diff --check`. Browser QA uses the production build in the Codex in-app browser.
 
-The build reports a pre-existing workspace-root warning because another lockfile exists above this checkout. It does not prevent compilation.
+`tests/e2e/cinematic-scroll.spec.ts` checks that the camera changes within the same chapter, reverses to the same pose, stays pinned, and presents all chapters in document flow under reduced motion. `tests/e2e/lower-sections.spec.ts` covers stable skills replacement and independent mobile workflow keyboard controls. The full Playwright suite runs in GitHub Actions; physical-device GPU profiling was not performed.
+
+The build reports an existing workspace-root warning because a lockfile exists above this checkout. It does not prevent compilation.
 
 ## Documentation consulted
 
 - [Motion scroll animation](https://motion.dev/docs/react-scroll-animations)
-- [Motion reduced-motion hook](https://motion.dev/docs/react-use-reduced-motion)
+- [Motion useScroll](https://motion.dev/docs/react-use-scroll)
+- [Motion useTransform](https://motion.dev/docs/react-use-transform)
+- [Motion reduced motion](https://motion.dev/docs/react-use-reduced-motion)
 - [shadcn Button composition](https://ui.shadcn.com/docs/components/radix/button)
-- [User-supplied interaction reference](https://openai.com/index/gpt-6-for-everyone/)
-
-## Lower sections
-
-- About: layered portrait sheets, native scroll-linked portrait travel, and count-up statistics that stop immediately when motion is disabled. Animation frames are canceled on cleanup.
-- Experience: each card reveals as it enters the viewport; a native view timeline fills the connecting rail. Detail expansion respects the global preference.
-- Education: individual card entrances, drawing accent bars, gentle hover elevation, and degree badges that wrap on narrow screens.
-- Skills: a stable category panel, animated selection indicator, staggered skill chips, and a category-specific constellation made from actual skill names. Category buttons expose their pressed state and controlled region.
-- Projects: independent, keyboard-accessible three-step workflow illustrations for CodeLens AI and PitchPilot. Explanations are announced in a polite live region. These illustrate architecture rather than running the products.
-- Contact: a one-time connection-path drawing and envelope entrance. Form submission behavior is unchanged.
-- Shared reveals use transform/opacity instead of blur. Pointer sheens also honor the motion toggle.
-
-Two focused E2E checks cover skills replacement/scroll stability and independent mobile workflow keyboard controls under reduced motion. See `tests/e2e/lower-sections.spec.ts`.
+- [Apple product-page framing reference](https://www.apple.com/iphone-18-pro/)
