@@ -58,6 +58,8 @@ test("lower-page scenes stay still under reduced motion and preserve mobile cont
 }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await page.emulateMedia({ reducedMotion: "reduce" })
+  const pageErrors: string[] = []
+  page.on("pageerror", (error) => pageErrors.push(error.message))
   await page.goto("/")
   await expect(page.locator("[data-motion]")).toHaveAttribute(
     "data-motion",
@@ -85,4 +87,5 @@ test("lower-page scenes stay still under reduced motion and preserve mobile cont
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true)
+  expect(pageErrors).toEqual([])
 })

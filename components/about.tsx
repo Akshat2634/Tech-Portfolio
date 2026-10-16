@@ -25,10 +25,11 @@ const whatIDo = [
 
 function useCountUp(target: number, decimals: number, shouldStart: boolean, duration = 1800, delay = 0) {
   const [value, setValue] = useState(0)
-  const { enabled } = usePortfolioMotion()
+  const { enabled, ready } = usePortfolioMotion()
   const completed = useRef(false)
 
   useEffect(() => {
+    if (!ready) return
     if (!enabled) {
       completed.current = true
       setValue(target)
@@ -50,7 +51,7 @@ function useCountUp(target: number, decimals: number, shouldStart: boolean, dura
       clearTimeout(timeout)
       cancelAnimationFrame(frame)
     }
-  }, [shouldStart, target, duration, delay, decimals, enabled])
+  }, [shouldStart, target, duration, delay, decimals, enabled, ready])
 
   return value
 }

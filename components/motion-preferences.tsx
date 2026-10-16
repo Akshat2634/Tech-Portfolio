@@ -4,14 +4,23 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { MotionConfig, useReducedMotion } from "motion/react"
 import { Pause, Play } from "lucide-react"
 
-const MotionContext = createContext({ enabled: false, toggle: () => {} })
+const MotionContext = createContext({
+  enabled: false,
+  ready: false,
+  systemReduced: false,
+  toggle: () => {},
+})
 
 export function MotionPreferences({ children }: { children: React.ReactNode }) {
   const reduced = useReducedMotion()
   const [paused, setPaused] = useState(false)
-  const enabled = !reduced && !paused
+  const [ready, setReady] = useState(false)
+  // Match the server on the first client render, then apply browser preferences.
+  const enabled = ready && !reduced && !paused
+  const systemReduced = ready && !!reduced
   useEffect(() => {
     setPaused(localStorage.getItem("portfolio-motion") === "paused")
+    setReady(true)
   }, [])
   function toggle() {
     setPaused((previous) => {
@@ -20,7 +29,7 @@ export function MotionPreferences({ children }: { children: React.ReactNode }) {
     })
   }
   return (
-    <MotionContext.Provider value={{ enabled, toggle }}>
+    <MotionContext.Provider value={{ enabled, ready, systemReduced, toggle }}>
       <MotionConfig reducedMotion={enabled ? "user" : "always"}>
         <div data-motion={enabled ? "on" : "off"}>{children}</div>
       </MotionConfig>
@@ -33,15 +42,14 @@ export function usePortfolioMotion() {
 }
 
 export function MotionToggle() {
-  const { enabled, toggle } = usePortfolioMotion()
-  const reduced = useReducedMotion()
+  const { enabled, ready, systemReduced, toggle } = usePortfolioMotion()
   return (
     <button
       className="motion-toggle"
       onClick={toggle}
-      disabled={!!reduced}
+      disabled={!ready || systemReduced}
       aria-label={
-        reduced
+        systemReduced
           ? "Motion reduced by system preference"
           : enabled
             ? "Pause animations"
