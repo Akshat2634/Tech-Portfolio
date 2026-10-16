@@ -109,7 +109,7 @@ export default function Hero() {
           <div className="orbital-core">
             <div className="hero-profile-image">
               <Image
-                src="/images/profile.jpg"
+                src="/images/portrait-lake.jpeg"
                 alt="Akshat Sahu"
                 fill
                 sizes="160px"
@@ -137,8 +137,8 @@ export default function Hero() {
           <div className="orbit-label orbit-tools">
             <Braces size={19} />
             <div>
-              <span>SELECTED WORK</span>
-              <strong>CodeLens AI + PitchPilot</strong>
+              <span>WHAT I BUILD</span>
+              <strong>Agents &amp; developer tools</strong>
             </div>
           </div>
           <span className="orbital-coordinate coordinate-top">
