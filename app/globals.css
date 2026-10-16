@@ -471,12 +471,6 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 .workflow-detail p { max-width: 560px; margin-top: 8px; color: hsl(var(--foreground) / .65); font-size: 13px; line-height: 1.8; }
 .workflow-footnote { display: block; margin-top: 18px; padding-top: 14px; border-top: 1px solid hsl(var(--workflow-accent) / .15); font: 8px var(--font-mono), monospace; letter-spacing: .08em; color: hsl(var(--foreground) / .5); }
 .workflow-node:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 5px; }
-.contact-signal { position: relative; height: 152px; margin-top: 30px; }
-.contact-signal > svg { position: absolute; inset: 0 4px auto; width: calc(100% - 8px); height: 120px; stroke: hsl(var(--primary)); stroke-width: 1.2; }
-.contact-signal .signal-guide { stroke: hsl(var(--primary) / .2); stroke-dasharray: 3 6; }
-.contact-signal circle { fill: hsl(var(--accent)); stroke: none; }
-.signal-envelope { position: absolute; width: 60px; height: 60px; border: 1px solid hsl(var(--primary) / .3); border-radius: 18px; display: grid; place-items: center; top: 32px; left: calc(50% - 30px); color: hsl(var(--primary)); background: hsl(var(--card)); box-shadow: 0 10px 30px hsl(var(--primary) / .08); }
-.signal-label { position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; font: 8px var(--font-mono), monospace; letter-spacing: .1em; color: hsl(var(--foreground) / .6); }
 @keyframes portrait-travel { from { transform: translateY(45px) rotate(-3deg) scale(.96); } to { transform: translateY(-45px) rotate(3deg) scale(1.04); } }
 @keyframes career-fill { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 @supports (animation-timeline: view()) {
@@ -658,7 +652,6 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 .workflow-stage { perspective: 900px; }
 .project-workflow { view-timeline-name: --project-camera; view-timeline-axis: block; }
 #skills { view-timeline-name: --skills-camera; view-timeline-axis: block; }
-#contact { view-timeline-name: --contact-camera; view-timeline-axis: block; }
 @keyframes hero-camera { from { transform: translate3d(0,0,0) rotateY(0deg) scale(1); opacity: 1; } to { transform: translate3d(-40px,50px,0) rotateY(-28deg) rotateZ(18deg) scale(1.7); opacity: .2; } }
 @keyframes hero-knowledge-flight { from { transform: translate(0,0) rotate(-6deg); } to { transform: translate(-160px,-180px) rotate(-35deg); } }
 @keyframes hero-agents-flight { from { transform: translate(0,0) rotate(5deg); } to { transform: translate(190px,-100px) rotate(35deg); } }
@@ -671,7 +664,6 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
 @keyframes skill-drift-one { from { translate: -30px -30px; } to { translate: 25px 20px; } }
 @keyframes skill-drift-two { from { translate: 30px -20px; } to { translate: -25px 25px; } }
 @keyframes skill-drift-three { from { translate: -20px 30px; } to { translate: 30px -20px; } }
-@keyframes envelope-travel { from { translate: -100px 24px; rotate: -15deg; } to { translate: 100px -24px; rotate: 15deg; } }
 @supports (animation-timeline: view()) {
   [data-motion="on"] .orbital-scene { animation: hero-camera linear both; animation-timeline: --hero-camera; animation-range: exit 0% exit 100%; }
   [data-motion="on"] .orbit-knowledge { animation: hero-knowledge-flight linear both; animation-timeline: --hero-camera; animation-range: exit 0% exit 100%; }
@@ -687,7 +679,6 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
   [data-motion="on"] .satellite-1 { animation: skill-drift-two linear both; }
   [data-motion="on"] .satellite-2 { animation: skill-drift-three linear both; }
   [data-motion="on"] .stack-satellite { animation-timeline: --skills-camera; animation-range: entry 0% exit 100%; }
-  [data-motion="on"] .signal-envelope { animation: envelope-travel linear both; animation-timeline: --contact-camera; animation-range: entry 0% exit 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .system-film { height: auto !important; }
@@ -715,4 +706,110 @@ html:has([data-motion="off"]) { scroll-behavior: auto; }
   [data-motion="on"] .film-copy { position: relative; margin: 40px 0; animation: none; }
   [data-motion="on"] .film-ghost { display: none; }
   [data-motion="on"] .film-bottomline { position: relative; inset: auto; }
+}
+
+/* The journey continues: each lower scene has its own document-scroll timeline. */
+.portrait-satellites { position: absolute; inset: -15px -8px 35px; z-index: 3; pointer-events: none; overflow: clip; border-radius: 22px; }
+.portrait-token { position: absolute; display: flex; align-items: center; gap: 9px; padding: 13px 16px; border-radius: 13px; border: 1px solid hsl(var(--primary) / .35); background: hsl(var(--card) / .96); color: hsl(var(--primary)); font: 9px var(--font-mono), monospace; letter-spacing: .1em; box-shadow: 0 12px 30px #0002; }
+.token-plan { left: 10px; top: 10%; transform: rotate(-12deg); }.token-build { right: 10px; top: 44%; transform: rotate(10deg); }.token-ship { left: 10px; bottom: 12%; transform: rotate(-8deg); }
+.portrait-orbit-line { position: absolute; inset: 14% 8%; border: 1px solid hsl(var(--accent) / .45); border-radius: 50%; transform: rotate(-30deg) scaleY(.55); z-index: -1; }
+.journey-scene { position: relative; max-width: 768px; margin: -24px auto 48px; height: 270px; overflow: clip; }
+.journey-caption { position: absolute; top: 8px; left: 0; width: 100%; text-align: center; color: hsl(var(--foreground) / .5); font: 8px var(--font-mono), monospace; letter-spacing: .16em; }
+.career-flight { view-timeline-name: --career-flight; perspective: 900px; }
+.career-flight-line { position: absolute; top: 138px; left: 13%; right: 13%; height: 1px; background: hsl(var(--primary) / .2); transform: rotate(-6deg); }
+.career-flight-line > i { display: block; height: 1px; background: linear-gradient(90deg,hsl(var(--primary)),hsl(var(--accent))); transform-origin: left; }
+.career-courier { position: absolute; left: 12%; top: 110px; width: 74%; color: hsl(var(--accent)); }
+.career-courier svg { padding: 4px; width: 32px; height: 32px; border: 1px solid hsl(var(--accent) / .3); background: hsl(var(--card)); border-radius: 50%; }
+.flight-node { position: absolute; top: 65px; width: 150px; display: flex; align-items: center; flex-direction: column; gap: 12px; }
+.flight-node-0 { left: calc(16% - 75px); }.flight-node-1 { left: calc(50% - 75px); }.flight-node-2 { left: calc(84% - 75px); }
+.flight-icon { width: 84px; height: 84px; display: grid; place-items: center; border: 1px solid hsl(var(--primary) / .4); border-radius: 24px; background: linear-gradient(135deg,hsl(var(--primary) / .13),hsl(var(--card))); color: hsl(var(--primary)); box-shadow: inset 0 1px hsl(var(--foreground) / .1), 0 20px 30px -15px #0003; }
+.flight-node-2 .flight-icon { color: hsl(var(--accent)); border-color: hsl(var(--accent) / .4); }
+.flight-node strong { font: 9px var(--font-mono), monospace; letter-spacing: .08em; }.flight-node small { font: 8px var(--font-mono), monospace; color: hsl(var(--foreground) / .5); }
+.flight-coordinate { position: absolute; bottom: 14px; width: 100%; text-align: center; color: hsl(var(--foreground) / .4); font: 8px var(--font-mono), monospace; letter-spacing: .18em; }
+.education-entry { view-timeline-name: --degree-card; perspective: 1000px; }
+.learning-scene { height: 300px; view-timeline-name: --learning; perspective: 1000px; }
+.learning-ghost { position: absolute; top: 66px; left: 0; width: 100%; font-size: clamp(30px,6vw,66px); font-weight: 650; letter-spacing: -.06em; text-align: center; color: hsl(var(--foreground) / .06); white-space: nowrap; }
+.learning-book { position: absolute; width: 420px; height: 180px; top: 78px; left: calc(50% - 210px); transform-style: preserve-3d; transform: rotateX(30deg) rotateZ(-8deg); }
+.book-sheet { position: absolute; top: 0; bottom: 0; width: 50%; padding: 24px; border: 1px solid hsl(var(--primary) / .4); border-radius: 14px; background: linear-gradient(135deg,hsl(var(--card)),hsl(var(--primary) / .1)); color: hsl(var(--primary)); box-shadow: 0 15px 35px -10px #0003; }
+.book-sheet-back { left: 0; width: 100%; transform: translateZ(-14px) rotateZ(4deg); background: hsl(var(--primary) / .13); }
+.book-sheet-left { left: 0; transform-origin: right; transform: rotateY(-18deg); }.book-sheet-right { right: 0; transform-origin: left; transform: rotateY(18deg); color: hsl(var(--accent)); border-color: hsl(var(--accent) / .35); }
+.book-sheet strong { display: block; margin: 12px 0; font: 9px var(--font-mono), monospace; letter-spacing: .04em; }.book-sheet i { display: block; height: 2px; width: 100%; margin-top: 8px; background: currentColor; opacity: .2; }.book-sheet i:nth-last-child(2) { width: 65%; }.book-sheet small { display: block; margin-top: 17px; font: 6px var(--font-mono), monospace; letter-spacing: .05em; color: hsl(var(--foreground) / .5); }
+.book-spine { position: absolute; left: 50%; top: 8px; bottom: 8px; width: 1px; background: hsl(var(--primary) / .45); }
+.learning-cap { position: absolute; right: 14%; top: 48px; padding: 14px; border: 1px solid hsl(var(--primary) / .3); border-radius: 18px; color: hsl(var(--primary)); background: hsl(var(--card)); transform: rotate(12deg); }.learning-spark { position: absolute; left: 13%; bottom: 35px; color: hsl(var(--accent)); }
+.contact-signal { position: relative; min-height: 310px; margin: -24px 0 64px; view-timeline-name: --contact-launch; overflow: clip; }
+.signal-copy { position: absolute; top: 70px; left: 0; z-index: 2; width: 60%; pointer-events: none; }.signal-copy > span { color: hsl(var(--primary)); font: 9px var(--font-mono), monospace; letter-spacing: .15em; }.signal-copy strong { display: block; margin-top: 18px; font-size: clamp(1.8rem,3.5vw,3.3rem); font-weight: 550; line-height: 1.1; letter-spacing: -.05em; }
+.signal-launch { position: absolute; right: 0; width: 43%; height: 100%; perspective: 900px; }
+.signal-orbit { position: absolute; inset: 30px -10px; border: 1px solid hsl(var(--primary) / .25); border-radius: 50%; transform: rotate(-25deg) scaleY(.55); }.signal-orbit-two { transform: rotate(40deg) scaleY(.6); border-color: hsl(var(--accent) / .25); }
+.signal-envelope { position: absolute; width: 150px; height: 130px; top: 110px; left: calc(50% - 75px); transform: rotate(-12deg); color: hsl(var(--primary)); }
+.signal-envelope > svg { position: relative; width: 100%; height: 100%; padding: 17px; border-radius: 24px; border: 1px solid hsl(var(--primary) / .45); background: hsl(var(--card)); box-shadow: 0 20px 40px #0002; }
+.signal-letter { position: absolute; left: 20px; width: 110px; height: 130px; top: -45px; border-radius: 14px; border: 1px solid hsl(var(--accent) / .4); background: hsl(var(--card)); color: hsl(var(--accent)); padding: 16px; }.signal-letter > span { font: 6px var(--font-mono), monospace; letter-spacing: .04em; }.signal-letter i { display: block; height: 2px; margin: 10px 0; background: hsl(var(--accent) / .25); }.signal-letter > svg { margin-left: auto; }
+.signal-spark { position: absolute; color: hsl(var(--accent)); font-size: 28px; font-weight: 200; }.spark-one { top: 45px; left: 12%; }.spark-two { right: 8%; bottom: 50px; }
+.portfolio-footer { position: relative; overflow: clip; view-timeline-name: --footer-finale; }
+.footer-signoff { max-width: 1240px; margin: auto; padding: 70px 6vw 45px; }.footer-signoff > p { color: hsl(var(--foreground) / .5); font: 9px var(--font-mono), monospace; letter-spacing: .16em; }
+.footer-wordmark { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: 30px 0 14px; font-size: clamp(2.4rem,11vw,10rem); line-height: 1; font-weight: 600; letter-spacing: -.075em; color: hsl(var(--foreground)); }
+.footer-name-last { display: flex; align-items: center; gap: 12px; color: hsl(var(--primary)); }.footer-name-last svg { width: .9em; height: .9em; color: hsl(var(--accent)); transition: transform .3s ease; }.footer-wordmark:hover svg { transform: translate(5px,-5px); }.footer-wordmark:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 10px; }.footer-signoff-note { font: 8px var(--font-mono), monospace; color: hsl(var(--foreground) / .45); letter-spacing: .15em; }
+@keyframes portrait-layer-one { from { transform: translate(-28px,25px) rotate(-14deg); } to { transform: translate(18px,-35px) rotate(9deg); } }
+@keyframes portrait-layer-two { from { transform: translate(28px,20px) rotate(14deg); } to { transform: translate(-18px,-25px) rotate(-10deg); } }
+@keyframes portrait-plan { from { translate: 0 70px; rotate: -15deg; } to { translate: 12px -25px; rotate: 10deg; } }
+@keyframes portrait-build { from { translate: 0 -60px; rotate: 18deg; } to { translate: -12px 50px; rotate: -12deg; } }
+@keyframes portrait-ship { from { translate: 0 35px; rotate: -10deg; } to { translate: 12px -85px; rotate: 15deg; } }
+@keyframes portrait-orbit { from { rotate: -35deg; } to { rotate: 55deg; } }
+@keyframes career-courier { 0% { transform: translate(0,25px) rotate(-15deg); } 45% { transform: translate(45%,-30px) rotate(10deg); } 100% { transform: translate(100%,10px) rotate(-10deg); } }
+@keyframes career-line { from { transform: scaleX(.05); } to { transform: scaleX(1); } }
+@keyframes flight-first { from { transform: translate(-70px,50px) rotateY(35deg) rotateZ(-15deg); } to { transform: translate(25px,-10px) rotateY(-15deg) rotateZ(8deg); } }
+@keyframes flight-middle { from { transform: translate(0,65px) rotateX(35deg) scale(.8); } to { transform: translate(0,-25px) rotateX(-12deg) scale(1.12); } }
+@keyframes flight-last { from { transform: translate(70px,50px) rotateY(-35deg) rotateZ(15deg); } to { transform: translate(-25px,-10px) rotateY(15deg) rotateZ(-8deg); } }
+@keyframes career-card-travel { 0% { translate: -35px 30px; rotate: -2deg; } 40%,72% { translate: 0 0; rotate: 0deg; } 100% { translate: 25px -25px; rotate: 1deg; } }
+@keyframes learning-camera { from { transform: translateY(35px) rotateX(58deg) rotateZ(-18deg) scale(.85); } to { transform: translateY(-10px) rotateX(12deg) rotateZ(8deg) scale(1.08); } }
+@keyframes book-open-left { from { transform: rotateY(-65deg); } to { transform: rotateY(8deg); } }
+@keyframes book-open-right { from { transform: rotateY(65deg); } to { transform: rotateY(-8deg); } }
+@keyframes learning-cap { from { transform: translate(-25px,55px) rotate(-25deg); } to { transform: translate(25px,-5px) rotate(25deg); } }
+@keyframes degree-travel { 0% { translate: 35px 35px; rotate: 2deg; } 45%,75% { translate: 0 0; rotate: 0deg; } 100% { translate: -20px -25px; rotate: -1deg; } }
+@keyframes contact-flight { 0% { transform: translate(-60px,35px) rotate(-25deg) scale(.8); } 50% { transform: translate(0,0) rotate(-8deg) scale(1); } 100% { transform: translate(65px,-40px) rotate(20deg) scale(1.15); } }
+@keyframes letter-rise { from { transform: translateY(38px) rotate(-8deg); } to { transform: translateY(-40px) rotate(10deg); } }
+@keyframes contact-copy { from { transform: translateY(35px); } to { transform: translateY(-15px); } }
+@keyframes finale-first { from { transform: translate(-110px,50px) rotate(-5deg); } to { transform: translate(0,0) rotate(0deg); } }
+@keyframes finale-last { from { transform: translate(110px,50px) rotate(5deg); } to { transform: translate(0,0) rotate(0deg); } }
+@keyframes finale-arrow { from { rotate: -80deg; scale: .6; } to { rotate: 0deg; scale: 1; } }
+@supports (animation-timeline: view()) {
+  [data-motion="on"] .sheet-one { animation: portrait-layer-one linear both; }
+  [data-motion="on"] .sheet-two { animation: portrait-layer-two linear both; }
+  [data-motion="on"] .token-plan { animation: portrait-plan linear both; }
+  [data-motion="on"] .token-build { animation: portrait-build linear both; }
+  [data-motion="on"] .token-ship { animation: portrait-ship linear both; }
+  [data-motion="on"] .portrait-orbit-line { animation: portrait-orbit linear both; }
+  [data-motion="on"] .portrait-sheet, [data-motion="on"] .portrait-token, [data-motion="on"] .portrait-orbit-line { animation-timeline: --portrait; animation-range: entry 0% exit 100%; }
+  [data-motion="on"] .career-courier { animation: career-courier linear both; }
+  [data-motion="on"] .career-flight-line > i { animation: career-line linear both; }
+  [data-motion="on"] .flight-node-0 { animation: flight-first linear both; }
+  [data-motion="on"] .flight-node-1 { animation: flight-middle linear both; }
+  [data-motion="on"] .flight-node-2 { animation: flight-last linear both; }
+  [data-motion="on"] .career-courier, [data-motion="on"] .career-flight-line > i, [data-motion="on"] .flight-node { animation-timeline: --career-flight; animation-range: entry 0% exit 100%; }
+  [data-motion="on"] .career-card { animation: career-card-travel linear both; animation-timeline: --career; animation-range: entry 0% exit 100%; }
+  [data-motion="on"] .learning-book { animation: learning-camera linear both; }
+  [data-motion="on"] .book-sheet-left { animation: book-open-left linear both; }
+  [data-motion="on"] .book-sheet-right { animation: book-open-right linear both; }
+  [data-motion="on"] .learning-cap { animation: learning-cap linear both; }
+  [data-motion="on"] .learning-spark { animation: portrait-orbit linear both; }
+  [data-motion="on"] .learning-book, [data-motion="on"] .book-sheet-left, [data-motion="on"] .book-sheet-right, [data-motion="on"] .learning-cap, [data-motion="on"] .learning-spark { animation-timeline: --learning; animation-range: entry 0% exit 100%; }
+  [data-motion="on"] .education-card { animation: degree-travel linear both; animation-timeline: --degree-card; animation-range: entry 0% exit 100%; }
+  [data-motion="on"] .signal-envelope { animation: contact-flight linear both; }
+  [data-motion="on"] .signal-letter { animation: letter-rise linear both; }
+  [data-motion="on"] .signal-copy { animation: contact-copy linear both; }
+  [data-motion="on"] .signal-orbit, [data-motion="on"] .signal-spark { animation: portrait-orbit linear both; }
+  [data-motion="on"] .signal-envelope, [data-motion="on"] .signal-letter, [data-motion="on"] .signal-copy, [data-motion="on"] .signal-orbit, [data-motion="on"] .signal-spark { animation-timeline: --contact-launch; animation-range: entry 0% exit 100%; }
+  [data-motion="on"] .footer-name-first { animation: finale-first linear both; }
+  [data-motion="on"] .footer-name-last { animation: finale-last linear both; }
+  [data-motion="on"] .footer-name-last svg { animation: finale-arrow linear both; }
+  [data-motion="on"] .footer-name-first, [data-motion="on"] .footer-name-last, [data-motion="on"] .footer-name-last svg { animation-timeline: --footer-finale; animation-range: entry 0% entry 100%; }
+}
+@media (max-width: 767px) {
+  .portrait-token { font-size: 8px; padding: 10px 12px; gap: 7px; }
+  .journey-scene { height: 240px; margin-bottom: 30px; }.journey-caption { font-size: 6px; letter-spacing: .08em; }
+  .flight-node { top: 65px; width: 100px; }.flight-node-0 { left: calc(16% - 50px); }.flight-node-1 { left: calc(50% - 50px); }.flight-node-2 { left: calc(84% - 50px); }
+  .flight-icon { width: 62px; height: 62px; border-radius: 18px; }.flight-icon svg { width: 27px; height: 27px; }.flight-node strong { font-size: 7px; letter-spacing: .02em; }.flight-node small { font-size: 6px; }.flight-coordinate { font-size: 6px; bottom: 20px; }
+  .career-flight-line { top: 118px; }.career-courier { top: 98px; }
+  .learning-scene { height: 260px; }.learning-book { width: 280px; height: 155px; top: 70px; left: calc(50% - 140px); }.book-sheet { padding: 17px; }.book-sheet strong { font-size: 7px; margin: 10px 0; }.book-sheet small { font-size: 4px; margin-top: 14px; }.book-sheet i { margin-top: 6px; }.book-sheet svg { width: 25px; height: 25px; }.learning-cap { padding: 10px; right: 8%; top: 38px; }.learning-cap svg { width: 26px; height: 26px; }.learning-spark { left: 5%; bottom: 20px; }
+  .contact-signal { min-height: 430px; margin-bottom: 40px; }.signal-copy { top: 20px; width: 100%; text-align: center; }.signal-copy > span { font-size: 8px; }.signal-copy strong { font-size: clamp(1.8rem,7.5vw,2.5rem); margin-top: 15px; }.signal-launch { top: 140px; height: 285px; width: 100%; }.signal-envelope { width: 125px; height: 110px; left: calc(50% - 62.5px); top: 110px; }.signal-letter { width: 95px; left: 15px; height: 115px; top: -40px; padding: 13px; }.signal-orbit { inset-inline: 25px; }.spark-one { left: 17%; }
+  .footer-signoff { padding: 50px 24px 24px; }.footer-signoff > p { font-size: 6px; letter-spacing: .12em; }.footer-wordmark { gap: 8px; margin-top: 28px; }.footer-name-last { gap: 5px; }.footer-signoff-note { font-size: 6px; }
 }

@@ -11,12 +11,13 @@ There are no scroll-event listeners, per-frame React updates, or chapter thresho
 ## Surrounding sections
 
 - Hero: the orbital sculpture enlarges and rotates away as its labels disperse with scrolling. Its small idle markers pause offscreen.
-- About: layered portrait sheets travel and rotate with scroll. Count-up statistics cancel their animation frames on cleanup and when motion stops.
-- Experience: individual card entrances and a scroll-linked connecting rail. Detail expansion honors the global preference.
-- Education: individual entrances, drawing accents, hover elevation, and wrapping degree badges.
+- About: portrait sheets spread and rotate independently, while PLAN / BUILD / SHIP badges orbit the portrait with document scrolling. Count-up statistics cancel their animation frames on cleanup and when motion stops.
+- Experience: a career flight path connects Build, Orchestrate, and AI Coworkers, with a moving courier and three tilting milestones. The job cards also travel with scroll, settling while in the reading area. Detail expansion honors the global preference.
+- Education: a CSS 3D book opens as its camera rotates; a graduation-cap badge moves independently. Degree cards tilt into place, alongside drawing accents and wrapping badges.
 - Skills: stable category content and an animated selection indicator. A constellation uses actual skill names, with scroll-linked orbit rotation and satellite travel. Controls expose their pressed state and controlled region.
 - Projects: the three workflow nodes assemble from separated, tilted positions as they enter view, then lift apart on exit. Independent keyboard-accessible controls explain CodeLens AI and PitchPilot in a polite live region.
-- Contact: a connection path and envelope entrance, plus scroll-linked envelope flight. Form behavior is unchanged.
+- Contact: a large envelope flies through two orbital rings while its letter rises out, beside a scroll-linked invitation. The form stays stationary and its submission behavior is unchanged.
+- Footer: a large AKSHAT SAHU wordmark assembles from opposite directions and an arrow rotates into place. The wordmark is a keyboard-accessible back-to-top link.
 
 No dependencies were added. Existing theme controls, résumé, projects, and contact behavior remain available.
 
@@ -24,7 +25,7 @@ No dependencies were added. Existing theme controls, résumé, projects, and con
 
 Use `pnpm typecheck`, `pnpm build`, and `git diff --check`. Browser QA uses the production build in the Codex in-app browser.
 
-`tests/e2e/cinematic-scroll.spec.ts` checks that the camera changes within the same chapter, reverses to the same pose, stays pinned, and presents all chapters in document flow under reduced motion. `tests/e2e/lower-sections.spec.ts` covers stable skills replacement and independent mobile workflow keyboard controls. The full Playwright suite runs in GitHub Actions; physical-device GPU profiling was not performed.
+`tests/e2e/cinematic-scroll.spec.ts` checks that the camera changes within the same chapter, reverses to the same pose, stays pinned, and presents all chapters in document flow under reduced motion. `tests/e2e/lower-sections.spec.ts` covers stable skills replacement and independent mobile workflow keyboard controls. `tests/e2e/journey-motion.spec.ts` verifies continuous scroll movement across all seven lower-page motion subjects and a static, usable mobile reduced-motion state. The full Playwright suite runs in GitHub Actions; physical-device GPU profiling was not performed.
 
 The build reports an existing workspace-root warning because a lockfile exists above this checkout. It does not prevent compilation.
 

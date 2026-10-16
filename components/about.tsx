@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView } from "motion/react"
 import SectionHeading from "./section-heading"
+import { PortraitSatellites } from "./journey-scenes"
 import { usePortfolioMotion } from "./motion-preferences"
 import Image from "next/image"
 import { ease } from "@/lib/animations"
@@ -119,6 +120,7 @@ export default function About() {
             <div className="portrait-composition relative w-full max-w-sm mx-auto">
               <div className="portrait-sheet sheet-one" aria-hidden="true" />
               <div className="portrait-sheet sheet-two" aria-hidden="true" />
+              <PortraitSatellites />
               {/* Decorative dot grid accents */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-[radial-gradient(hsl(var(--primary))_1px,transparent_1px)] [background-size:8px_8px] opacity-30 -z-10" />
               <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-[radial-gradient(hsl(var(--accent))_1px,transparent_1px)] [background-size:6px_6px] opacity-25 -z-10" />

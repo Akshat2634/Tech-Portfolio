@@ -188,34 +188,31 @@ export function ProjectWorkflow({ kind }: { kind: keyof typeof workflows }) {
 }
 
 export function ContactSignal() {
-  const { enabled } = usePortfolioMotion()
   return (
     <div className="contact-signal" aria-hidden="true">
-      <svg viewBox="0 0 360 120" fill="none">
-        <path
-          className="signal-guide"
-          d="M10 90C80 90 75 30 180 60S275 30 350 30"
-        />
-        <motion.path
-          d="M10 90C80 90 75 30 180 60S275 30 350 30"
-          initial={enabled ? { pathLength: 0 } : false}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: enabled ? 1.2 : 0, ease }}
-        />
-        <circle cx="10" cy="90" r="4" />
-        <circle cx="350" cy="30" r="4" />
-      </svg>
-      <motion.span
-        className="signal-envelope"
-        initial={enabled ? { y: 15, rotate: -12, opacity: 0 } : false}
-        whileInView={{ y: 0, rotate: 0, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease }}
-      >
-        <Mail size={25} strokeWidth={1.25} />
-      </motion.span>
-      <span className="signal-label">YOUR NEXT IDEA → LET’S BUILD IT</span>
+      <div className="signal-copy">
+        <span>THE NEXT CHAPTER</span>
+        <strong>
+          Good work starts
+          <br />
+          with a conversation.
+        </strong>
+      </div>
+      <div className="signal-launch">
+        <div className="signal-orbit" />
+        <div className="signal-orbit signal-orbit-two" />
+        <div className="signal-envelope">
+          <span className="signal-letter">
+            <span>YOUR NEXT IDEA</span>
+            <i />
+            <i />
+            <ArrowUpRight size={26} />
+          </span>
+          <Mail size={80} strokeWidth={0.8} />
+        </div>
+        <span className="signal-spark spark-one">+</span>
+        <span className="signal-spark spark-two">+</span>
+      </div>
     </div>
   )
 }

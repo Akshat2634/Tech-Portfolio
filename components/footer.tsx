@@ -1,10 +1,18 @@
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="glass-scrim">
+    <footer className="portfolio-footer glass-scrim">
+      <div className="footer-signoff">
+        <p>HUMAN AMBITION. AUTONOMOUS ACTION.</p>
+        <a href="#home" className="footer-wordmark" aria-label="Back to top">
+          <span className="footer-name-first">AKSHAT</span>
+          <span className="footer-name-last">SAHU<ArrowUpRight strokeWidth={.8} /></span>
+        </a>
+        <span className="footer-signoff-note">LET’S BUILD WHAT’S NEXT.</span>
+      </div>
       <div className="container mx-auto max-w-5xl px-4 py-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           {/* Brand */}

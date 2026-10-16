@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import SectionHeading from "./section-heading"
+import { CareerFlight } from "./journey-scenes"
 import { usePortfolioMotion } from "./motion-preferences"
 import { CompanyLogo } from "./company-logo"
 import { Calendar, MapPin, ChevronRight, ChevronDown } from "lucide-react"
@@ -34,6 +35,7 @@ export default function Experience() {
     <section id="experience" className="py-24">
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Work Experience" subtitle="Professional journey" />
+        <CareerFlight />
 
         <div className="space-y-0 max-w-3xl mx-auto">
           {experiences.map((exp, index) => {

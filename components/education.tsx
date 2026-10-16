@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react"
 import SectionHeading from "./section-heading"
+import { LearningSculpture } from "./journey-scenes"
 import { usePortfolioMotion } from "./motion-preferences"
 import { CompanyLogo } from "./company-logo"
 import { Calendar, MapPin, Star } from "lucide-react"
@@ -52,12 +53,13 @@ export default function Education() {
     <section id="education" className="py-24 glass-scrim">
       <div className="container mx-auto max-w-5xl px-4 md:px-8">
         <SectionHeading title="Education" subtitle="Academic background" />
+        <LearningSculpture />
 
         <div className="space-y-6 max-w-3xl mx-auto">
           {educationData.map((edu, index) => {
             const config = degreeConfig[edu.degree]
             return (
-              <motion.div key={index} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
+              <motion.div className="education-entry" key={index} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
                 <div className="education-card glass rounded-xl overflow-hidden group">
                   {/* Top gradient bar */}
                   <motion.div className={`h-1 bg-gradient-to-r ${config.gradient}`} style={{ originX: 0 }} initial={enabled ? { scaleX: 0 } : false} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: .8, delay: index * .12 }} />
